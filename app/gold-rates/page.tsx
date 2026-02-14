@@ -22,78 +22,31 @@ export default function GoldPage() {
 
   return (
     <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
-      
-      {/* Gold Rates Section */}
       <h1 style={{ textAlign: 'center', color: '#b8860b', fontSize: '2rem' }}>Saudi Gold Rates Today</h1>
       <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>Real-time gold prices per gram in SAR</p>
 
-      <div className="responsive-container">
+      <div style={{ background: 'white', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
         {goldRates.map((gold, index) => (
-          <div key={index} className="data-row">
-            <span className="label">✨ {gold.purity}</span>
-            <span className="value">{gold.price}</span>
-            <span className="change" style={{ color: 'green' }}>{gold.change}</span>
+          <div key={index} style={{ display: 'flex', justifyContent: 'space-between', padding: '20px', borderBottom: '1px solid #eee' }}>
+            <span style={{ fontWeight: 'bold' }}>✨ {gold.purity}</span>
+            <span style={{ color: '#b8860b', fontWeight: 'bold' }}>{gold.price}</span>
+            <span style={{ color: 'green' }}>{gold.change}</span>
           </div>
         ))}
       </div>
 
-      {/* Hajj & Umrah Pilgrims Section */}
-      <div style={{ marginTop: '50px', backgroundColor: '#f9f9f9', padding: '25px', borderRadius: '15px', border: '1px solid #eee' }}>
+      <div style={{ marginTop: '50px', backgroundColor: '#f9f9f9', padding: '25px', borderRadius: '15px' }}>
         <h2 style={{ textAlign: 'center', color: '#1976d2' }}>Currency Rates for Pilgrims</h2>
-        <p style={{ textAlign: 'center', color: '#666' }}>1 SAR exchange rate for international travelers</p>
-        
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
-          gap: '15px', 
-          marginTop: '25px' 
-        }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '15px', marginTop: '25px' }}>
           {internationalRates.map((item, idx) => (
-            <div key={idx} style={{ 
-              backgroundColor: 'white', 
-              padding: '15px', 
-              borderRadius: '12px', 
-              textAlign: 'center',
-              boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-            }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '5px' }}>{item.flag}</div>
-              <div style={{ fontWeight: 'bold', color: '#333', fontSize: '1rem' }}>{item.country}</div>
-              <div style={{ color: '#1976d2', fontSize: '1.3rem', fontWeight: 'bold', margin: '5px 0' }}>{item.rate}</div>
-              <div style={{ fontSize: '0.8rem', color: '#999' }}>{item.currency}</div>
+            <div key={idx} style={{ backgroundColor: 'white', padding: '15px', borderRadius: '12px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+              <div style={{ fontSize: '2.5rem' }}>{item.flag}</div>
+              <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>{item.country}</div>
+              <div style={{ color: '#1976d2', fontSize: '1.2rem', fontWeight: 'bold' }}>{item.rate}</div>
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .responsive-container {
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-          overflow: hidden;
-          border: 1px solid #eee;
-        }
-        .data-row {
-          display: flex;
-          justify-content: space-between;
-          padding: 20px;
-          border-bottom: 1px solid #eee;
-          align-items: center;
-        }
-        .label { font-weight: bold; font-size: 1.1rem; color: #444; }
-        .value { color: #b8860b; font-weight: bold; font-size: 1.1rem; }
-
-        @media (max-width: 600px) {
-          .data-row {
-            flex-direction: column;
-            gap: 10px;
-            text-align: center;
-            padding: 15px;
-          }
-          .label { font-size: 1.1rem; }
-          .value { font-size: 1.3rem; }
-        }
-      `}</style>
     </div>
   );
 }
