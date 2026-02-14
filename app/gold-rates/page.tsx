@@ -23,6 +23,7 @@ export default function GoldPage() {
   return (
     <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
       
+      {/* Gold Rates Section */}
       <h1 style={{ textAlign: 'center', color: '#b8860b', fontSize: '2rem' }}>Saudi Gold Rates Today</h1>
       <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>Real-time gold prices per gram in SAR</p>
 
@@ -36,6 +37,7 @@ export default function GoldPage() {
         ))}
       </div>
 
+      {/* Hajj & Umrah Pilgrims Section */}
       <div style={{ marginTop: '50px', backgroundColor: '#f9f9f9', padding: '25px', borderRadius: '15px', border: '1px solid #eee' }}>
         <h2 style={{ textAlign: 'center', color: '#1976d2' }}>Currency Rates for Pilgrims</h2>
         <p style={{ textAlign: 'center', color: '#666' }}>1 SAR exchange rate for international travelers</p>
