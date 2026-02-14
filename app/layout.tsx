@@ -1,34 +1,33 @@
-import type { Metadata } from "next";
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Navbar from './components/Navbar'; // نیویگیشن بار امپورٹ کی
+import Footer from './components/Footer'; // فوٹر امپورٹ کیا
 
-// یہ حصہ گوگل سرچ (SEO) کے لیے ہے
+const inter = Inter({ subsets: ['latin'] });
+
 export const metadata: Metadata = {
-  title: "Saudi Price | Live Gold Rates, Currency & Electronics in KSA",
-  description: "Get the latest 24K, 22K gold prices, SAR exchange rates for PKR, INR, and best electronics deals in Saudi Arabia.",
-  keywords: "Saudi Gold Rate, SAR to PKR, Saudi Electronics Prices, iPhone Prices KSA",
+  title: 'Saudi Price - Gold, Currency & Electronics Rates',
+  description: 'Daily updated gold rates, currency exchange, and electronics prices in Saudi Arabia.',
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body style={{ 
-        margin: 0, 
-        padding: 0, 
-        display: 'flex', 
-        flexDirection: 'column', 
-        minHeight: '100vh' 
-      }}>
+      <body className={inter.className} style={{ margin: 0, backgroundColor: '#f5f5f5' }}>
+        {/* یہ نیویگیشن بار اب ہر پیج پر نظر آئے گی */}
         <Navbar />
-        
-        <main style={{ flex: 1 }}>
+
+        {/* یہاں ہر پیج کا اپنا مواد لوڈ ہوگا */}
+        <main style={{ minHeight: '80vh' }}>
           {children}
         </main>
-        
+
+        {/* فوٹر بھی ہر پیج کے آخر میں نظر آئے گا */}
         <Footer />
       </body>
     </html>

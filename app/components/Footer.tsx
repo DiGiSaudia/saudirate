@@ -1,78 +1,59 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  
   return (
-    <footer style={{
-      backgroundColor: '#222',
-      color: 'white',
-      padding: '40px 20px',
+    <footer style={{ 
+      backgroundColor: '#1a1a1a', 
+      color: 'white', 
+      padding: '40px 20px', 
       marginTop: '50px',
-      borderTop: '5px solid #1976d2'
+      borderTop: '3px solid #ffcc00'
     }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '30px'
+      <div style={{ 
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+        gap: '30px',
+        textAlign: 'center'
       }}>
-        {/* About Column */}
+        {/* About Section */}
         <div>
-          <h3 style={{ color: '#1976d2' }}>SaudiPrice.com</h3>
-          <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#ccc' }}>
-            Your premium destination for real-time gold rates, currency exchange, and electronics prices in Saudi Arabia.
+          <h3 style={{ color: '#ffcc00' }}>SaudiPrice.com</h3>
+          <p style={{ fontSize: '0.9rem', color: '#ccc', lineHeight: '1.6' }}>
+            Your trusted source for daily gold rates, currency exchange, and latest electronics prices in KSA.
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h4>Quick Links</h4>
-          <ul style={{ listStyle: 'none', padding: 0, fontSize: '0.9rem' }}>
-            <li><a href="/gold-rates" style={{ color: '#ccc', textDecoration: 'none' }}>Gold Rates</a></li>
-            <li><a href="/currency" style={{ color: '#ccc', textDecoration: 'none' }}>Currency Exchange</a></li>
-            <li><a href="/electronics" style={{ color: '#ccc', textDecoration: 'none' }}>Electronics</a></li>
-            <li><a href="/contact" style={{ color: '#ccc', textDecoration: 'none' }}>Contact Us</a></li>
-          </ul>
+          <h4 style={{ marginBottom: '15px' }}>Quick Links</h4>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <Link href="/gold-rates" style={{ color: '#bbb', textDecoration: 'none' }}>Gold Rates</Link>
+            <Link href="/currency" style={{ color: '#bbb', textDecoration: 'none' }}>Currency Exchange</Link>
+            <Link href="/electronics" style={{ color: '#bbb', textDecoration: 'none' }}>Electronics</Link>
+          </div>
         </div>
 
-        {/* Social Media */}
+        {/* Contact info */}
         <div>
-          <h4>Follow Us</h4>
-          <div style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
-            {/* یہ لنکس آپ بعد میں اپنے اصلی اکاؤنٹس سے بدل سکتے ہیں */}
-            <a href="#" style={socialIconStyle}>FB</a>
-            <a href="#" style={socialIconStyle}>TW</a>
-            <a href="#" style={socialIconStyle}>IG</a>
-          </div>
+          <h4 style={{ marginBottom: '15px' }}>Stay Updated</h4>
+          <p style={{ fontSize: '0.9rem', color: '#bbb' }}>Arabic support coming in 6 months!</p>
+          <p style={{ fontSize: '0.9rem', color: '#ffcc00' }}>🇸🇦 Proudly serving KSA</p>
         </div>
       </div>
 
-      <div style={{
-        textAlign: 'center',
-        marginTop: '40px',
-        paddingTop: '20px',
-        borderTop: '1px solid #444',
+      <div style={{ 
+        textAlign: 'center', 
+        marginTop: '40px', 
+        paddingTop: '20px', 
+        borderTop: '1px solid #333',
         fontSize: '0.8rem',
-        color: '#888'
+        color: '#777'
       }}>
-        © {currentYear} SaudiPrice.com. All Rights Reserved.
+        © 2026 SaudiPrice.com - All Rights Reserved.
       </div>
     </footer>
   );
 }
-
-const socialIconStyle = {
-  backgroundColor: '#444',
-  color: 'white',
-  width: '35px',
-  height: '35px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '50%',
-  textDecoration: 'none',
-  fontSize: '0.8rem',
-  fontWeight: 'bold'
-};

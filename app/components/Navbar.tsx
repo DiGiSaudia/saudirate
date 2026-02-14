@@ -1,79 +1,95 @@
-"use client"; // یہ لائن اوپر لازمی لکھنی ہے تاکہ بٹن کام کرے
+"use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Gold Rates", path: "/gold-rates" },
+    { name: "Currency", path: "/currency" },
+    { name: "Electronics", path: "/electronics" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
-    <nav style={{
-      backgroundColor: '#333',
+    <nav style={{ 
+      backgroundColor: '#1a1a1a', 
+      padding: '15px 20px', 
       color: 'white',
       position: 'sticky',
       top: 0,
       zIndex: 1000,
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-      width: '100%',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
     }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '15px 20px',
+      <div style={{ 
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center' 
       }}>
         {/* Logo */}
-        <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-          <a href="/" style={{ color: 'white', textDecoration: 'none' }}>
-            Saudi<span style={{ color: '#b8860b' }}>Price</span>
-          </a>
+        <Link href="/" style={{ 
+          fontSize: '1.5rem', 
+          fontWeight: 'bold', 
+          color: '#ffcc00', 
+          textDecoration: 'none' 
+        }}>
+          SaudiPrice<span style={{color: 'white'}}>.com</span>
+        </Link>
+
+        {/* Desktop Links */}
+        <div style={{ display: 'flex', gap: '20px' }} className="desktop-menu">
+          {navLinks.map((link, idx) => (
+            <Link key={idx} href={link.path} style={{ 
+              color: 'white', 
+              textDecoration: 'none', 
+              fontSize: '1rem',
+              fontWeight: '500'
+            }}>
+              {link.name}
+            </Link>
+          ))}
         </div>
 
-        {/* Mobile Toggle Button (تین لائنیں) */}
-        <div 
-          onClick={() => setIsOpen(!isOpen)} 
-          style={{ cursor: 'pointer', display: 'block', padding: '5px' }}
-          className="mobile-menu-btn"
-        >
-          <div style={{ width: '25px', height: '3px', backgroundColor: 'white', margin: '5px 0' }}></div>
-          <div style={{ width: '25px', height: '3px', backgroundColor: 'white', margin: '5px 0' }}></div>
-          <div style={{ width: '25px', height: '3px', backgroundColor: 'white', margin: '5px 0' }}></div>
-        </div>
-
-        {/* Links Area */}
-        <div style={{
-          display: isOpen ? 'flex' : 'none', // بٹن دبانے پر کھلے گا یا بند ہوگا
-          flexDirection: 'column',
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          width: '100%',
-          backgroundColor: '#333',
-          padding: '20px',
-          gap: '15px',
-          boxSizing: 'border-box',
-          borderTop: '1px solid #444'
-        }} className="nav-links">
-          <a href="/gold-rates" onClick={() => setIsOpen(false)} style={{ color: 'white', textDecoration: 'none' }}>Gold Rates</a>
-          <a href="/currency" onClick={() => setIsOpen(false)} style={{ color: 'white', textDecoration: 'none' }}>Currency</a>
-          <a href="/electronics" onClick={() => setIsOpen(false)} style={{ color: 'white', textDecoration: 'none' }}>Electronics</a>
-          <a href="/contact" onClick={() => setIsOpen(false)} style={{ color: 'white', textDecoration: 'none' }}>Contact</a>
+        {/* Mobile Menu Button */}
+        <div style={{ cursor: 'pointer', fontSize: '1.5rem' }} 
+             className="mobile-btn" 
+             onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? '✖' : '☰'}
         </div>
       </div>
 
-      {/* CSS for responsiveness - اسے مٹائیے گا نہیں */}
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <div style={{ 
+          backgroundColor: '#1a1a1a', 
+          padding: '20px', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '15px',
+          borderTop: '1px solid #333'
+        }}>
+          {navLinks.map((link, idx) => (
+            <Link key={idx} href={link.path} onClick={() => setIsOpen(false)} style={{ 
+              color: 'white', 
+              textDecoration: 'none', 
+              fontSize: '1.1rem' 
+            }}>
+              {link.name}
+            </Link>
+          ))}
+        </div>
+      )}
+
       <style jsx>{`
-        @media (min-width: 768px) {
-          .mobile-menu-btn { display: none !important; }
-          .nav-links {
-            display: flex !important;
-            flex-direction: row !important;
-            position: static !important;
-            width: auto !important;
-            padding: 0 !important;
-            border: none !important;
-            gap: 25px !important;
-          }
+        @media (max-width: 768px) {
+          .desktop-menu { display: none !important; }
+        }
+        @media (min-width: 769px) {
+          .mobile-btn { display: none !important; }
         }
       `}</style>
     </nav>
