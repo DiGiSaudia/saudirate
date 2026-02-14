@@ -31,7 +31,7 @@ export default function HomePage() {
       
       {/* Hero Section */}
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <h1 style={{ fontSize: '2.5rem', color: '#222', marginBottom: '10px' }}>Welcome to Saudi rate</h1>
+        <h1 style={{ fontSize: '2.5rem', color: '#222', marginBottom: '10px' }}>Welcome to Saudi Rate</h1>
         <p style={{ fontSize: '1.2rem', color: '#666' }}>Your trusted partner for daily rates and electronic prices in KSA</p>
       </div>
 
