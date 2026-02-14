@@ -3,11 +3,6 @@ import React from 'react';
 export default function Navbar() {
   return (
     <nav style={{
-      display: 'flex',
-      flexWrap: 'wrap', // یہ سب سے اہم ہے: موبائل پر لنکس کو نیچے گرا دے گا
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '10px 15px',
       backgroundColor: '#333',
       color: 'white',
       position: 'sticky',
@@ -15,20 +10,34 @@ export default function Navbar() {
       zIndex: 1000,
       boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
       width: '100%',
-      boxSizing: 'border-box' // یہ اسکرین کو باہر نکلنے سے روکے گا
     }}>
-      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-        <a href="/" style={{ color: 'white', textDecoration: 'none' }}>SaudiPrice</a>
-      </div>
-      
-      <div style={{ 
-        display: 'flex', 
-        gap: '15px', 
-        marginTop: '5px' // موبائل پر تھوڑا فاصلہ دے گا
+      <div style={{
+        maxWidth: '1200px', // ڈیسک ٹاپ پر مینیو کو بہت زیادہ پھیلنے سے روکے گا
+        margin: '0 auto',   // مینیو کو اسکرین کے درمیان میں لائے گا
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '15px 20px',
+        flexWrap: 'wrap'
       }}>
-        <a href="/gold-rates" style={{ color: 'white', textDecoration: 'none', fontSize: '0.9rem' }}>Gold</a>
-        <a href="/currency" style={{ color: 'white', textDecoration: 'none', fontSize: '0.9rem' }}>Currency</a>
-        <a href="/electronics" style={{ color: 'white', textDecoration: 'none', fontSize: '0.9rem' }}>Electronics</a>
+        {/* Logo Text */}
+        <div style={{ fontSize: '1.6rem', fontWeight: 'bold', letterSpacing: '1px' }}>
+          <a href="/" style={{ color: 'white', textDecoration: 'none' }}>
+            Saudi<span style={{ color: '#b8860b' }}>Price</span>
+          </a>
+        </div>
+        
+        {/* Menu Links */}
+        <div style={{ 
+          display: 'flex', 
+          gap: '25px', 
+          alignItems: 'center'
+        }}>
+          <a href="/gold-rates" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', fontWeight: '500' }}>Gold</a>
+          <a href="/currency" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', fontWeight: '500' }}>Currency</a>
+          <a href="/electronics" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', fontWeight: '500' }}>Electronics</a>
+          <a href="/contact" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', fontWeight: '500' }}>Contact</a>
+        </div>
       </div>
     </nav>
   );
