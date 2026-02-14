@@ -10,22 +10,26 @@ export default function Home() {
 
   return (
     <div style={{ 
-      padding: "40px 15px", 
+      padding: "40px 20px", 
       fontFamily: "Arial, sans-serif", 
       textAlign: "center", 
       backgroundColor: "#f4f7f6", 
       minHeight: "100vh",
-      overflowX: "hidden" // موبائل پر دائیں طرف کی فالتو جگہ ختم کرنے کے لیے
+      width: "100%",            // یہ اسکرین کو پورا کور کرے گا
+      boxSizing: "border-box",  // پیڈنگ کی وجہ سے اسکرین باہر نہیں نکلے گی
+      overflowX: "hidden"       // دائیں بائیں ہلنے سے روکے گا
     }}>
-      <h1 style={{ color: "#333", fontSize: "2.5rem", fontWeight: "bold" }}>Saudi Price Portal</h1>
-      <p style={{ color: "#666", marginBottom: "40px" }}>Your one-stop shop for latest rates in Saudi Arabia</p>
+      <h1 style={{ color: "#333", fontSize: "2.2rem", fontWeight: "bold", marginTop: "10px" }}>Saudi Price Portal</h1>
+      <p style={{ color: "#666", marginBottom: "40px", fontSize: "1rem" }}>Your one-stop shop for latest rates in Saudi Arabia</p>
 
       <div style={{ 
         display: "grid", 
+        // یہ لائن موبائل پر کارڈز کو خود بخود سیٹ کر دے گی
         gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
         gap: "20px", 
         maxWidth: "1000px", 
-        margin: "0 auto" 
+        margin: "0 auto",
+        width: "100%"
       }}>
         {categories.map((cat, i) => (
           <a key={i} href={cat.link} style={{ 
@@ -34,16 +38,19 @@ export default function Home() {
             backgroundColor: "white", 
             borderRadius: "15px", 
             boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-            display: "block"
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
           }}>
-            <div style={{ fontSize: "3rem", marginBottom: "10px" }}>{cat.icon}</div>
-            <h3 style={{ color: cat.color, margin: "10px 0" }}>{cat.title}</h3>
-            <span style={{ fontSize: "0.9rem", color: "#888" }}>View Details →</span>
+            <div style={{ fontSize: "3rem", marginBottom: "15px" }}>{cat.icon}</div>
+            <h3 style={{ color: cat.color, margin: "0 0 10px 0", fontSize: "1.4rem" }}>{cat.title}</h3>
+            <span style={{ fontSize: "0.9rem", color: "#888", marginTop: "5px" }}>View Details →</span>
           </a>
         ))}
       </div>
       
-      {/* ہم نے یہاں سے فوٹر ہٹا دیا ہے کیونکہ وہ اب layout.tsx سے آ رہا ہے */}
+      {/* فوٹر یہاں سے ہٹا دیا گیا ہے کیونکہ وہ layout.tsx میں موجود ہے */}
     </div>
   );
 }
