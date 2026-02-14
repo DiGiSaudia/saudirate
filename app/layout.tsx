@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
+// یہ حصہ گوگل سرچ (SEO) کے لیے ہے
+export const metadata: Metadata = {
+  title: "Saudi Price | Live Gold Rates, Currency & Electronics in KSA",
+  description: "Get the latest 24K, 22K gold prices, SAR exchange rates for PKR, INR, and best electronics deals in Saudi Arabia.",
+  keywords: "Saudi Gold Rate, SAR to PKR, Saudi Electronics Prices, iPhone Prices KSA",
+};
 
 export default function RootLayout({
   children,
@@ -13,20 +21,15 @@ export default function RootLayout({
         padding: 0, 
         display: 'flex', 
         flexDirection: 'column', 
-        minHeight: '100vh' // اس سے فوٹر ہمیشہ نیچے رہے گا
+        minHeight: '100vh' 
       }}>
-        
-        {/* مینیو بار - اوپر */}
         <Navbar />
-
-        {/* صفحے کا اصل مواد - درمیان میں */}
+        
         <main style={{ flex: 1 }}>
           {children}
         </main>
-
-        {/* فوٹر - سب سے نیچے */}
+        
         <Footer />
-
       </body>
     </html>
   );
