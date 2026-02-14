@@ -6,9 +6,7 @@ const CurrencyCards = () => {
   const [rates, setRates] = useState<any>({});
   const [loading, setLoading] = useState(true);
 
-  const API_KEY = 'goldapi-2fojksmlmivjd4-io'; // آپ کی API Key
-
-  // ان ممالک کے کوڈز جن کے ریٹس ہم نے دکھانے ہیں
+  // یہ 24 ممالک کی لسٹ ہے (کرنسی کوڈز کے ساتھ)
   const countries = [
     { code: 'pk', name: 'Pakistan', currency: 'PKR' },
     { code: 'in', name: 'India', currency: 'INR' },
@@ -18,70 +16,104 @@ const CurrencyCards = () => {
     { code: 'ph', name: 'Philippines', currency: 'PHP' },
     { code: 'np', name: 'Nepal', currency: 'NPR' },
     { code: 'lk', name: 'Sri Lanka', currency: 'LKR' },
-    // آپ مزید 24 ممالک یہاں اسی طرح شامل کر سکتے ہیں
+    { code: 'tr', name: 'Turkey', currency: 'TRY' },
+    { code: 'my', name: 'Malaysia', currency: 'MYR' },
+    { code: 'af', name: 'Afghanistan', currency: 'AFN' },
+    { code: 'ma', name: 'Morocco', currency: 'MAD' },
+    { code: 'dz', name: 'Algeria', currency: 'DZD' },
+    { code: 'sd', name: 'Sudan', currency: 'SDG' },
+    { code: 'jo', name: 'Jordan', currency: 'JOD' },
+    { code: 'ye', name: 'Yemen', currency: 'YER' },
+    { code: 'ng', name: 'Nigeria', currency: 'NGN' },
+    { code: 'gb', name: 'UK', currency: 'GBP' },
+    { code: 'us', name: 'USA', currency: 'USD' },
+    { code: 'ca', name: 'Canada', currency: 'CAD' },
+    { code: 'fr', name: 'France', currency: 'EUR' },
+    { code: 'iq', name: 'Iraq', currency: 'IQD' },
+    { code: 'sy', name: 'Syria', currency: 'SYP' },
+    { code: 'ir', name: 'Iran', currency: 'IRR' },
   ];
 
   useEffect(() => {
-    const fetchCurrency = async () => {
+    const fetchRates = async () => {
       try {
-        // ہم ایک ہی بار میں SAR (سعودی ریال) کے تمام ریٹس منگوائیں گے
-        const response = await fetch("https://www.goldapi.io/api/stat", {
-          headers: { "x-access-token": API_KEY, "Content-Type": "application/json" }
-        });
-        const data = await response.json();
-        // یہاں ہم مثال کے طور پر ڈیٹا سیٹ کر رہے ہیں، اصل API سے SAR کا تقابل ہوگا
-        setRates(data.currencies || {}); 
+        // یہ ایک فری اور تیز API ہے جو کبھی بند نہیں ہوتی
+        const res = await fetch('https://open.er-api.com/v6/latest/SAR');
+        const data = await res.json();
+        setRates(data.rates);
         setLoading(false);
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error fetching currency:', error);
         setLoading(false);
       }
     };
-    fetchCurrency();
+    fetchRates();
   }, []);
 
   return (
-    <div style={{ padding: '40px 20px' }}>
-      <h2 style={{ textAlign: 'center', color: '#1a73e8', marginBottom: '30px' }}>
-        Saudi Riyal (SAR) Live Exchange Rates
+    <div style={{ padding: '40px 20px', backgroundColor: '#fdfdfd' }}>
+      <h2 style={{ textAlign: 'center', color: '#1a73e8', marginBottom: '10px', fontSize: '2rem' }}>
+        Saudi Riyal (SAR) Exchange Rates
       </h2>
+      <p style={{ textAlign: 'center', color: '#666', marginBottom: '40px' }}>
+        Today's live currency conversion from Saudi Arabia
+      </p>
 
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
         gap: '20px',
         maxWidth: '1200px',
         margin: '0 auto'
       }}>
-        {countries.map((curr) => (
-          <div key={curr.code} style={{ 
+        {countries.map((item) => (
+          <div key={item.code} style={{ 
             display: 'flex', 
             alignItems: 'center', 
+            justifyContent: 'space-between', // اس سے ریٹ دائیں طرف چلا جائے گا
             padding: '20px', 
             backgroundColor: '#fff', 
-            borderRadius: '15px', 
-            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-            border: '1px solid #f0f0f0'
+            borderRadius: '12px', 
+            boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+            border: '1px solid #eee'
           }}>
-            <img 
-              src={`https://flagcdn.com/w80/${curr.code}.png`} 
-              alt={curr.name} 
-              style={{ width: '45px', marginRight: '20px', borderRadius: '4px' }} 
-            />
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 'bold' }}>{curr.name}</div>
-              <div style={{ color: '#1a73e8', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                {/* یہاں لائیو ریٹ آئے گا، اگر نہ ملے تو پرانا ریٹ دکھائے گا */}
-                1 SAR = {rates[curr.currency] || 'Calculating...'}
+            
+            {/* بائیں طرف: جھنڈا اور ملک کا نام */}
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <img 
+                src={`https://flagcdn.com/w80/${item.code}.png`} 
+                alt={item.name} 
+                style={{ width: '40px', height: 'auto', borderRadius: '4px', marginRight: '15px', border: '1px solid #e0e0e0' }}
+              />
+              <div>
+                <div style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#333' }}>{item.name}</div>
+                <div style={{ fontSize: '0.8rem', color: '#888' }}>1 SAR to {item.currency}</div>
               </div>
             </div>
+
+            {/* دائیں طرف: لائیو ریٹ */}
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ color: '#0070f3', fontSize: '1.4rem', fontWeight: 'bold' }}>
+                {loading ? '...' : rates[item.currency] ? rates[item.currency].toFixed(2) : 'N/A'}
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#28a745', fontWeight: '600' }}>Live Rate</div>
+            </div>
+
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: '40px', textAlign: 'center' }}>
-        <Link href="/gold-rates" style={{ padding: '12px 30px', backgroundColor: '#1a73e8', color: 'white', borderRadius: '30px', textDecoration: 'none', fontWeight: 'bold' }}>
-           Check Gold Rates →
+      <div style={{ marginTop: '50px', textAlign: 'center' }}>
+        <Link href="/gold-rates" style={{ 
+          display: 'inline-block',
+          padding: '12px 30px',
+          backgroundColor: '#1a73e8',
+          color: 'white',
+          borderRadius: '30px',
+          textDecoration: 'none',
+          fontWeight: 'bold'
+        }}>
+           Check Live Gold Rates →
         </Link>
       </div>
     </div>
