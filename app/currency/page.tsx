@@ -1,7 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 
 const CurrencyCards = () => {
-  // عمرہ زائرین کے اہم 24 ممالک کی لسٹ
   const currencies = [
     { code: 'pk', name: 'Pakistan', rate: '74.15' },
     { code: 'in', name: 'India', rate: '22.20' },
@@ -53,30 +53,40 @@ const CurrencyCards = () => {
             backgroundColor: '#fff', 
             borderRadius: '15px', 
             boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-            border: '1px solid #f0f0f0',
-            transition: 'transform 0.2s'
+            border: '1px solid #f0f0f0'
           }}>
-            {/* یہ امیج ٹیگ کروم ڈیسک ٹاپ پر جھنڈے دکھائے گا */}
             <img 
               src={`https://flagcdn.com/w80/${curr.code}.png`} 
               alt={curr.name} 
-              style={{ width: '45px', height: 'auto', marginRight: '20px', borderRadius: '4px', border: '1px solid #eee' }} 
+              style={{ width: '45px', marginRight: '20px', borderRadius: '4px' }} 
             />
             <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#333' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
                 {curr.code.toUpperCase()} <span style={{ fontSize: '0.9rem', color: '#777', fontWeight: 'normal' }}>| {curr.name}</span>
               </div>
-              <div style={{ color: '#1a73e8', fontSize: '1.3rem', fontWeight: 'bold', marginTop: '5px' }}>
-                {curr.rate} <span style={{ fontSize: '0.8rem', color: '#28a745' }}>Live Rate</span>
-              </div>
+              <div style={{ color: '#1a73e8', fontSize: '1.3rem', fontWeight: 'bold' }}>{curr.rate}</div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* --- BACK TO HOME BUTTON (یہاں شامل کر دیا گیا ہے) --- */}
+      <div style={{ marginTop: '50px', textAlign: 'center' }}>
+        <Link href="/" style={{ 
+          display: 'inline-block',
+          padding: '15px 35px',
+          backgroundColor: '#1a73e8',
+          color: 'white',
+          borderRadius: '30px',
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          fontSize: '1.1rem',
+          boxShadow: '0 4px 15px rgba(26,115,232,0.4)'
+        }}>
+           ← Back to Homepage
+        </Link>
+      </div>
       
-      <p style={{ textAlign: 'center', marginTop: '40px', color: '#999', fontSize: '0.8rem' }}>
-        * Rates are updated based on international market standards.
-      </p>
     </div>
   );
 };
