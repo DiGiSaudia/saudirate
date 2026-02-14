@@ -38,7 +38,7 @@ export default function ContactPage() {
         {/* Contact Details */}
         <div style={{ backgroundColor: '#f0f7ff', padding: '25px', borderRadius: '10px' }}>
           <h3 style={{ color: '#1976d2', marginTop: 0 }}>Contact Details</h3>
-          <p style={{ color: '#444' }}><strong>Email:</strong> info@saudiprice.com</p>
+          <p style={{ color: '#444' }}><strong>Email:</strong> info@SaudiRate.com</p>
           <p style={{ color: '#444' }}><strong>Location:</strong> Riyadh, Saudi Arabia</p>
           <hr style={{ border: '0.5px solid #d0e3ff', margin: '20px 0' }} />
           <h4>WhatsApp Support</h4>

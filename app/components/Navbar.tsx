@@ -37,7 +37,7 @@ export default function Navbar() {
           color: '#ffcc00', 
           textDecoration: 'none' 
         }}>
-          SaudiPrice<span style={{color: 'white'}}>.com</span>
+          SaudiRate<span style={{color: 'white'}}>.com</span>
         </Link>
 
         {/* Desktop Links */}

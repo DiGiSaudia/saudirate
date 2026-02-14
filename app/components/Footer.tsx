@@ -20,7 +20,7 @@ export default function Footer() {
       }}>
         {/* About Section */}
         <div>
-          <h3 style={{ color: '#ffcc00' }}>SaudiPrice.com</h3>
+          <h3 style={{ color: '#ffcc00' }}>SaudiRate.com</h3>
           <p style={{ fontSize: '0.9rem', color: '#ccc', lineHeight: '1.6' }}>
             Your trusted source for daily gold rates, currency exchange, and latest electronics prices in KSA.
           </p>
@@ -52,7 +52,7 @@ export default function Footer() {
         fontSize: '0.8rem',
         color: '#777'
       }}>
-        © 2026 SaudiPrice.com - All Rights Reserved.
+        © 2026 SaudiRate.com - All Rights Reserved.
       </div>
     </footer>
   );
