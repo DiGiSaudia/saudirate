@@ -9,13 +9,20 @@ export default function Home() {
   ];
 
   return (
-    <div style={{ padding: "40px 20px", fontFamily: "Arial, sans-serif", textAlign: "center", backgroundColor: "#f4f7f6", minHeight: "100vh" }}>
+    <div style={{ 
+      padding: "40px 15px", 
+      fontFamily: "Arial, sans-serif", 
+      textAlign: "center", 
+      backgroundColor: "#f4f7f6", 
+      minHeight: "100vh",
+      overflowX: "hidden" // موبائل پر دائیں طرف کی فالتو جگہ ختم کرنے کے لیے
+    }}>
       <h1 style={{ color: "#333", fontSize: "2.5rem", fontWeight: "bold" }}>Saudi Price Portal</h1>
       <p style={{ color: "#666", marginBottom: "40px" }}>Your one-stop shop for latest rates in Saudi Arabia</p>
 
       <div style={{ 
         display: "grid", 
-        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
+        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
         gap: "20px", 
         maxWidth: "1000px", 
         margin: "0 auto" 
@@ -35,10 +42,8 @@ export default function Home() {
           </a>
         ))}
       </div>
-
-      <footer style={{ marginTop: "50px", color: "#888", fontSize: "0.9rem" }}>
-        <p>© 2026 saudiprice.com | Arabic support coming in 6 months.</p>
-      </footer>
+      
+      {/* ہم نے یہاں سے فوٹر ہٹا دیا ہے کیونکہ وہ اب layout.tsx سے آ رہا ہے */}
     </div>
   );
 }
