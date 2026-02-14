@@ -1,48 +1,59 @@
 import React from 'react';
 
 export default function CurrencyPage() {
-  const rates = [
-    { country: "Pakistan", currency: "PKR", buy: "74.10", sell: "74.80" },
-    { country: "India", currency: "INR", buy: "22.15", sell: "22.40" },
-    { country: "Philippines", currency: "PHP", buy: "14.85", sell: "15.10" },
-    { country: "Egypt", currency: "EGP", buy: "12.90", sell: "13.20" },
+  const currencyRates = [
+    { country: "Pakistan", currency: "PKR", rate: "74.15", flag: "🇵🇰" },
+    { country: "India", currency: "INR", rate: "22.20", flag: "🇮🇳" },
+    { country: "Bangladesh", currency: "BDT", rate: "31.50", flag: "🇧🇩" },
+    { country: "Egypt", currency: "EGP", rate: "13.10", flag: "🇪🇬" },
+    { country: "Philippines", currency: "PHP", rate: "14.90", flag: "🇵🇭" },
+    { country: "Indonesia", currency: "IDR", rate: "4150.00", flag: "🇮🇩" },
+    { country: "Nepal", currency: "NPR", rate: "35.60", flag: "🇳🇵" },
+    { country: "Sri Lanka", currency: "LKR", rate: "82.40", flag: "🇱🇰" },
+    { country: "Iran", currency: "IRR", rate: "11200.00", flag: "🇮🇷" },
   ];
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'Arial' }}>
-      <h1 style={{ textAlign: 'center', color: '#1976d2', fontSize: '1.8rem' }}>Today's SAR Exchange Rates</h1>
-      <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>Live currency rates from Saudi Riyal (SAR)</p>
-
-      {/* ٹیبل کو موبائل پر فٹ کرنے کے لیے اس کنٹینر کا استعمال ضروری ہے */}
-      <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', borderRadius: '10px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', backgroundColor: 'white', minWidth: '500px' }}>
-          <thead>
-            <tr style={{ backgroundColor: '#1976d2', color: 'white' }}>
-              <th style={thStyle}>Country</th>
-              <th style={thStyle}>Currency</th>
-              <th style={thStyle}>Bank Buy</th>
-              <th style={thStyle}>Bank Sell</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rates.map((rate, index) => (
-              <tr key={index} style={{ borderBottom: '1px solid #eee' }}>
-                <td style={tdStyle}><strong>{rate.country}</strong></td>
-                <td style={tdStyle}>{rate.currency}</td>
-                <td style={{ ...tdStyle, color: 'green', fontWeight: 'bold' }}>{rate.buy}</td>
-                <td style={{ ...tdStyle, color: 'red', fontWeight: 'bold' }}>{rate.sell}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
       
-      <p style={{ marginTop: '20px', fontSize: '0.8rem', color: '#999', textAlign: 'center' }}>
-        * Rates are subject to change according to market conditions.
-      </p>
+      <h1 style={{ textAlign: 'center', color: '#1976d2', fontSize: '2rem' }}>Saudi Riyal (SAR) Exchange Rates</h1>
+      <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>Today's live currency conversion from Saudi Arabia</p>
+
+      {/* Grid Container for Cards */}
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+        gap: '20px' 
+      }}>
+        {currencyRates.map((item, idx) => (
+          <div key={idx} style={{ 
+            backgroundColor: 'white', 
+            padding: '20px', 
+            borderRadius: '15px', 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+            border: '1px solid #eee'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <span style={{ fontSize: '2.5rem' }}>{item.flag}</span>
+              <div>
+                <div style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#333' }}>{item.country}</div>
+                <div style={{ fontSize: '0.85rem', color: '#999' }}>1 SAR to {item.currency}</div>
+              </div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ color: '#1976d2', fontSize: '1.5rem', fontWeight: 'bold' }}>{item.rate}</div>
+              <div style={{ fontSize: '0.8rem', color: 'green' }}>Live Rate</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ marginTop: '40px', textAlign: 'center', color: '#888', fontSize: '0.9rem' }}>
+        <p>* Rates are updated based on international market standards.</p>
+      </div>
     </div>
   );
 }
-
-const thStyle = { padding: '15px', textAlign: 'left' as const };
-const tdStyle = { padding: '15px', textAlign: 'left' as const };
