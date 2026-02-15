@@ -1,32 +1,32 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://saudiprice.com'; // اپنی اصل ڈومین یہاں لکھیں
+  const baseUrl = 'https://saudirate.com'
 
   return [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'always',
+      changeFrequency: 'daily',
       priority: 1,
     },
     {
       url: `${baseUrl}/gold-rates`,
       lastModified: new Date(),
-      changeFrequency: 'hourly',
+      changeFrequency: 'daily',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/currency`,
       lastModified: new Date(),
-      changeFrequency: 'hourly',
+      changeFrequency: 'daily',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/calculator`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.5,
     },
-  ];
+  ]
 }
