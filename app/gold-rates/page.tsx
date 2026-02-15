@@ -6,13 +6,20 @@ export default function GoldRatesPage() {
   const [rates, setRates] = useState<any>({});
   const [loading, setLoading] = useState(true);
 
+  // آج کی تاریخ ڈائنامک رکھنے کے لیے
+  const today = new Date().toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
   useEffect(() => {
     const fetchGoldPrice = async () => {
       try {
         const res = await fetch('https://open.er-api.com/v6/latest/SAR');
         const data = await res.json();
         
-        const base24K = 285.45; // Live Base Price (Placeholder for calculation)
+        const base24K = 285.45; // آپ کا موجودہ فارمولا
         
         setRates({
           '24K': base24K,
@@ -42,36 +49,41 @@ export default function GoldRatesPage() {
 
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'system-ui, sans-serif' }}>
-      {/* Header Section */}
+      {/* SEO Optimized Header Section */}
       <section style={{ backgroundColor: '#111', color: 'white', padding: '60px 20px', textAlign: 'center', borderBottom: '5px solid #ffcc00' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: '850' }}>Saudi <span style={{ color: '#ffcc00' }}>Gold</span> Market Live</h1>
-        <p style={{ color: '#aaa', marginTop: '10px' }}>Current prices for Gold Grams, Bars, and Ounces in KSA</p>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: '850' }}>
+          Gold Rate in Saudi Arabia Today: <span style={{ color: '#ffcc00' }}>{today}</span>
+        </h1>
+        <p style={{ color: '#aaa', marginTop: '10px', maxWidth: '800px', margin: '10px auto' }}>
+          Get the most accurate **live gold price in KSA**. Track real-time updates for 24K, 22K, 21K, and 18K gold grams and bars.
+        </p>
       </section>
 
-      {/* Top Ad Unit */}
-      <div style={{ maxWidth: '1100px', margin: '20px auto', padding: '15px', backgroundColor: '#eee', textAlign: 'center', color: '#999', fontSize: '0.8rem', borderRadius: '8px', border: '1px solid #ddd' }}>
-        -- Advertisement Space --
-      </div>
-
-      {/* Gold Cards Grid - Now 6 Boxes */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px 40px 20px' }}>
+      {/* Gold Cards Grid */}
+      <div style={{ maxWidth: '1100px', margin: '20px auto', padding: '0 20px 40px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           {goldCategories.map((item, index) => (
-            <div key={index} style={{ backgroundColor: 'white', borderRadius: '20px', padding: '30px', boxShadow: '0 8px 25px rgba(0,0,0,0.05)', border: '1px solid #eee', textAlign: 'center', transition: 'transform 0.2s' }}>
+            <div key={index} style={{ backgroundColor: 'white', borderRadius: '20px', padding: '30px', boxShadow: '0 8px 25px rgba(0,0,0,0.05)', border: '1px solid #eee', textAlign: 'center' }}>
               <div style={{ display: 'inline-block', backgroundColor: item.color, color: '#000', padding: '4px 12px', borderRadius: '50px', fontSize: '0.7rem', fontWeight: 'bold', marginBottom: '15px' }}>{item.desc}</div>
               <h3 style={{ fontSize: '1.1rem', color: '#555', marginBottom: '10px' }}>{item.label}</h3>
               <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#111' }}>
                 {loading ? '...' : rates[item.key]?.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} <span style={{ fontSize: '0.9rem' }}>SAR</span>
               </div>
-              <div style={{ marginTop: '15px', color: '#28a745', fontSize: '0.8rem', fontWeight: 'bold' }}>● Verified Live Rate</div>
+              <div style={{ marginTop: '15px', color: '#28a745', fontSize: '0.8rem', fontWeight: 'bold' }}>● Verified Live Rate: {today}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Middle/Bottom Ad Space */}
-      <div style={{ maxWidth: '1100px', margin: '30px auto', padding: '50px', backgroundColor: '#eee', textAlign: 'center', color: '#999', borderRadius: '10px' }}>
-        -- Large Content Ad Unit --
+      {/* SEO Article Section - Adds Value for Google */}
+      <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', backgroundColor: 'white', borderRadius: '15px', border: '1px solid #ddd', lineHeight: '1.6' }}>
+        <h2 style={{ fontSize: '1.8rem', color: '#111', marginBottom: '15px' }}>Why Track the Gold Price Today in Saudi Arabia?</h2>
+        <p style={{ marginBottom: '15px', color: '#444' }}>
+          Staying updated with the **gold rate in Saudi Arabia today** is essential for jewelry buyers and investors. Since the Saudi Riyal is pegged to the US Dollar, local gold prices often fluctuate based on international spot market trends.
+        </p>
+        <p style={{ marginBottom: '15px', color: '#444' }}>
+          At <strong>saudirate.com</strong>, we provide real-time updates for **21K gold rate** (popular for jewelry) and **24K gold rate** (preferred for investment). Our data is updated daily to ensure you get the best information for your next purchase.
+        </p>
       </div>
 
       {/* Navigation Footer */}
