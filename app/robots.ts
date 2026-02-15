@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/', // اگر کوئی فولڈر چھپانا ہو
     },
-    sitemap: 'https://saudiprice.com/sitemap.xml',
+    sitemap: 'https://saudirate.com/sitemap.xml',
   };
 }
