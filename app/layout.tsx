@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* براہِ راست ہیڈ میں میٹا ٹیگ ڈالنا تاکہ گوگل فوراً پہچان لے */}
-        <meta name="google-site-verification" content="efzBC_IHaO50KyVO_vqOR44y3kXBDSRh_gcsnBsEAl8" />
+        {/* گوگل بوٹ کے لیے میٹا ٹیگ سب سے اوپر */}
+        <meta name="google-site-verification" content="efzBC_IHaO50KyVO_vqOR44y3k {BDSRh_gcsnBsEAl8" />
       </head>
       <body className={inter.className} style={{ margin: 0, backgroundColor: '#f5f5f5' }}>
         <Navbar />
