@@ -2,42 +2,54 @@ import React from 'react';
 
 export default function ContactPage() {
   return (
-    <div style={{ 
-      padding: "60px 20px", 
-      maxWidth: "900px", 
-      margin: "0 auto", 
-      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-      lineHeight: "1.6",
-      color: "#333"
-    }}>
-      <h1 style={{ color: "#0070f3", fontSize: "2.5rem", marginBottom: "20px" }}>Contact Us</h1>
-      <p style={{ fontSize: "1.2rem", marginBottom: "30px" }}>
-        Have questions about gold rates or currency exchange in Saudi Arabia? We are here to help!
-      </p>
+    <div style={{ maxWidth: '800px', margin: '50px auto', padding: '0 20px', fontFamily: 'Arial' }}>
+      <h1 style={{ textAlign: 'center', color: '#1976d2' }}>Contact Us</h1>
+      <p style={{ textAlign: 'center', color: '#666' }}>Have any questions or suggestions? We'd love to hear from you!</p>
 
       <div style={{ 
-        display: "grid", 
-        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
-        gap: "20px",
-        marginTop: "40px" 
+        backgroundColor: '#f9f9f9', 
+        padding: '30px', 
+        borderRadius: '15px', 
+        marginTop: '30px',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
       }}>
-        {/* Email Box */}
-        <div style={{ padding: "20px", border: "1px solid #eaeaea", borderRadius: "10px", backgroundColor: "#fafafa" }}>
-          <h3 style={{ marginTop: "0" }}>📧 Email</h3>
-          <p>Send us an email at:<br />
-          <strong>support@saudiprice.com</strong></p>
-        </div>
-
-        {/* Support Box */}
-        <div style={{ padding: "20px", border: "1px solid #eaeaea", borderRadius: "10px", backgroundColor: "#fafafa" }}>
-          <h3 style={{ marginTop: "0" }}>🕒 Support Hours</h3>
-          <p>We are available from 9:00 AM to 6:00 PM (Saudi Time), Sunday to Thursday.</p>
-        </div>
+        <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Your Name</label>
+            <input type="text" placeholder="Enter your name" style={inputStyle} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Email Address</label>
+            <input type="email" placeholder="Enter your email" style={inputStyle} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Message</label>
+            <textarea rows={5} placeholder="How can we help you?" style={inputStyle}></textarea>
+          </div>
+          <button type="button" style={{
+            padding: '12px',
+            backgroundColor: '#1976d2',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}>Send Message</button>
+        </form>
       </div>
 
-      <div style={{ marginTop: "50px", fontSize: "0.9rem", color: "#666" }}>
-        <p>Note: Our website is currently in English, but we will provide support in Arabic starting in 6 months. [cite: 2026-02-13]</p>
+      <div style={{ marginTop: '40px', textAlign: 'center' }}>
+        <h4>Email Us Directly</h4>
+        <p style={{ color: '#1976d2', fontWeight: 'bold' }}>info@saudiprice.com</p>
       </div>
     </div>
   );
 }
+
+const inputStyle = {
+  width: '100%',
+  padding: '10px',
+  borderRadius: '5px',
+  border: '1px solid #ddd',
+  boxSizing: 'border-box' as const
+};
