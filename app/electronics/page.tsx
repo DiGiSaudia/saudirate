@@ -9,47 +9,47 @@ const ElectronicsPage = () => {
     { 
       id: 1, 
       category: 'Mobile', 
-      name: "iPhone 16 Pro Max (256GB)", 
+      name: "iPhone 16 Pro Max", 
       price: "5,699", 
-      store: "Amazon SA", 
-      img: "https://m.media-amazon.com/images/I/61H9MByE6mL._AC_SL1500_.jpg",
-      buyLink: "https://www.amazon.sa/-/en/dp/B0DGJ9M6S7" // اصل ایمیزون لنک
+      store: "Jarir Bookstore", 
+      img: "https://www.apple.com/newsroom/images/2024/09/apple-introduces-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-hero-240909_inline.jpg.large.jpg",
+      buyLink: "https://www.jarir.com/sa-en/catalogsearch/result/?q=iphone%2016%20pro%20max" 
     },
     { 
       id: 2, 
       category: 'Mobile', 
       name: "Samsung Galaxy S24 Ultra", 
       price: "4,199", 
-      store: "Amazon SA", 
-      img: "https://m.media-amazon.com/images/I/71WjsZ8nEAL._AC_SL1500_.jpg",
-      buyLink: "https://www.amazon.sa/-/en/dp/B0CSB24T6P" 
+      store: "Noon.com", 
+      img: "https://images.samsung.com/is/image/samsung/p6pim/sa/2401/gallery/sa-galaxy-s24-s928-sm-s928bztvmea-539330922?$650_519_PNG$",
+      buyLink: "https://www.noon.com/saudi-en/search/?q=s24%20ultra" 
     },
     { 
       id: 3, 
       category: 'Gaming', 
-      name: "PlayStation 5 (Slim Edition)", 
+      name: "PlayStation 5 Slim", 
       price: "2,149", 
-      store: "Amazon SA", 
+      store: "Extra", 
       img: "https://m.media-amazon.com/images/I/510uTH76GvL._AC_SL1000_.jpg",
-      buyLink: "https://www.amazon.sa/-/en/dp/B0CLLM92P3"
+      buyLink: "https://www.extra.com/en-sa/search/?text=ps5%20slim"
     },
     { 
       id: 4, 
       category: 'Accessories', 
-      name: "Apple AirPods Pro (2nd Gen)", 
+      name: "AirPods Pro 2", 
       price: "899", 
-      store: "Amazon SA", 
+      store: "Lulu Hypermarket", 
       img: "https://m.media-amazon.com/images/I/61f1YfLfKVL._AC_SL1500_.jpg",
-      buyLink: "https://www.amazon.sa/-/en/dp/B0BDHWDR12"
+      buyLink: "https://www.luluhypermarket.com/en-sa/search/?text=airpods%20pro%202"
     },
     { 
       id: 5, 
       category: 'Laptop', 
-      name: "MacBook Air M3 13-inch", 
+      name: "MacBook Air M3", 
       price: "4,399", 
-      store: "Amazon SA", 
+      store: "Panda", 
       img: "https://m.media-amazon.com/images/I/71ItM6oa16L._AC_SL1500_.jpg",
-      buyLink: "https://www.amazon.sa/-/en/dp/B0CX299L2P"
+      buyLink: "https://panda.com.sa/en/catalogsearch/result/?q=macbook"
     }
   ];
 
@@ -61,37 +61,36 @@ const ElectronicsPage = () => {
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h1 style={{ fontSize: '2.5rem', fontWeight: '800', color: '#1a1a1a' }}>Electronics Prices in KSA</h1>
-          <p style={{ color: '#666' }}>Real-time prices and direct links to top retailers in Saudi Arabia.</p>
+          <p style={{ color: '#666' }}>Compare latest prices from Jarir, Noon, Extra, and Lulu.</p>
         </div>
 
-        {/* Filter Buttons */}
+        {/* Filters */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '40px', flexWrap: 'wrap' }}>
           {['All', 'Mobile', 'Laptop', 'Gaming', 'Accessories'].map((cat) => (
-            <button 
-              key={cat}
-              onClick={() => setFilter(cat)}
-              style={{
+            <button key={cat} onClick={() => setFilter(cat)} style={{
                 padding: '10px 25px', borderRadius: '25px', border: 'none',
                 backgroundColor: filter === cat ? '#1a73e8' : '#fff',
                 color: filter === cat ? '#fff' : '#555',
                 fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-              }}
-            >
-              {cat}
-            </button>
+            }}>{cat}</button>
           ))}
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
           {filteredProducts.map((item) => (
             <div key={item.id} style={{ backgroundColor: 'white', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 5px 15px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
-              <div style={{ height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px' }}>
-                <img src={item.img} alt={item.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+              <div style={{ height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px', backgroundColor: '#fff' }}>
+                <img 
+                  src={item.img} 
+                  alt={item.name} 
+                  style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} 
+                  onError={(e: any) => { e.target.src = "https://via.placeholder.com/300?text=Product+Image"; }} // اگر امیج لوڈ نہ ہو تو یہ دکھائے
+                />
               </div>
               
               <div style={{ padding: '20px' }}>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', height: '50px', overflow: 'hidden' }}>{item.name}</h3>
-                <p style={{ color: '#888', fontSize: '0.8rem' }}>Seller: <b>{item.store}</b></p>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', height: '50px' }}>{item.name}</h3>
+                <p style={{ color: '#888', fontSize: '0.8rem' }}>Check price at: <b>{item.store}</b></p>
                 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '15px' }}>
                   <span style={{ fontSize: '1.4rem', fontWeight: '900', color: '#1a73e8' }}>
@@ -101,7 +100,7 @@ const ElectronicsPage = () => {
                     backgroundColor: '#ffcc00', color: '#000', padding: '10px 15px', 
                     borderRadius: '8px', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold' 
                   }}>
-                    Buy Now →
+                    View Store →
                   </a>
                 </div>
               </div>
