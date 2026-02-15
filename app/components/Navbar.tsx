@@ -9,6 +9,7 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "Gold Rates", path: "/gold-rates" },
     { name: "Currency", path: "/currency" },
+    { name: "Calculator", path: "/calculator" },
     { name: "Electronics", path: "/electronics" },
     { name: "Contact", path: "/contact" },
   ];
