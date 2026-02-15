@@ -6,7 +6,14 @@ export default function CurrencyPage() {
   const [rates, setRates] = useState<any>({});
   const [loading, setLoading] = useState(true);
 
-  // 12 ممالک کی لسٹ ان کے کوڈز کے ساتھ
+  // آج کی تاریخ ڈائنامک رکھنے کے لیے (SEO کے لیے بہترین)
+  const today = new Date().toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
+  // آپ کی پرانی 12 ممالک کی لسٹ (محفوظ ہے)
   const countries = [
     { pair: 'SAR to PKR', code: 'PK', name: 'Pakistan', target: 'PKR' },
     { pair: 'SAR to INR', code: 'IN', name: 'India', target: 'INR' },
@@ -22,8 +29,8 @@ export default function CurrencyPage() {
     { pair: 'SAR to TRY', code: 'TR', name: 'Turkey', target: 'TRY' },
   ];
 
+  // آپ کا پرانا API Fetching طریقہ (محفوظ ہے)
   useEffect(() => {
-    // مفت API سے ڈیٹا حاصل کرنے کا فنکشن
     const fetchRates = async () => {
       try {
         const res = await fetch('https://open.er-api.com/v6/latest/SAR');
@@ -39,9 +46,15 @@ export default function CurrencyPage() {
 
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#f8f9fa', fontFamily: 'system-ui, sans-serif' }}>
+      
+      {/* SEO Optimized Header */}
       <section style={{ backgroundColor: '#111', color: 'white', padding: '60px 20px', textAlign: 'center', borderBottom: '5px solid #ffcc00' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: '850' }}>SAR <span style={{ color: '#ffcc00' }}>Live</span> Exchange Rates</h1>
-        <p style={{ color: '#aaa', marginTop: '10px' }}>Real-time conversion for 12 countries from Saudi Market</p>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: '850' }}>
+          Currency Exchange Rate in Saudi Arabia Today: <span style={{ color: '#ffcc00' }}>{today}</span>
+        </h1>
+        <p style={{ color: '#aaa', marginTop: '10px', maxWidth: '800px', margin: '10px auto' }}>
+          Get the latest **SAR to PKR today live rate**, INR, BDT, and PHP updates. Track the best exchange rates in KSA daily for 12 major countries.
+        </p>
       </section>
 
       {/* Top Ad Unit */}
@@ -49,6 +62,7 @@ export default function CurrencyPage() {
         -- Display Ad Space --
       </div>
 
+      {/* Currency Grid Boxes */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '20px 20px 60px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
           {countries.map((item, index) => (
@@ -66,11 +80,32 @@ export default function CurrencyPage() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#28a745', fontSize: '0.85rem', fontWeight: '600' }}>
                 <span style={{ width: '8px', height: '8px', backgroundColor: '#28a745', borderRadius: '50%' }}></span>
-                {loading ? 'Connecting...' : 'Live Rate Updated'}
+                {loading ? 'Connecting...' : `Live Rate: ${today}`}
               </div>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* SEO ARTICLE SECTION - Plagiarism-Free & Keyword Optimized */}
+      <div style={{ maxWidth: '850px', margin: '0 auto 60px', padding: '30px', backgroundColor: 'white', borderRadius: '15px', border: '1px solid #ddd', lineHeight: '1.8' }}>
+        <h2 style={{ fontSize: '1.8rem', color: '#111', marginBottom: '20px', fontWeight: 'bold' }}>
+          Best Exchange Rate in Saudi Arabia: Live SAR Updates
+        </h2>
+        
+        <p style={{ marginBottom: '15px', color: '#444' }}>
+          Finding the **best exchange rate in Saudi Arabia** is a top priority for expatriates. Whether you need the **SAR to PKR today live rate** for Pakistan or **SAR to INR** for India, staying updated with **real-time currency updates in KSA** ensures you get the most value for your money.
+        </p>
+
+        <h3 style={{ fontSize: '1.4rem', color: '#111', marginTop: '20px', marginBottom: '10px' }}>Why Do Saudi Riyal Exchange Rates Change?</h3>
+        <p style={{ marginBottom: '15px', color: '#444' }}>
+          The **currency exchange rate in KSA** is influenced by global economic shifts and the performance of the US Dollar. Since the Saudi Riyal is pegged to the USD, tracking the **live SAR exchange rate** on <strong>saudirate.com</strong> helps you choose the perfect time for your remittances.
+        </p>
+
+        <h3 style={{ fontSize: '1.4rem', color: '#111', marginTop: '20px', marginBottom: '10px' }}>Reliable Remittance Updates</h3>
+        <p style={{ color: '#444' }}>
+          At <strong>saudirate.com</strong>, we provide accurate **today's currency rate in Saudi Arabia** for all major Asian and Western currencies. Our real-time data combined with SEO-friendly content makes us your trusted financial guide in the Kingdom.
+        </p>
       </div>
 
       {/* Bottom Nav Buttons */}
@@ -78,6 +113,7 @@ export default function CurrencyPage() {
         <Link href="/" style={{ flex: '1', minWidth: '150px', padding: '16px', textAlign: 'center', backgroundColor: '#111', color: 'white', borderRadius: '12px', textDecoration: 'none', fontWeight: 'bold' }}>🏠 Home</Link>
         <Link href="/gold-rates" style={{ flex: '1', minWidth: '150px', padding: '16px', textAlign: 'center', backgroundColor: '#ffcc00', color: 'black', borderRadius: '12px', textDecoration: 'none', fontWeight: 'bold' }}>💰 Gold Rates</Link>
       </div>
+
     </main>
   );
 }
