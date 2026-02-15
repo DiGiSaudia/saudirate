@@ -3,75 +3,43 @@ import React from 'react';
 
 const ContactPage = () => {
   return (
-    <div style={{ 
-      padding: '60px 20px', 
-      backgroundColor: '#f4f4f4', 
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <div style={{ 
-        maxWidth: '900px', 
-        width: '100%',
-        backgroundColor: 'white', 
-        borderRadius: '25px', 
-        overflow: 'hidden', 
-        boxShadow: '0 20px 50px rgba(0,0,0,0.1)',
-        display: 'flex',
-        flexWrap: 'wrap'
-      }}>
+    <div style={{ padding: '60px 20px', backgroundColor: '#f9f9f9', minHeight: '80vh' }}>
+      <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
         
-        {/* Left Side: Info */}
+        {/* سادہ اور روشن ہیڈر */}
+        <h1 style={{ color: '#333', fontSize: '2.5rem', marginBottom: '10px' }}>Contact Us</h1>
+        <p style={{ color: '#666', marginBottom: '40px' }}>
+          Have a question or feedback? We'd love to hear from you.
+        </p>
+
+        {/* کانٹیکٹ فارم جو باقی ویب سائٹ سے میچ کرتا ہے */}
         <div style={{ 
-          flex: '1 1 300px', 
-          backgroundColor: '#1a1a1a', 
-          color: 'white', 
-          padding: '40px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center'
+          backgroundColor: 'white', 
+          padding: '40px', 
+          borderRadius: '15px', 
+          boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+          border: '1px solid #eee',
+          textAlign: 'left'
         }}>
-          <h2 style={{ color: '#ffcc00', fontSize: '2rem', marginBottom: '20px' }}>Get in Touch</h2>
-          <p style={{ lineHeight: '1.6', color: '#ccc', marginBottom: '30px' }}>
-            Have a question about Saudi Gold rates or Currency exchange? Drop us a message and our team will get back to you.
-          </p>
-          
-          <div style={{ marginBottom: '20px' }}>
-            <p style={{ marginBottom: '10px' }}><strong>📍 Location:</strong> Riyadh, Saudi Arabia</p>
-            <p style={{ marginBottom: '10px' }}><strong>📧 Email:</strong> info@saudirate.com</p>
-            <p style={{ marginBottom: '10px' }}><strong>💬 WhatsApp:</strong> Coming Soon</p>
-          </div>
-
-          <div style={{ marginTop: '20px', display: 'flex', gap: '15px' }}>
-            {/* Social Icons Placeholder */}
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>f</div>
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>x</div>
-          </div>
-        </div>
-
-        {/* Right Side: Form */}
-        <div style={{ flex: '1 1 400px', padding: '40px' }}>
-          <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={{ marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>Full Name</label>
-              <input type="text" placeholder="Enter your name" style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
+          <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>Name</label>
+              <input type="text" placeholder="Your full name" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={{ marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>Email Address</label>
-              <input type="email" placeholder="email@example.com" style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>Email</label>
+              <input type="email" placeholder="your@email.com" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={{ marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>Message</label>
-              <textarea placeholder="How can we help you?" rows={4} style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem', resize: 'none' }}></textarea>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>Message</label>
+              <textarea placeholder="How can we help you?" rows={5} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem', resize: 'none' }}></textarea>
             </div>
 
             <button type="button" style={{ 
-              marginTop: '10px',
-              backgroundColor: '#ffcc00', 
-              color: '#000', 
+              backgroundColor: '#1a73e8', // آپ کی ویب سائٹ کا نیلا رنگ
+              color: 'white', 
               padding: '15px', 
               borderRadius: '8px', 
               border: 'none', 
@@ -83,6 +51,12 @@ const ContactPage = () => {
               Send Message
             </button>
           </form>
+        </div>
+
+        {/* رابطہ کی معلومات */}
+        <div style={{ marginTop: '40px', color: '#888', fontSize: '0.9rem' }}>
+          <p>Email: <b>info@saudirate.com</b></p>
+          <p>Riyadh, Saudi Arabia</p>
         </div>
       </div>
     </div>
