@@ -1,66 +1,43 @@
-'use client';
 import React from 'react';
 
-const ContactPage = () => {
+export default function ContactPage() {
   return (
-    <div style={{ padding: '60px 20px', backgroundColor: '#f9f9f9', minHeight: '80vh' }}>
-      <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-        
-        {/* سادہ اور روشن ہیڈر */}
-        <h1 style={{ color: '#333', fontSize: '2.5rem', marginBottom: '10px' }}>Contact Us</h1>
-        <p style={{ color: '#666', marginBottom: '40px' }}>
-          Have a question or feedback? We'd love to hear from you.
-        </p>
+    <div style={{ 
+      padding: "60px 20px", 
+      maxWidth: "900px", 
+      margin: "0 auto", 
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      lineHeight: "1.6",
+      color: "#333"
+    }}>
+      <h1 style={{ color: "#0070f3", fontSize: "2.5rem", marginBottom: "20px" }}>Contact Us</h1>
+      <p style={{ fontSize: "1.2rem", marginBottom: "30px" }}>
+        Have questions about gold rates or currency exchange in Saudi Arabia? We are here to help!
+      </p>
 
-        {/* کانٹیکٹ فارم جو باقی ویب سائٹ سے میچ کرتا ہے */}
-        <div style={{ 
-          backgroundColor: 'white', 
-          padding: '40px', 
-          borderRadius: '15px', 
-          boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-          border: '1px solid #eee',
-          textAlign: 'left'
-        }}>
-          <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>Name</label>
-              <input type="text" placeholder="Your full name" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>Email</label>
-              <input type="email" placeholder="your@email.com" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>Message</label>
-              <textarea placeholder="How can we help you?" rows={5} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem', resize: 'none' }}></textarea>
-            </div>
-
-            <button type="button" style={{ 
-              backgroundColor: '#1a73e8', // آپ کی ویب سائٹ کا نیلا رنگ
-              color: 'white', 
-              padding: '15px', 
-              borderRadius: '8px', 
-              border: 'none', 
-              fontWeight: 'bold', 
-              fontSize: '1rem',
-              cursor: 'pointer',
-              transition: '0.3s'
-            }}>
-              Send Message
-            </button>
-          </form>
+      <div style={{ 
+        display: "grid", 
+        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
+        gap: "20px",
+        marginTop: "40px" 
+      }}>
+        {/* Email Box */}
+        <div style={{ padding: "20px", border: "1px solid #eaeaea", borderRadius: "10px", backgroundColor: "#fafafa" }}>
+          <h3 style={{ marginTop: "0" }}>📧 Email</h3>
+          <p>Send us an email at:<br />
+          <strong>support@saudiprice.com</strong></p>
         </div>
 
-        {/* رابطہ کی معلومات */}
-        <div style={{ marginTop: '40px', color: '#888', fontSize: '0.9rem' }}>
-          <p>Email: <b>info@saudirate.com</b></p>
-          <p>Riyadh, Saudi Arabia</p>
+        {/* Support Box */}
+        <div style={{ padding: "20px", border: "1px solid #eaeaea", borderRadius: "10px", backgroundColor: "#fafafa" }}>
+          <h3 style={{ marginTop: "0" }}>🕒 Support Hours</h3>
+          <p>We are available from 9:00 AM to 6:00 PM (Saudi Time), Sunday to Thursday.</p>
         </div>
+      </div>
+
+      <div style={{ marginTop: "50px", fontSize: "0.9rem", color: "#666" }}>
+        <p>Note: Our website is currently in English, but we will provide support in Arabic starting in 6 months. [cite: 2026-02-13]</p>
       </div>
     </div>
   );
-};
-
-export default ContactPage;
+}
