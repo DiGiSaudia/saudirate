@@ -7,9 +7,12 @@ import Footer from './components/Footer'; // فوٹر امپورٹ کیا
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Saudi Gold Price Today & Currency Exchange | SaudiRate.com",
-  description: "Check live Gold Rate in KSA (24K, 22K, 21K, 18K) and Saudi Riyal (SAR) exchange rates for Pakistan, India, Bangladesh, Philippines and more. Updated daily.",
-  keywords: "gold rate ksa, saudi gold price, sar to pkr, sar to inr, riyal rate, saudi currency, live gold rate",
+  title: 'Saudi Price | Live Gold and Currency Rates',
+  description: 'Get real-time Saudi Riyal exchange rates and gold prices in KSA.',
+  // یہاں گوگل ویریفیکیشن کوڈ شامل کریں
+  verification: {
+    google: 'efzBC_IHaO50KyVO_vqOR44y3kXBDSRh_gcsnBsEAl8',
+  },
 };
 
 export default function RootLayout({
