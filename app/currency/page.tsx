@@ -49,4 +49,24 @@ export default function CurrencyPage() {
       </div>
 
       {/* Middle/Bottom Ad Space */}
-      <div style={{ maxWidth: '1100px', margin: '20px auto', padding: '50px', backgroundColor: '#f0f0f0', textAlign: 'center', color: '#999', borderRadius: '8px'
+      <div style={{ maxWidth: '1100px', margin: '20px auto', padding: '50px', backgroundColor: '#f0f0f0', textAlign: 'center', color: '#999', borderRadius: '8px' }}>
+        -- Large Content Ad Unit --
+      </div>
+
+      {/* Navigation Footer */}
+      <div style={{ backgroundColor: '#fff', padding: '40px 20px', borderTop: '1px solid #eee' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+          <Link href="/" style={{ flex: '1', minWidth: '140px', padding: '15px', textAlign: 'center', backgroundColor: '#111', color: 'white', borderRadius: '12px', textDecoration: 'none', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+            🏠 Home
+          </Link>
+          <Link href="/gold-rates" style={{ flex: '1', minWidth: '140px', padding: '15px', textAlign: 'center', backgroundColor: '#ffcc00', color: 'black', borderRadius: '12px', textDecoration: 'none', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(255,204,0,0.2)' }}>
+            💰 Gold Rates
+          </Link>
+          <Link href="/calculator" style={{ flex: '1', minWidth: '140px', padding: '15px', textAlign: 'center', backgroundColor: '#0070f3', color: 'white', borderRadius: '12px', textDecoration: 'none', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(0,112,243,0.2)' }}>
+            🔢 Converter
+          </Link>
+        </div>
+      </div>
+    </main>
+  );
+}
