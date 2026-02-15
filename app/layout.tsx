@@ -7,11 +7,10 @@ import Footer from './components/Footer'; // فوٹر امپورٹ کیا
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Saudi Price | Live Gold and Currency Rates',
-  description: 'Get real-time Saudi Riyal exchange rates and gold prices in KSA.',
-  // یہاں گوگل ویریفیکیشن کوڈ شامل کریں
+  title: 'Saudi Rate | Live Gold and Currency Rates',
+  description: 'Real-time gold prices and currency exchange rates in Saudi Arabia.',
   verification: {
-    google: 'efzBC_IHaO50KyVO_vqOR44y3kXBDSRh_gcsnBsEAl8',
+    google: 'efzBC_IHaO50KyVO_vqOR44y3kXBDSRh_gcsnBsEAl8', // صرف یہاں والا حصہ ڈالنا ہے
   },
 };
 
