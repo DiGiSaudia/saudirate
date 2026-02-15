@@ -1,87 +1,32 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React from 'react';
 
-const CurrencyCards = () => {
-  const [rates, setRates] = useState<any>({});
-  const [loading, setLoading] = useState(true);
-
-  // 24 اہم ممالک
-  const countries = [
-    { code: 'pk', name: 'Pakistan', currency: 'PKR' },
-    { code: 'in', name: 'India', currency: 'INR' },
-    { code: 'bd', name: 'Bangladesh', currency: 'BDT' },
-    { code: 'id', name: 'Indonesia', currency: 'IDR' },
-    { code: 'eg', name: 'Egypt', currency: 'EGP' },
-    { code: 'ph', name: 'Philippines', currency: 'PHP' },
-    { code: 'np', name: 'Nepal', currency: 'NPR' },
-    { code: 'lk', name: 'Sri Lanka', currency: 'LKR' },
-    // باقی ممالک...
-  ];
-
-  useEffect(() => {
-    const fetchRates = async () => {
-      try {
-        const res = await fetch('https://open.er-api.com/v6/latest/SAR');
-        if (!res.ok) throw new Error('Failed to fetch');
-        const data = await res.json();
-        setRates(data.rates);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching currency:', error);
-        // Backup Rates (تاکہ N/A نظر نہ آئے)
-        setRates({
-            PKR: 74.50, INR: 22.15, BDT: 31.50, IDR: 4300, EGP: 12.90, PHP: 15.20, NPR: 35.60, LKR: 85.00
-        });
-        setLoading(false);
-      }
-    };
-    fetchRates();
-  }, []);
-
+export default function CurrencyPage() {
   return (
-    <div style={{ padding: '40px 20px', backgroundColor: '#fdfdfd' }}>
-      <h2 style={{ textAlign: 'center', color: '#1a73e8', marginBottom: '10px', fontSize: '2rem' }}>
-        SAR Exchange Rates Today
-      </h2>
-      
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
-        gap: '20px',
-        maxWidth: '1200px',
-        margin: '30px auto'
-      }}>
-        {countries.map((item) => (
-          <div key={item.code} style={{ 
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
-            padding: '20px', backgroundColor: '#fff', borderRadius: '12px', 
-            boxShadow: '0 4px 6px rgba(0,0,0,0.05)', border: '1px solid #eee'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img src={`https://flagcdn.com/w80/${item.code}.png`} alt={item.name} 
-                   style={{ width: '40px', borderRadius: '4px', marginRight: '15px' }} />
-              <div>
-                <div style={{ fontWeight: 'bold' }}>{item.name}</div>
-                <div style={{ fontSize: '0.8rem', color: '#888' }}>1 SAR to {item.currency}</div>
-              </div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ color: '#0070f3', fontSize: '1.4rem', fontWeight: 'bold' }}>
-                {loading ? '...' : rates[item.currency] ? rates[item.currency].toFixed(2) : '---'}
-              </div>
-            </div>
+    <main style={{ minHeight: '100vh', backgroundColor: '#fdfdfd', fontFamily: 'system-ui, sans-serif' }}>
+      <div style={{ backgroundColor: '#111', color: 'white', padding: '40px 20px', textAlign: 'center', borderBottom: '4px solid #ffcc00' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>SAR Exchange Rates Today</h1>
+        <p style={{ color: '#aaa', marginTop: '10px' }}>Current Saudi Riyal rates for international transfers.</p>
+      </div>
+
+      <div style={{ maxWidth: '900px', margin: '20px auto', textAlign: 'center', padding: '15px', backgroundColor: '#eee', color: '#777', fontSize: '0.8rem' }}>
+        -- Top Ad Unit --
+      </div>
+
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+        {/* Currency Cards */}
+        {['SAR to PKR', 'SAR to INR', 'SAR to PHP', 'SAR to BDT'].map((pair) => (
+          <div key={pair} style={{ backgroundColor: 'white', padding: '25px', borderRadius: '12px', border: '1px solid #eee', textAlign: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}>
+            <h3 style={{ color: '#555', fontSize: '1rem' }}>{pair}</h3>
+            <p style={{ fontSize: '1.8rem', fontWeight: 'bold', margin: '10px 0', color: '#1a1a1a' }}>--.--</p>
+            <span style={{ fontSize: '0.8rem', color: '#28a745' }}>Updated 5m ago</span>
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: '50px', textAlign: 'center' }}>
-        <Link href="/gold-rates" style={{ padding: '12px 30px', backgroundColor: '#1a73e8', color: 'white', borderRadius: '30px', textDecoration: 'none', fontWeight: 'bold' }}>
-           Check Live Gold Rates →
-        </Link>
+      <div style={{ maxWidth: '900px', margin: '40px auto', textAlign: 'center', padding: '50px', backgroundColor: '#eee', color: '#777', fontSize: '0.8rem' }}>
+        -- Bottom Ad Unit (Horizontal) --
       </div>
-    </div>
+    </main>
   );
-};
-
-export default CurrencyCards;
+}

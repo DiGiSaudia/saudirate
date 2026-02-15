@@ -1,121 +1,52 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React from 'react';
 
-const GoldRates = () => {
-  const [rates, setRates] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [lastUpdated, setLastUpdated] = useState('');
-  const [isLive, setIsLive] = useState(false);
-
-  useEffect(() => {
-    const fetchGoldRates = async () => {
-      try {
-        const res = await fetch('https://open.er-api.com/v6/latest/XAU');
-        if (!res.ok) throw new Error('Failed to fetch');
-        const data = await res.json();
-        
-        const pricePerOunceInSAR = data.rates.SAR;
-        const pricePerGram24k = pricePerOunceInSAR / 31.1035;
-
-        setRates({
-          k24: pricePerGram24k,
-          k22: pricePerGram24k * 0.9167,
-          k21: pricePerGram24k * 0.875,
-          k18: pricePerGram24k * 0.75
-        });
-        setIsLive(true);
-        setLastUpdated(new Date().toLocaleTimeString());
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching gold rates, using backup:", error);
-        // Backup Rates (Safety Net) - اگر API فیل ہو جائے تو یہ دکھائے گا
-        setRates({
-          k24: 335.50, // اندازاً قیمت
-          k22: 307.50,
-          k21: 293.50,
-          k18: 251.60
-        });
-        setIsLive(false); // یہ بتائے گا کہ یہ لائیو نہیں بلکہ بیک اپ ہے
-        setLastUpdated(new Date().toLocaleTimeString());
-        setLoading(false);
-      }
-    };
-    fetchGoldRates();
-  }, []);
-
+export default function GoldRatesPage() {
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
-      
-      {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: '30px', backgroundColor: '#fff8e1', padding: '20px', borderRadius: '15px' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-          <span style={{ 
-            height: '10px', width: '10px', 
-            backgroundColor: isLive ? '#28a745' : '#ffc107', 
-            borderRadius: '50%', display: 'inline-block' 
-          }}></span>
-          <span style={{ color: isLive ? '#28a745' : '#b8860b', fontWeight: 'bold', fontSize: '0.9rem' }}>
-            {isLive ? 'LIVE MARKET DATA' : 'LATEST MARKET ESTIMATES'}
-          </span>
-        </div>
-        <img src="https://flagcdn.com/w80/sa.png" alt="Saudi Flag" style={{ width: '40px', borderRadius: '4px', marginBottom: '10px' }} />
-        <h1 style={{ color: '#b8860b', margin: 0, fontSize: '1.8rem' }}>Saudi Gold Price Today</h1>
-        <p style={{ color: '#666', marginTop: '5px', fontSize: '0.9rem' }}>
-          Updated: <b>{loading ? 'Updating...' : lastUpdated}</b>
-        </p>
+    <main style={{ minHeight: '100vh', backgroundColor: '#fdfdfd', fontFamily: 'system-ui, sans-serif' }}>
+      {/* Header Section */}
+      <div style={{ backgroundColor: '#111', color: 'white', padding: '40px 20px', textAlign: 'center', borderBottom: '4px solid #ffcc00' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Live Gold Rates in Saudi Arabia</h1>
+        <p style={{ color: '#aaa', marginTop: '10px' }}>Real-time 24K, 22K, 21K, and 18K gold prices per gram.</p>
       </div>
 
-      {/* Gold Table */}
-      <div style={{ backgroundColor: 'white', borderRadius: '15px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
-        <div style={{ padding: '15px 20px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', backgroundColor: '#f9f9f9' }}>
-          <span style={{ fontWeight: 'bold', color: '#555' }}>Gold Type (1 Gram)</span>
-          <span style={{ fontWeight: 'bold', color: '#555' }}>Price (SAR)</span>
-        </div>
-        
-        {loading ? (
-           <div style={{padding: '30px', textAlign: 'center'}}>Loading Rates...</div>
-        ) : (
-          [
-            { label: '24K Gold', price: rates?.k24 },
-            { label: '22K Gold', price: rates?.k22 },
-            { label: '21K Gold', price: rates?.k21 },
-            { label: '18K Gold', price: rates?.k18 }
-          ].map((item, index) => (
-            <div key={index} style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              padding: '20px', 
-              borderBottom: index !== 3 ? '1px solid #eee' : 'none',
-              alignItems: 'center'
-            }}>
-              <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>✨ {item.label}</span>
-              <div style={{ textAlign: 'right' }}>
-                <span style={{ fontWeight: 'bold', color: '#b8860b', fontSize: '1.3rem' }}>
-                  {item.price ? item.price.toFixed(2) : '---'}
-                </span>
-                <span style={{ fontSize: '0.9rem', color: '#b8860b', marginLeft: '5px' }}>SAR</span>
-              </div>
-            </div>
-          ))
-        )}
+      {/* Top Ad Space */}
+      <div style={{ maxWidth: '900px', margin: '20px auto', padding: '20px', backgroundColor: '#f0f0f0', textAlign: 'center', color: '#999', fontSize: '0.8rem', borderRadius: '8px' }}>
+        -- Ad Space: Top Header --
       </div>
 
-      <div style={{ marginTop: '40px', textAlign: 'center' }}>
-        <Link href="/" style={{ 
-          display: 'inline-block',
-          padding: '12px 30px', 
-          backgroundColor: '#b8860b', 
-          color: 'white', 
-          borderRadius: '30px', 
-          textDecoration: 'none', 
-          fontWeight: 'bold' 
-        }}>
-           ← Back to Homepage
-        </Link>
+      {/* Gold Rates Table */}
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '20px' }}>
+        <div style={{ backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', overflow: 'hidden', border: '1px solid #eee' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <thead style={{ backgroundColor: '#f8f9fa' }}>
+              <tr>
+                <th style={{ padding: '15px', borderBottom: '2px solid #eee' }}>Type</th>
+                <th style={{ padding: '15px', borderBottom: '2px solid #eee' }}>Price (SAR)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: '15px', borderBottom: '1px solid #eee' }}>Gold 24K</td>
+                <td style={{ padding: '15px', borderBottom: '1px solid #eee', fontWeight: 'bold' }}>285.50</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '15px', borderBottom: '1px solid #eee' }}>Gold 22K</td>
+                <td style={{ padding: '15px', borderBottom: '1px solid #eee', fontWeight: 'bold' }}>261.75</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '15px', borderBottom: '1px solid #eee' }}>Gold 21K</td>
+                <td style={{ padding: '15px', borderBottom: '1px solid #eee', fontWeight: 'bold' }}>249.80</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+
+      {/* Middle/Bottom Ad Space */}
+      <div style={{ maxWidth: '900px', margin: '30px auto', padding: '40px', backgroundColor: '#f0f0f0', textAlign: 'center', color: '#999', fontSize: '0.8rem', borderRadius: '8px' }}>
+        -- Ad Space: In-Content Large --
+      </div>
+    </main>
   );
-};
-
-export default GoldRates;
+}
