@@ -7,8 +7,9 @@ import Footer from './components/Footer'; // فوٹر امپورٹ کیا
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Saudi Price - Gold, Currency & Electronics Rates',
-  description: 'Daily updated gold rates, currency exchange, and electronics prices in Saudi Arabia.',
+  title: "Saudi Gold Price Today & Currency Exchange | SaudiRate.com",
+  description: "Check live Gold Rate in KSA (24K, 22K, 21K, 18K) and Saudi Riyal (SAR) exchange rates for Pakistan, India, Bangladesh, Philippines and more. Updated daily.",
+  keywords: "gold rate ksa, saudi gold price, sar to pkr, sar to inr, riyal rate, saudi currency, live gold rate",
 };
 
 export default function RootLayout({
