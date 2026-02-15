@@ -1,83 +1,69 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
 
 export default function HomePage() {
-  const sections = [
-    {
-      title: "Gold Rates",
-      description: "Live 24K, 22K, and 21K gold prices in Saudi Arabia.",
-      link: "/gold-rates",
-      icon: "💰",
-      color: "#b8860b"
-    },
-    {
-      title: "Currency Exchange",
-      description: "Latest SAR exchange rates for PKR, INR, BDT and more.",
-      link: "/currency",
-      icon: "💵",
-      color: "#1976d2"
-    },
-    {
-      title: "Electronics Deals",
-      description: "Best prices for iPhone, Samsung, and latest gadgets.",
-      link: "/electronics",
-      icon: "📱",
-      color: "#333"
-    }
-  ];
-
   return (
-    <div style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
-      
+    <main style={{ fontFamily: 'system-ui, sans-serif' }}>
       {/* Hero Section */}
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <h1 style={{ fontSize: '2.5rem', color: '#222', marginBottom: '10px' }}>Welcome to Saudi Rate</h1>
-        <p style={{ fontSize: '1.2rem', color: '#666' }}>Your trusted partner for daily rates and electronic prices in KSA</p>
-      </div>
-
-      {/* Navigation Cards */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-        gap: '30px' 
+      <section style={{ 
+        padding: '80px 20px', 
+        textAlign: 'center', 
+        backgroundColor: '#1a1a1a', 
+        color: 'white',
+        backgroundImage: 'linear-gradient(45deg, #1a1a1a 0%, #333 100%)'
       }}>
-        {sections.map((section, index) => (
-          <Link href={section.link} key={index} style={{ textDecoration: 'none' }}>
-            <div style={{ 
-              backgroundColor: 'white', 
-              borderRadius: '20px', 
-              padding: '30px', 
-              textAlign: 'center',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
-              border: '1px solid #eee',
-              cursor: 'pointer',
-              height: '100%',
-              transition: 'transform 0.3s ease'
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '20px' }}>
+            Saudi <span style={{ color: '#ffcc00' }}>Gold & Currency</span> Rates
+          </h1>
+          <p style={{ fontSize: '1.2rem', color: '#ccc', marginBottom: '40px' }}>
+            Get real-time updates on Gold prices and Exchange rates in Saudi Arabia. 
+            Trusted, fast, and accurate data at your fingertips.
+          </p>
+          
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/gold-rates" style={{ 
+              backgroundColor: '#ffcc00', color: '#000', padding: '15px 30px', 
+              borderRadius: '10px', fontWeight: 'bold', textDecoration: 'none', fontSize: '1.1rem' 
             }}>
-              <div style={{ fontSize: '4rem', marginBottom: '20px' }}>{section.icon}</div>
-              <h2 style={{ color: section.color, marginBottom: '15px' }}>{section.title}</h2>
-              <p style={{ color: '#777', lineHeight: '1.6', marginBottom: '20px' }}>{section.description}</p>
-              <span style={{ 
-                display: 'inline-block', 
-                padding: '10px 25px', 
-                backgroundColor: section.color, 
-                color: 'white', 
-                borderRadius: '50px',
-                fontWeight: 'bold'
-              }}>
-                View Details
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
+              Check Gold Rates
+            </Link>
+            <Link href="/calculator" style={{ 
+              backgroundColor: 'transparent', color: 'white', padding: '15px 30px', 
+              borderRadius: '10px', fontWeight: 'bold', textDecoration: 'none', 
+              fontSize: '1.1rem', border: '2px solid white' 
+            }}>
+              Currency Calculator
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      {/* Future Arabic Support Note */}
-      <div style={{ marginTop: '80px', textAlign: 'center', padding: '20px', backgroundColor: '#f0f4f8', borderRadius: '15px' }}>
-        <p style={{ color: '#555', margin: 0 }}>
-          <strong>Note:</strong> We currently support English. Arabic language support is coming in 6 months! 🇸🇦
-        </p>
-      </div>
-    </div>
+      {/* Quick Info Section */}
+      <section style={{ padding: '60px 20px', backgroundColor: '#fff' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          
+          <div style={{ padding: '30px', borderRadius: '15px', border: '1px solid #eee', textAlign: 'center' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '15px' }}>💰</div>
+            <h3 style={{ marginBottom: '10px' }}>Live Gold Prices</h3>
+            <p style={{ color: '#666' }}>Daily updates for 24K, 22K, 21K, and 18K gold across KSA.</p>
+          </div>
+
+          <div style={{ padding: '30px', borderRadius: '15px', border: '1px solid #eee', textAlign: 'center' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '15px' }}>💱</div>
+            <h3 style={{ marginBottom: '10px' }}>Currency Exchange</h3>
+            <p style={{ color: '#666' }}>Real-time SAR exchange rates for PKR, INR, PHP, and more.</p>
+          </div>
+
+          <div style={{ padding: '30px', borderRadius: '15px', border: '1px solid #eee', textAlign: 'center' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '15px' }}>📊</div>
+            <h3 style={{ marginBottom: '10px' }}>Smart Calculator</h3>
+            <p style={{ color: '#666' }}>Easily convert your currency with our latest market-based calculator.</p>
+          </div>
+
+        </div>
+      </section>
+    </main>
   );
 }
