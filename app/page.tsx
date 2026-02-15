@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 export default function HomePage() {
-  // Dynamic Date for SEO and User Trust
   const today = new Date().toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
@@ -10,124 +9,79 @@ export default function HomePage() {
   });
 
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#f8f9fa', fontFamily: 'system-ui, -apple-system, sans-serif', paddingBottom: '40px' }}>
+    <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'system-ui, sans-serif' }}>
       
-      {/* --- HERO SECTION (Premium Dark Theme) --- */}
+      {/* 1. PREMIUM HERO SECTION */}
       <section style={{ 
-        background: 'linear-gradient(135deg, #111 0%, #333 100%)', 
+        background: '#111', 
         color: 'white', 
-        padding: '60px 20px 80px', 
+        padding: '80px 20px', 
         textAlign: 'center', 
-        borderBottom: '6px solid #FFD700',
-        position: 'relative'
+        borderBottom: '6px solid #FFD700' 
       }}>
-        
-        {/* Date Badge */}
-        <div style={{ 
-          display: 'inline-block', 
-          backgroundColor: 'rgba(255, 215, 0, 0.2)', 
-          color: '#FFD700', 
-          border: '1px solid #FFD700',
-          padding: '8px 20px', 
-          borderRadius: '50px', 
-          fontSize: '0.9rem', 
-          fontWeight: '600',
-          marginBottom: '20px'
-        }}>
-          📅 {today}
+        {/* Date at the Top */}
+        <div style={{ backgroundColor: '#FFD700', color: '#000', display: 'inline-block', padding: '5px 15px', borderRadius: '5px', fontWeight: 'bold', marginBottom: '20px' }}>
+          Updated: {today}
         </div>
 
-        <h1 style={{ 
-          fontSize: '3rem', 
-          fontWeight: '900', 
-          margin: '0 0 15px', 
-          letterSpacing: '-1px' 
-        }}>
+        <h1 style={{ fontSize: '3.5rem', fontWeight: '900', margin: '0 0 10px' }}>
           Saudi<span style={{ color: '#FFD700' }}>Rate</span>.com
         </h1>
-        
-        <p style={{ 
-          fontSize: '1.2rem', 
-          color: '#ddd', 
-          maxWidth: '600px', 
-          margin: '0 auto 40px', 
-          lineHeight: '1.5' 
-        }}>
-          Your trusted source for **Gold Prices**, **Exchange Rates**, and **Zakat Calculation** in Saudi Arabia.
+        <p style={{ fontSize: '1.2rem', color: '#ccc', maxWidth: '700px', margin: '0 auto 30px' }}>
+          Real-time Gold Prices, Currency Exchange, and Financial Tools in KSA.
         </p>
 
-        {/* Quick Action Buttons (Mobile Friendly) */}
         <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/gold-rates" style={{ textDecoration: 'none' }}>
-            <div style={{ padding: '15px 30px', backgroundColor: '#FFD700', color: '#000', fontWeight: 'bold', borderRadius: '50px', boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)' }}>
-              Check Gold 🟡
-            </div>
-          </Link>
-          <Link href="/currency" style={{ textDecoration: 'none' }}>
-            <div style={{ padding: '15px 30px', backgroundColor: '#fff', color: '#000', fontWeight: 'bold', borderRadius: '50px', boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-              Check Currency 💱
-            </div>
-          </Link>
+          <Link href="/gold-rates" style={{ padding: '15px 30px', backgroundColor: '#FFD700', color: '#000', fontWeight: 'bold', borderRadius: '8px', textDecoration: 'none' }}>Gold Rates 🟡</Link>
+          <Link href="/currency" style={{ padding: '15px 30px', backgroundColor: '#fff', color: '#000', fontWeight: 'bold', borderRadius: '8px', textDecoration: 'none' }}>Currency Rates 💱</Link>
         </div>
       </section>
 
-      {/* --- ADVERTISEMENT SPACE (Responsive) --- */}
-      <div style={{ maxWidth: '1000px', margin: '30px auto', padding: '0 20px' }}>
-        <div style={{ backgroundColor: '#fff', border: '1px dashed #ccc', padding: '30px', borderRadius: '10px', textAlign: 'center', color: '#999', fontSize: '0.9rem' }}>
-          -- SPONSORED ADVERTISEMENT SPACE --
-        </div>
-      </div>
-
-      {/* --- MAIN FEATURES GRID --- */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '20px' }}>
+      {/* 2. THREE MAIN CARDS (Including Calculator) */}
+      <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
           
-          {/* 1. Gold Rate Box */}
+          {/* Gold Card */}
           <Link href="/gold-rates" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '15px', border: '1px solid #eee', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', textAlign: 'center', height: '100%' }}>
+            <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '15px', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
               <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🟡</div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px' }}>Gold Rates</h2>
-              <p style={{ color: '#666', fontSize: '0.95rem' }}>Live updates for 24K, 22K, 21K gold prices in SAR.</p>
-              <div style={{ marginTop: '15px', color: '#FFD700', fontWeight: 'bold' }}>View Prices →</div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Gold Price Today</h2>
+              <p style={{ color: '#666', marginTop: '10px' }}>Live 24K, 22K, 21K & 18K rates in Saudi Arabia.</p>
             </div>
           </Link>
 
-          {/* 2. Currency Exchange Box */}
+          {/* Currency Card */}
           <Link href="/currency" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '15px', border: '1px solid #eee', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', textAlign: 'center', height: '100%' }}>
+            <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '15px', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
               <div style={{ fontSize: '3rem', marginBottom: '15px' }}>💱</div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px' }}>Exchange Rates</h2>
-              <p style={{ color: '#666', fontSize: '0.95rem' }}>Best rates for SAR to PKR, INR, BDT, and PHP.</p>
-              <div style={{ marginTop: '15px', color: '#28a745', fontWeight: 'bold' }}>Check Rates →</div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Exchange Rates</h2>
+              <p style={{ color: '#666', marginTop: '10px' }}>SAR to PKR, INR, BDT, and PHP live conversions.</p>
             </div>
           </Link>
 
-          {/* 3. Calculator Box (NEW) */}
+          {/* CALCULATOR CARD (Updated Name) */}
           <Link href="/calculator" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '15px', border: '1px solid #eee', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', textAlign: 'center', height: '100%' }}>
+            <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '15px', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '2px solid #0070f3' }}>
               <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🧮</div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px' }}>Zakat Calculator</h2>
-              <p style={{ color: '#666', fontSize: '0.95rem' }}>Calculate Gold Zakat and currency conversions instantly.</p>
-              <div style={{ marginTop: '15px', color: '#0070f3', fontWeight: 'bold' }}>Calculate Now →</div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0070f3' }}>Zakat & Gold Calculator</h2>
+              <p style={{ color: '#666', marginTop: '10px' }}>Easily calculate Zakat on Gold and Currency conversions.</p>
             </div>
           </Link>
 
         </div>
       </div>
 
-      {/* --- SEO ARTICLE SECTION (Clean & Simple) --- */}
-      <div style={{ backgroundColor: 'white', padding: '60px 20px', borderTop: '1px solid #eee', marginTop: '40px' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#111', marginBottom: '20px' }}>
-            Why Choose SaudiRate.com?
-          </h2>
-          <p style={{ fontSize: '1.1rem', color: '#555', lineHeight: '1.8' }}>
-            Welcome to the #1 financial guide in the Kingdom. We provide **real-time gold prices** and **currency exchange rates** to help you make smart financial decisions. Whether you are sending money home or buying jewelry, our data is accurate, free, and updated daily for **{today}**.
+      {/* 3. CLEAN SEO SECTION */}
+      <section style={{ backgroundColor: '#fff', padding: '60px 20px', borderTop: '1px solid #eee', textAlign: 'center' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '20px' }}>About SaudiRate.com</h2>
+          <p style={{ color: '#555', lineHeight: '1.8', fontSize: '1.1rem' }}>
+            We are dedicated to providing the residents of Saudi Arabia with the most accurate and 
+            up-to-date financial data. From the **Gold Market** to **Remittance Rates**, 
+            our platform ensures you have the information you need at your fingertips.
           </p>
         </div>
-      </div>
-
-      {/* FOOTER REMOVED - It will come from layout.tsx automatically */}
+      </section>
 
     </main>
   );
