@@ -1,63 +1,92 @@
+'use client';
 import React from 'react';
 
-export default function ContactPage() {
+const ContactPage = () => {
   return (
-    <div style={{ maxWidth: '800px', margin: '50px auto', padding: '0 20px', fontFamily: 'Arial, sans-serif' }}>
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ color: '#1976d2', fontSize: '2.5rem' }}>Contact Us</h1>
-        <p style={{ color: '#666', fontSize: '1.1rem' }}>Have a question or need assistance? Send us a message!</p>
-      </div>
-
+    <div style={{ 
+      padding: '60px 20px', 
+      backgroundColor: '#f4f4f4', 
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
       <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-        gap: '40px',
-        backgroundColor: '#fff',
-        padding: '30px',
-        borderRadius: '15px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+        maxWidth: '900px', 
+        width: '100%',
+        backgroundColor: 'white', 
+        borderRadius: '25px', 
+        overflow: 'hidden', 
+        boxShadow: '0 20px 50px rgba(0,0,0,0.1)',
+        display: 'flex',
+        flexWrap: 'wrap'
       }}>
         
-        {/* Contact Form */}
-        <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <div>
-            <label style={labelStyle}>Full Name</label>
-            <input type="text" placeholder="Enter your name" style={inputStyle} />
+        {/* Left Side: Info */}
+        <div style={{ 
+          flex: '1 1 300px', 
+          backgroundColor: '#1a1a1a', 
+          color: 'white', 
+          padding: '40px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}>
+          <h2 style={{ color: '#ffcc00', fontSize: '2rem', marginBottom: '20px' }}>Get in Touch</h2>
+          <p style={{ lineHeight: '1.6', color: '#ccc', marginBottom: '30px' }}>
+            Have a question about Saudi Gold rates or Currency exchange? Drop us a message and our team will get back to you.
+          </p>
+          
+          <div style={{ marginBottom: '20px' }}>
+            <p style={{ marginBottom: '10px' }}><strong>📍 Location:</strong> Riyadh, Saudi Arabia</p>
+            <p style={{ marginBottom: '10px' }}><strong>📧 Email:</strong> info@saudirate.com</p>
+            <p style={{ marginBottom: '10px' }}><strong>💬 WhatsApp:</strong> Coming Soon</p>
           </div>
-          <div>
-            <label style={labelStyle}>Email Address</label>
-            <input type="email" placeholder="email@example.com" style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle}>Message</label>
-            <textarea rows={5} placeholder="How can we help you?" style={inputStyle}></textarea>
-          </div>
-          <button type="button" style={buttonStyle}>Send Message</button>
-        </form>
 
-        {/* Contact Details */}
-        <div style={{ backgroundColor: '#f0f7ff', padding: '25px', borderRadius: '10px' }}>
-          <h3 style={{ color: '#1976d2', marginTop: 0 }}>Contact Details</h3>
-          <p style={{ color: '#444' }}><strong>Email:</strong> info@SaudiRate.com</p>
-          <p style={{ color: '#444' }}><strong>Location:</strong> Riyadh, Saudi Arabia</p>
-          <hr style={{ border: '0.5px solid #d0e3ff', margin: '20px 0' }} />
-          <h4>WhatsApp Support</h4>
-          <p style={{ fontSize: '0.9rem', color: '#666' }}>Chat with us for quick price updates.</p>
-          <a href="https://wa.me/966XXXXXXXXX" target="_blank" style={{
-            display: 'inline-block',
-            padding: '10px 20px',
-            backgroundColor: '#25D366',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '5px',
-            fontWeight: 'bold'
-          }}>Chat on WhatsApp</a>
+          <div style={{ marginTop: '20px', display: 'flex', gap: '15px' }}>
+            {/* Social Icons Placeholder */}
+            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>f</div>
+            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>x</div>
+          </div>
+        </div>
+
+        {/* Right Side: Form */}
+        <div style={{ flex: '1 1 400px', padding: '40px' }}>
+          <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <label style={{ marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>Full Name</label>
+              <input type="text" placeholder="Enter your name" style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <label style={{ marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>Email Address</label>
+              <input type="email" placeholder="email@example.com" style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem' }} />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <label style={{ marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>Message</label>
+              <textarea placeholder="How can we help you?" rows={4} style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem', resize: 'none' }}></textarea>
+            </div>
+
+            <button type="button" style={{ 
+              marginTop: '10px',
+              backgroundColor: '#ffcc00', 
+              color: '#000', 
+              padding: '15px', 
+              borderRadius: '8px', 
+              border: 'none', 
+              fontWeight: 'bold', 
+              fontSize: '1rem',
+              cursor: 'pointer',
+              transition: '0.3s'
+            }}>
+              Send Message
+            </button>
+          </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
-const labelStyle = { display: 'block', marginBottom: '5px', fontWeight: 'bold' };
-const inputStyle = { width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', boxSizing: 'border-box' as const };
-const buttonStyle = { padding: '15px', backgroundColor: '#1976d2', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
+export default ContactPage;
