@@ -8,12 +8,19 @@ export default function HomePage() {
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
+      // سعودی عرب کے ٹائم زون کے مطابق فارمیٹنگ
       const formatted = now.toLocaleDateString('en-GB', {
-        day: 'numeric', month: 'short', year: 'numeric'
+        day: 'numeric', 
+        month: 'short', 
+        year: 'numeric',
+        timeZone: 'Asia/Riyadh'
       }) + '  |  ' + now.toLocaleTimeString('en-GB', {
-        hour: '2-digit', minute: '2-digit', second: '2-digit'
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        timeZone: 'Asia/Riyadh'
       });
-      setDateTime(formatted);
+      setDateTime(formatted + " (KSA)");
     }, 1000);
     return () => clearInterval(timer);
   }, []);
@@ -21,7 +28,7 @@ export default function HomePage() {
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'sans-serif' }}>
       
-      {/* --- TOP HEADER BAR (Standard Website Style) --- */}
+      {/* TOP HEADER BAR - FIXED TO SAUDI TIME */}
       <div style={{ 
         backgroundColor: '#FFD700', 
         color: '#000', 
@@ -31,10 +38,10 @@ export default function HomePage() {
         textAlign: 'center',
         borderBottom: '1px solid #e5c100'
       }}>
-        {dateTime ? `🕒 ${dateTime}` : 'Loading...'}
+        {dateTime ? `🕒 Saudi Arabia Time: ${dateTime}` : 'Loading...'}
       </div>
 
-      {/* --- HERO SECTION --- */}
+      {/* باقی سارا ہیرو سیکشن اور باکسز وہی رہیں گے جو پہلے تھے */}
       <section style={{ background: '#000', color: '#fff', padding: '60px 20px 100px', textAlign: 'center' }}>
         <h1 style={{ fontSize: '3.5rem', fontWeight: 'bold', margin: '0 0 10px' }}>
           Saudi<span style={{ color: '#FFD700' }}>Rate</span>
@@ -43,10 +50,8 @@ export default function HomePage() {
           Real-Time Gold Prices & Currency Exchange
         </p>
 
-        {/* --- 3 SERVICE BOXES --- */}
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
-          
-          {/* Box 1 */}
+          {/* Box 1: Gold */}
           <div style={{ backgroundColor: '#fff', color: '#000', padding: '40px 20px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🟡</div>
             <h2 style={{ fontSize: '1.6rem', fontWeight: 'bold' }}>Gold Rates</h2>
@@ -54,7 +59,7 @@ export default function HomePage() {
             <Link href="/gold-rates" style={{ display: 'block', backgroundColor: '#FFD700', color: '#000', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>View Gold Prices</Link>
           </div>
 
-          {/* Box 2 */}
+          {/* Box 2: Currency */}
           <div style={{ backgroundColor: '#fff', color: '#000', padding: '40px 20px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '15px' }}>💱</div>
             <h2 style={{ fontSize: '1.6rem', fontWeight: 'bold' }}>Currency Rates</h2>
@@ -62,22 +67,21 @@ export default function HomePage() {
             <Link href="/currency" style={{ display: 'block', backgroundColor: '#111', color: '#fff', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>Check Rates</Link>
           </div>
 
-          {/* Box 3 */}
+          {/* Box 3: Calculator */}
           <div style={{ backgroundColor: '#fff', color: '#000', padding: '40px 20px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
             <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🧮</div>
             <h2 style={{ fontSize: '1.6rem', fontWeight: 'bold' }}>Currency Calculator</h2>
             <p style={{ color: '#666', margin: '15px 0 25px' }}>Instant remittance amounts calculation.</p>
             <Link href="/calculator" style={{ display: 'block', backgroundColor: '#28a745', color: '#fff', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>Use Calculator</Link>
           </div>
-
         </div>
       </section>
 
-      {/* --- ADS & SEO SECTION --- */}
+      {/* SEO ARTICLE AREA */}
       <div style={{ maxWidth: '1100px', margin: '40px auto', padding: '0 20px' }}>
         <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '15px', border: '1px solid #eee', lineHeight: '1.8' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '20px' }}>The Leading Hub for Financial Data in KSA</h2>
-          <p>Welcome to SaudiRate.com, your source for real-time gold and currency market updates.</p>
+          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '20px' }}>Saudi Arabia Financial Insights</h2>
+          <p>Get the most accurate gold and currency data updated according to Saudi Market time.</p>
         </div>
       </div>
 
