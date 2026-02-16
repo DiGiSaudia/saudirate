@@ -1,24 +1,25 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 export default function GoldRatesPage() {
-  // Yeh rates aap rozana manually update kar sakte hain ya baad mein API se connect kar denge
-  const goldRates = [
-    { unit: 'Gold 24K (1 Gram)', price: '285.50 SAR' },
-    { unit: 'Gold 22K (1 Gram)', price: '261.75 SAR' },
-    { unit: 'Gold 21K (1 Gram)', price: '249.80 SAR' },
-    { unit: 'Gold 18K (1 Gram)', price: '214.15 SAR' },
-  ];
+  const [weight, setAmount] = useState<number>(1);
+  const [purity, setPurity] = useState<number>(285.50); // Default 24K rate
 
-  const today = new Date().toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric'
-  });
+  // Current Gold Rates (Manual for now)
+  const rates = {
+    k24: 285.50,
+    k22: 261.75,
+    k21: 249.80,
+    k18: 214.15
+  };
+
+  const totalPrice = (weight * purity).toFixed(2);
 
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'sans-serif' }}>
       
-      {/* Top Navigation */}
+      {/* Top Nav */}
       <div style={{ backgroundColor: '#000', color: '#fff', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link href="/" style={{ color: '#FFD700', textDecoration: 'none', fontWeight: 'bold' }}>← Back to Home</Link>
         <span style={{ fontWeight: 'bold', color: '#FFD700' }}>SaudiRate Gold</span>
@@ -26,50 +27,76 @@ export default function GoldRatesPage() {
 
       <div style={{ maxWidth: '900px', margin: '40px auto', padding: '0 20px' }}>
         
-        {/* Header Section */}
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#111', marginBottom: '10px' }}>
-            Gold Rates in <span style={{ color: '#b8860b' }}>Saudi Arabia</span>
-          </h1>
-          <p style={{ color: '#666' }}>Last Updated: <strong>{today}</strong></p>
+        <h1 style={{ textAlign: 'center', fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '30px' }}>
+          Live Gold Rates & <span style={{ color: '#b8860b' }}>Calculator</span>
+        </h1>
+
+        {/* --- GOLD CALCULATOR SECTION --- */}
+        <div style={{ backgroundColor: '#000', color: '#fff', padding: '30px', borderRadius: '20px', marginBottom: '40px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
+          <h2 style={{ fontSize: '1.2rem', color: '#FFD700', marginBottom: '20px', textAlign: 'center' }}>Gold Value Calculator</h2>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '20px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px' }}>Weight (Grams)</label>
+              <input 
+                type="number" 
+                value={weight} 
+                onChange={(e) => setAmount(Number(e.target.value))}
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: 'none', fontSize: '1.1rem', color: '#000' }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px' }}>Gold Purity (Karat)</label>
+              <select 
+                onChange={(e) => setPurity(Number(e.target.value))}
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: 'none', fontSize: '1.1rem', color: '#000' }}
+              >
+                <option value={rates.k24}>24 Karat (99.9%)</option>
+                <option value={rates.k22}>22 Karat (91.6%)</option>
+                <option value={rates.k21}>21 Karat (87.5%)</option>
+                <option value={rates.k18}>18 Karat (75.0%)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'center', paddingTop: '10px', borderTop: '1px solid #333' }}>
+            <p style={{ fontSize: '0.9rem', color: '#aaa', margin: '10px 0 5px' }}>Total Estimated Price:</p>
+            <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#FFD700' }}>
+              {totalPrice} <span style={{ fontSize: '1rem' }}>SAR</span>
+            </div>
+          </div>
         </div>
 
-        {/* Top Ad Unit */}
+        {/* Ad Space */}
         <div style={{ backgroundColor: '#fff', padding: '15px', textAlign: 'center', border: '1px dashed #ccc', marginBottom: '30px', borderRadius: '10px' }}>
           <small style={{ color: '#bbb' }}>ADVERTISEMENT</small>
-          <div style={{ minHeight: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ddd' }}>Top Banner Ad Area</div>
+          <div style={{ minHeight: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ddd' }}>Banner Ad Area</div>
         </div>
 
-        {/* Gold Price Table */}
+        {/* Gold Table */}
         <div style={{ backgroundColor: '#fff', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid #eee' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ backgroundColor: '#000', color: '#FFD700' }}>
-                <th style={{ padding: '20px', fontSize: '1.1rem' }}>Gold Type / Quality</th>
-                <th style={{ padding: '20px', fontSize: '1.1rem', textAlign: 'right' }}>Price (SAR)</th>
+              <tr style={{ backgroundColor: '#f8f9fa' }}>
+                <th style={{ padding: '20px', textAlign: 'left' }}>Unit</th>
+                <th style={{ padding: '20px', textAlign: 'right' }}>Price (SAR)</th>
               </tr>
             </thead>
             <tbody>
-              {goldRates.map((item, index) => (
-                <tr key={index} style={{ borderBottom: '1px solid #eee', backgroundColor: index % 2 === 0 ? '#fff' : '#fafafa' }}>
-                  <td style={{ padding: '18px 20px', fontWeight: 'bold', color: '#333' }}>{item.unit}</td>
-                  <td style={{ padding: '18px 20px', textAlign: 'right', fontWeight: 'bold', color: '#b8860b', fontSize: '1.2rem' }}>{item.price}</td>
-                </tr>
-              ))}
+              <tr style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '15px 20px', fontWeight: 'bold' }}>Gold 24K (1g)</td>
+                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b' }}>{rates.k24}</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '15px 20px', fontWeight: 'bold' }}>Gold 22K (1g)</td>
+                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b' }}>{rates.k22}</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '15px 20px', fontWeight: 'bold' }}>Gold 21K (1g)</td>
+                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b' }}>{rates.k21}</td>
+              </tr>
             </tbody>
           </table>
-        </div>
-
-        {/* Info Box */}
-        <div style={{ marginTop: '30px', padding: '20px', backgroundColor: '#fff8e1', borderRadius: '10px', borderLeft: '5px solid #FFD700' }}>
-          <p style={{ margin: 0, fontSize: '0.9rem', color: '#555' }}>
-            <strong>Note:</strong> Gold prices in Saudi Arabia are subject to market fluctuations. These rates are indicative and based on the international bullion market.
-          </p>
-        </div>
-
-        {/* Bottom Ad Unit */}
-        <div style={{ marginTop: '40px', backgroundColor: '#fff', padding: '20px', borderRadius: '15px', textAlign: 'center', border: '1px solid #eee' }}>
-          <div style={{ minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ddd' }}>Large Responsive Ad</div>
         </div>
 
       </div>
