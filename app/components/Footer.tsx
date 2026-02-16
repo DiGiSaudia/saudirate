@@ -22,6 +22,7 @@ const Footer = () => {
             <li><Link href="/currency" style={{ color: '#aaa', textDecoration: 'none' }}>Currency Exchange</Link></li>
             <li><Link href="/calculator" style={{ color: '#aaa', textDecoration: 'none' }}>Currency Calculator</Link></li>
             <li><Link href="/contact" style={{ color: '#aaa', textDecoration: 'none' }}>Contact Us</Link></li>
+            <li><Link href="/disclaimer" style={{ color: '#aaa', textDecoration: 'none' }}>Disclaimer</Link></li>
           </ul>
         </div>
 
