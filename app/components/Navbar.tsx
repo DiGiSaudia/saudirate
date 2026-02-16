@@ -30,14 +30,14 @@ export default function Navbar() {
         justifyContent: 'space-between', 
         alignItems: 'center' 
       }}>
-        {/* Logo */}
+        {/* Logo - Updated without .com */}
         <Link href="/" style={{ 
           fontSize: '1.5rem', 
           fontWeight: 'bold', 
           color: '#ffcc00', 
           textDecoration: 'none' 
         }}>
-          SaudiRate<span style={{color: 'white'}}>.com</span>
+          Saudi<span style={{color: 'white'}}> Rate</span>
         </Link>
 
         {/* Desktop Links */}
@@ -56,8 +56,8 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <div style={{ cursor: 'pointer', fontSize: '1.5rem' }} 
-             className="mobile-btn" 
-             onClick={() => setIsOpen(!isOpen)}>
+              className="mobile-btn" 
+              onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? '✖' : '☰'}
         </div>
       </div>
