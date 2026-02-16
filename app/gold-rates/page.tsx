@@ -16,7 +16,6 @@ export default function GoldRatesPage() {
 
   const API_KEY = '0dfe1f9efbc26627f2809000';
 
-  // ریٹ حاصل کرنے کا فنکشن الگ کر دیا گیا ہے
   const fetchRates = async () => {
     setLoading(true);
     try {
@@ -35,7 +34,6 @@ export default function GoldRatesPage() {
         };
 
         setRates(newRates);
-        // اگر صارف نے پہلے سے کچھ منتخب کیا ہوا ہے تو اسے اپ ڈیٹ کریں، ورنہ 24K رکھیں
         if (selectedPurity === rates.k24 || selectedPurity === 285.500) {
             setSelectedPurity(newRates.k24);
         }
@@ -47,7 +45,6 @@ export default function GoldRatesPage() {
     }
   };
 
-  // جب پیج لوڈ ہو تو ریٹ لائیں
   useEffect(() => {
     fetchRates();
   }, []);
@@ -66,25 +63,41 @@ export default function GoldRatesPage() {
     text: isDarkMode ? '#ffffff' : '#1a1a1a',
     cardBg: isDarkMode ? '#1e1e1e' : '#fff',
     border: isDarkMode ? '#333' : '#eee',
-    refreshBtn: isDarkMode ? '#333' : '#e0e0e0'
+    refreshBtn: isDarkMode ? '#333' : '#e0e0e0',
+    adBg: isDarkMode ? '#1a1a1a' : '#eaeaea',
+    adText: isDarkMode ? '#555' : '#999'
   };
 
   const styles: { [key: string]: CSSProperties } = {
-    container: { minHeight: '100vh', backgroundColor: theme.bg, color: theme.text, fontFamily: 'Arial, sans-serif', transition: '0.3s' },
+    container: { minHeight: '100vh', backgroundColor: theme.bg, color: theme.text, fontFamily: 'Arial, sans-serif', transition: '0.3s', paddingBottom: '20px' },
     nav: { backgroundColor: '#111', color: '#fff', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-    link: { color: '#FFD700', textDecoration: 'none', fontWeight: 'bold' },
-    themeBtn: { background: '#FFD700', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', color: '#000' },
-    main: { maxWidth: '800px', margin: '30px auto', padding: '0 20px' },
-    headingContainer: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '10px' },
-    heading: { fontWeight: '800', fontSize: '2.5rem', margin: 0 },
-    refreshBtn: { background: theme.refreshBtn, border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: theme.text, transition: '0.2s' },
-    subText: { textAlign: 'center', color: '#666', marginBottom: '30px' },
-    calcCard: { background: 'linear-gradient(145deg, #1a1a1a, #000)', color: '#fff', padding: '30px', borderRadius: '20px', marginBottom: '40px' },
-    label: { display: 'flex', justifyContent: 'space-between', color: '#FFD700', marginBottom: '8px' },
-    input: { width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #444', fontSize: '1.1rem' },
+    link: { color: '#FFD700', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem' },
+    themeBtn: { background: '#FFD700', border: 'none', padding: '6px 12px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', color: '#000', fontSize: '0.9rem' },
+    main: { maxWidth: '800px', margin: '0 auto', padding: '20px' },
+    
+    // اشتہارات (Ads) کا سٹائل
+    adContainer: { width: '100%', minHeight: '90px', backgroundColor: theme.adBg, border: `1px dashed ${theme.border}`, borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '20px 0', color: theme.adText, fontSize: '0.8rem' },
+    
+    headingContainer: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '5px' },
+    heading: { fontWeight: '800', fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', margin: 0, textAlign: 'center' }, // Responsive Font Size
+    refreshBtn: { background: theme.refreshBtn, border: 'none', borderRadius: '50%', width: '35px', height: '35px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: theme.text, transition: '0.2s', flexShrink: 0 },
+    subText: { textAlign: 'center', color: '#666', marginBottom: '20px', fontSize: '0.9rem' },
+    
+    calcCard: { background: 'linear-gradient(145deg, #1a1a1a, #000)', color: '#fff', padding: '25px', borderRadius: '20px', marginBottom: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' },
+    
+    // موبائل کے لیے ان پٹ فیلڈز کا فلیکس لے آؤٹ
+    inputsRow: { display: 'flex', flexWrap: 'wrap', gap: '20px' },
+    inputWrapper: { flex: '1 1 250px' }, // یہ لائن موبائل ریسپانسو بناتی ہے (کم از کم 250px ورنہ نیچے آ جائے گی)
+    
+    label: { display: 'flex', justifyContent: 'space-between', color: '#FFD700', marginBottom: '8px', fontSize: '0.9rem' },
+    input: { width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid #444', fontSize: '1.1rem', backgroundColor: '#222', color: '#fff' },
+    
+    resultBox: { textAlign: 'center', marginTop: '20px', borderTop: '1px solid #333', paddingTop: '20px' },
+    resultText: { fontSize: 'clamp(2rem, 5vw, 2.8rem)', fontWeight: 'bold', color: '#FFD700' }, // Responsive Font Size
+
     tableContainer: { backgroundColor: theme.cardBg, borderRadius: '15px', overflow: 'hidden', border: `1px solid ${theme.border}` },
-    th: { padding: '18px', textAlign: 'left', backgroundColor: isDarkMode ? '#252525' : '#f1f1f1', color: theme.text },
-    td: { padding: '18px', borderBottom: `1px solid ${theme.border}` }
+    th: { padding: '15px', textAlign: 'left', backgroundColor: isDarkMode ? '#252525' : '#f1f1f1', color: theme.text, fontSize: '0.95rem' },
+    td: { padding: '15px', borderBottom: `1px solid ${theme.border}`, fontSize: '0.95rem' }
   };
 
   return (
@@ -98,7 +111,11 @@ export default function GoldRatesPage() {
 
       <div style={styles.main}>
         
-        {/* ہیڈنگ اور ریفریش بٹن ایک ساتھ */}
+        {/* --- TOP AD SLOT --- */}
+        <div style={styles.adContainer}>
+          <span>ADVERTISEMENT SPACE (Top)</span>
+        </div>
+
         <div style={styles.headingContainer}>
           <h1 style={styles.heading}>Saudi Gold Rates</h1>
           <button 
@@ -114,27 +131,39 @@ export default function GoldRatesPage() {
         <p style={styles.subText}>Live Market Updates & Calculator</p>
 
         <div style={styles.calcCard}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-            <div>
+          <div style={styles.inputsRow}>
+            <div style={styles.inputWrapper}>
               <div style={styles.label}>
-                <span>Grams</span>
-                <button onClick={handleClear} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '0.7rem' }}>Clear</button>
+                <span>Weight (Grams)</span>
+                <button onClick={handleClear} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', opacity: 0.8 }}>Clear</button>
               </div>
-              <input type="number" value={weight} onChange={(e: any) => setWeight(Number(e.target.value))} style={styles.input} />
+              <input 
+                type="number" 
+                value={weight} 
+                onChange={(e: any) => setWeight(Number(e.target.value))} 
+                style={styles.input} 
+                placeholder="1"
+              />
             </div>
-            <div>
+            <div style={styles.inputWrapper}>
               <label style={styles.label}>Purity</label>
               <select value={selectedPurity} onChange={(e: any) => setSelectedPurity(Number(e.target.value))} style={styles.input}>
-                <option value={rates.k24}>24K</option>
-                <option value={rates.k22}>22K</option>
-                <option value={rates.k21}>21K</option>
-                <option value={rates.k18}>18K</option>
+                <option value={rates.k24}>24K - Pure Gold</option>
+                <option value={rates.k22}>22K - Jewelry</option>
+                <option value={rates.k21}>21K - Trade</option>
+                <option value={rates.k18}>18K - Other</option>
               </select>
             </div>
           </div>
-          <div style={{ textAlign: 'center', marginTop: '20px', borderTop: '1px solid #333', paddingTop: '20px' }}>
-            <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#FFD700' }}>{total} SAR</div>
+          <div style={styles.resultBox}>
+            <div style={{fontSize: '0.9rem', color: '#aaa', marginBottom: '5px'}}>Estimated Price</div>
+            <div style={styles.resultText}>{total} <span style={{fontSize: '1rem'}}>SAR</span></div>
           </div>
+        </div>
+
+        {/* --- MIDDLE AD SLOT (High Revenue) --- */}
+        <div style={styles.adContainer}>
+          <span>ADVERTISEMENT SPACE (Middle)</span>
         </div>
 
         <div style={styles.tableContainer}>
@@ -150,13 +179,19 @@ export default function GoldRatesPage() {
                 <tr key={key}>
                   <td style={styles.td}>Gold {key.replace('k', '')}K</td>
                   <td style={{ ...styles.td, textAlign: 'right', fontWeight: 'bold', color: '#b8860b' }}>
-                    {loading ? 'Loading...' : val.toFixed(3)} SAR
+                    {loading ? 'Loading...' : val.toFixed(3)} <small style={{fontSize:'0.7em', color: theme.text}}>SAR</small>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        {/* --- BOTTOM AD SLOT --- */}
+        <div style={{ ...styles.adContainer, minHeight: '150px' }}>
+          <span>ADVERTISEMENT SPACE (Bottom)</span>
+        </div>
+
       </div>
     </div>
   );
