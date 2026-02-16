@@ -1,25 +1,52 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function GoldRatesPage() {
   const [weight, setAmount] = useState<number>(1);
-  const [purity, setPurity] = useState<number>(285.50); // Default 24K rate
-
-  // Current Gold Rates (Manual for now)
-  const rates = {
+  const [rates, setRates] = useState({
     k24: 285.50,
     k22: 261.75,
     k21: 249.80,
     k18: 214.15
-  };
+  });
+  const [purity, setPurity] = useState<number>(285.50);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const API_KEY = '0dfe1f9efbc26627f2809000';
+
+  useEffect(() => {
+    const fetchGold = async () => {
+      try {
+        const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/SAR`);
+        const data = await response.json();
+        if (data && data.result === "success") {
+          const goldOunceInSar = 1 / data.conversion_rates.XAU;
+          const base24K = goldOunceInSar / 31.1035;
+
+          const newRates = {
+            k24: Number(base24K.toFixed(2)),
+            k22: Number((base24K * 0.916).toFixed(2)),
+            k21: Number((base24K * 0.875).toFixed(2)),
+            k18: Number((base24K * 0.750).toFixed(2))
+          };
+          setRates(newRates);
+          setPurity(newRates.k24); // Default select 24k
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching gold:", error);
+        setLoading(false);
+      }
+    };
+    fetchGold();
+  }, []);
 
   const totalPrice = (weight * purity).toFixed(2);
 
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'sans-serif' }}>
       
-      {/* Top Nav */}
       <div style={{ backgroundColor: '#000', color: '#fff', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link href="/" style={{ color: '#FFD700', textDecoration: 'none', fontWeight: 'bold' }}>← Back to Home</Link>
         <span style={{ fontWeight: 'bold', color: '#FFD700' }}>SaudiRate Gold</span>
@@ -31,7 +58,6 @@ export default function GoldRatesPage() {
           Live Gold Rates & <span style={{ color: '#b8860b' }}>Calculator</span>
         </h1>
 
-        {/* --- GOLD CALCULATOR SECTION --- */}
         <div style={{ backgroundColor: '#000', color: '#fff', padding: '30px', borderRadius: '20px', marginBottom: '40px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
           <h2 style={{ fontSize: '1.2rem', color: '#FFD700', marginBottom: '20px', textAlign: 'center' }}>Gold Value Calculator</h2>
           
@@ -48,6 +74,7 @@ export default function GoldRatesPage() {
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px' }}>Gold Purity (Karat)</label>
               <select 
+                value={purity}
                 onChange={(e) => setPurity(Number(e.target.value))}
                 style={{ width: '100%', padding: '12px', borderRadius: '8px', border: 'none', fontSize: '1.1rem', color: '#000' }}
               >
@@ -62,18 +89,16 @@ export default function GoldRatesPage() {
           <div style={{ textAlign: 'center', paddingTop: '10px', borderTop: '1px solid #333' }}>
             <p style={{ fontSize: '0.9rem', color: '#aaa', margin: '10px 0 5px' }}>Total Estimated Price:</p>
             <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#FFD700' }}>
-              {totalPrice} <span style={{ fontSize: '1rem' }}>SAR</span>
+              {loading ? "..." : totalPrice} <span style={{ fontSize: '1rem' }}>SAR</span>
             </div>
           </div>
         </div>
 
-        {/* Ad Space */}
         <div style={{ backgroundColor: '#fff', padding: '15px', textAlign: 'center', border: '1px dashed #ccc', marginBottom: '30px', borderRadius: '10px' }}>
           <small style={{ color: '#bbb' }}>ADVERTISEMENT</small>
           <div style={{ minHeight: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ddd' }}>Banner Ad Area</div>
         </div>
 
-        {/* Gold Table */}
         <div style={{ backgroundColor: '#fff', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid #eee' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
@@ -85,15 +110,19 @@ export default function GoldRatesPage() {
             <tbody>
               <tr style={{ borderBottom: '1px solid #eee' }}>
                 <td style={{ padding: '15px 20px', fontWeight: 'bold' }}>Gold 24K (1g)</td>
-                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b' }}>{rates.k24}</td>
+                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b', fontWeight: 'bold' }}>{loading ? "Loading..." : rates.k24}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid #eee' }}>
                 <td style={{ padding: '15px 20px', fontWeight: 'bold' }}>Gold 22K (1g)</td>
-                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b' }}>{rates.k22}</td>
+                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b', fontWeight: 'bold' }}>{loading ? "Loading..." : rates.k22}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid #eee' }}>
                 <td style={{ padding: '15px 20px', fontWeight: 'bold' }}>Gold 21K (1g)</td>
-                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b' }}>{rates.k21}</td>
+                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b', fontWeight: 'bold' }}>{loading ? "Loading..." : rates.k21}</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '15px 20px', fontWeight: 'bold' }}>Gold 18K (1g)</td>
+                <td style={{ padding: '15px 20px', textAlign: 'right', color: '#b8860b', fontWeight: 'bold' }}>{loading ? "Loading..." : rates.k18}</td>
               </tr>
             </tbody>
           </table>
