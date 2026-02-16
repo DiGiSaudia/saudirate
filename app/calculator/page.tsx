@@ -1,93 +1,91 @@
-'use client';
+"use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
 
 export default function CalculatorPage() {
   const [amount, setAmount] = useState<number>(1);
-  const [fromCurrency, setFromCurrency] = useState('SAR');
-  const [toCurrency, setToCurrency] = useState('PKR');
+  const [targetCurrency, setTargetCurrency] = useState<string>('PKR');
 
-  // ڈمی ریٹ (آپ یہاں اپنی API سے ڈیٹا لا سکتے ہیں)
-  const rate = 74.25; 
-  const result = (amount * rate).toFixed(2);
+  // Yeh rates hum baad mein API se bhi connect kar sakte hain
+  const rates: { [key: string]: { rate: number, name: string, flag: string } } = {
+    PKR: { rate: 74.25, name: 'Pakistani Rupee', flag: '🇵🇰' },
+    INR: { rate: 22.15, name: 'Indian Rupee', flag: '🇮🇳' },
+    BDT: { rate: 31.40, name: 'Bangladeshi Taka', flag: '🇧🇩' },
+    PHP: { rate: 14.80, name: 'Philippine Peso', flag: '🇵🇭' }
+  };
+
+  const result = (amount * rates[targetCurrency].rate).toFixed(2);
 
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'system-ui, sans-serif' }}>
-      {/* Header */}
-      <section style={{ backgroundColor: '#111', color: 'white', padding: '60px 20px', textAlign: 'center', borderBottom: '5px solid #ffcc00' }}>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Currency <span style={{ color: '#ffcc00' }}>Converter</span></h1>
-        <p style={{ color: '#aaa', marginTop: '10px' }}>Fast and accurate Saudi Riyal conversion</p>
-      </section>
-
-      {/* Top Ad */}
-      <div style={{ maxWidth: '800px', margin: '20px auto', padding: '15px', backgroundColor: '#f0f0f0', textAlign: 'center', color: '#999', borderRadius: '8px', border: '1px solid #ddd' }}>
-        -- Ad Unit: Top Banner --
+    <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'sans-serif' }}>
+      
+      {/* Top Bar with Saudi Time (As per your home page) */}
+      <div style={{ backgroundColor: '#FFD700', color: '#000', padding: '8px 20px', fontSize: '0.85rem', fontWeight: 'bold', textAlign: 'center' }}>
+         Currency Calculator - SaudiRate.com
       </div>
 
-      {/* Calculator Container */}
-      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-        <div style={{ backgroundColor: 'white', borderRadius: '20px', padding: '30px', boxShadow: '0 10px 40px rgba(0,0,0,0.08)', border: '1px solid #eee' }}>
-          
+      <div style={{ maxWidth: '600px', margin: '40px auto', padding: '0 20px' }}>
+        
+        {/* TOP AD UNIT */}
+        <div style={{ backgroundColor: '#fff', padding: '15px', textAlign: 'center', border: '1px dashed #ccc', marginBottom: '30px', borderRadius: '8px' }}>
+          <p style={{ fontSize: '0.7rem', color: '#bbb', margin: '0 0 10px' }}>ADVERTISEMENT</p>
+          <div style={{ minHeight: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ddd', backgroundColor: '#fafafa' }}>
+             Top Banner Ad
+          </div>
+        </div>
+
+        {/* MAIN CALCULATOR CARD */}
+        <div style={{ backgroundColor: '#fff', padding: '35px', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid #eee' }}>
+          <h1 style={{ textAlign: 'center', fontSize: '1.8rem', fontWeight: 'bold', marginBottom: '30px', color: '#111' }}>
+            Currency <span style={{ color: '#28a745' }}>Converter</span>
+          </h1>
+
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>Amount</label>
+            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px', color: '#555' }}>Amount (Saudi Riyal - SAR)</label>
             <input 
               type="number" 
-              value={amount}
+              value={amount} 
               onChange={(e) => setAmount(Number(e.target.value))}
-              style={{ width: '100%', padding: '15px', borderRadius: '10px', border: '2px solid #eee', fontSize: '1.2rem', outline: 'none' }}
+              style={{ width: '100%', padding: '15px', borderRadius: '10px', border: '2px solid #f0f0f0', fontSize: '1.2rem', outline: 'none' }}
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '30px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>From</label>
-              <select style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #ddd', backgroundColor: '#f8f9fa' }}>
-                <option>🇸🇦 SAR</option>
-              </select>
-            </div>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#555' }}>To</label>
-              <select 
-                value={toCurrency}
-                onChange={(e) => setToCurrency(e.target.value)}
-                style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #ddd', backgroundColor: '#f8f9fa' }}
-              >
-                <option value="PKR">🇵🇰 PKR</option>
-                <option value="INR">🇮🇳 INR</option>
-                <option value="BDT">🇧🇩 BDT</option>
-                <option value="PHP">🇵🇭 PHP</option>
-              </select>
-            </div>
+          <div style={{ marginBottom: '30px' }}>
+            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px', color: '#555' }}>Convert To</label>
+            <select 
+              value={targetCurrency} 
+              onChange={(e) => setTargetCurrency(e.target.value)}
+              style={{ width: '100%', padding: '15px', borderRadius: '10px', border: '2px solid #f0f0f0', fontSize: '1.1rem', backgroundColor: '#fff', cursor: 'pointer' }}
+            >
+              <option value="PKR">🇵🇰 PKR - Pakistani Rupee</option>
+              <option value="INR">🇮🇳 INR - Indian Rupee</option>
+              <option value="BDT">🇧🇩 BDT - Bangladeshi Taka</option>
+              <option value="PHP">🇵🇭 PHP - Philippine Peso</option>
+            </select>
           </div>
 
-          {/* Result Area */}
-          <div style={{ backgroundColor: '#fff9e6', padding: '25px', borderRadius: '15px', textAlign: 'center', border: '1px solid #ffcc00' }}>
-            <div style={{ fontSize: '1rem', color: '#666' }}>{amount} SAR =</div>
-            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#111', margin: '5px 0' }}>{result} {toCurrency}</div>
-            <div style={{ fontSize: '0.8rem', color: '#28a745' }}>Updated live from market rates</div>
+          {/* RESULT AREA */}
+          <div style={{ backgroundColor: '#111', color: '#fff', padding: '30px', borderRadius: '15px', textAlign: 'center' }}>
+            <div style={{ fontSize: '0.9rem', color: '#FFD700', marginBottom: '10px', fontWeight: 'bold' }}>
+              {amount} SAR =
+            </div>
+            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#fff' }}>
+              {result} <span style={{ fontSize: '1.2rem', color: '#FFD700' }}>{targetCurrency}</span>
+            </div>
+            <div style={{ fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
+              1 SAR = {rates[targetCurrency].rate} {targetCurrency}
+            </div>
           </div>
-
         </div>
-      </div>
 
-      {/* Bottom Ad */}
-      <div style={{ maxWidth: '800px', margin: '20px auto', padding: '50px', backgroundColor: '#f0f0f0', textAlign: 'center', color: '#999', borderRadius: '8px' }}>
-        -- Large Responsive Ad Unit --
-      </div>
-
-      {/* Navigation Footer */}
-      <div style={{ padding: '40px 20px' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Link href="/" style={{ flex: '1', minWidth: '140px', padding: '15px', textAlign: 'center', backgroundColor: '#111', color: 'white', borderRadius: '10px', textDecoration: 'none', fontWeight: 'bold' }}>
-            🏠 Home
-          </Link>
-          <Link href="/gold-rates" style={{ flex: '1', minWidth: '140px', padding: '15px', textAlign: 'center', backgroundColor: '#ffcc00', color: 'black', borderRadius: '10px', textDecoration: 'none', fontWeight: 'bold' }}>
-            💰 Gold Rates
-          </Link>
-          <Link href="/currency" style={{ flex: '1', minWidth: '140px', padding: '15px', textAlign: 'center', backgroundColor: '#333', color: 'white', borderRadius: '10px', textDecoration: 'none', fontWeight: 'bold' }}>
-            💱 Exchange
-          </Link>
+        {/* LARGE RESPONSIVE AD UNIT */}
+        <div style={{ marginTop: '40px', backgroundColor: '#fff', padding: '20px', borderRadius: '12px', border: '1px solid #eee', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.7rem', color: '#bbb', marginBottom: '15px' }}>SPONSORED AD</p>
+          <div style={{ minHeight: '200px', backgroundColor: '#f9f9f9', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ccc' }}>
+            Large Responsive Ad Unit
+          </div>
         </div>
+
       </div>
     </main>
   );
