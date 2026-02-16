@@ -5,7 +5,6 @@ import Link from 'next/link';
 export default function GoldRatesPage() {
   const [weight, setWeight] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [lastUpdated, setLastUpdated] = useState(""); // نیا سٹیٹ
   const [rates, setRates] = useState({
     k24: 285.50,
     k22: 261.75,
@@ -15,26 +14,10 @@ export default function GoldRatesPage() {
   const [selectedPurity, setSelectedPurity] = useState(285.50);
 
   const API_KEY = '0dfe1f9efbc26627f2809000';
-  const CACHE_KEY = 'saudi_gold_rates';
-  const CACHE_TIME = 2 * 60 * 60 * 1000;
 
   useEffect(() => {
     const getRates = async () => {
       try {
-        const cachedData = localStorage.getItem(CACHE_KEY);
-        if (cachedData) {
-          const { rates: savedRates, timestamp } = JSON.parse(cachedData);
-          const isExpired = Date.now() - timestamp > CACHE_TIME;
-
-          if (!isExpired) {
-            setRates(savedRates);
-            setSelectedPurity(savedRates.k24);
-            setLastUpdated(new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-            setLoading(false);
-            return;
-          }
-        }
-
         const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/SAR`);
         const data = await res.json();
 
@@ -49,18 +32,11 @@ export default function GoldRatesPage() {
             k18: Number((gram24k * 0.750).toFixed(2))
           };
 
-          const now = Date.now();
-          localStorage.setItem(CACHE_KEY, JSON.stringify({
-            rates: newRates,
-            timestamp: now
-          }));
-
           setRates(newRates);
           setSelectedPurity(newRates.k24);
-          setLastUpdated(new Date(now).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -71,6 +47,7 @@ export default function GoldRatesPage() {
 
   const total = (weight * selectedPurity).toFixed(2);
 
+  // Styles defined with 'any' to prevent TypeScript redness
   const styles: { [key: string]: CSSProperties } = {
     container: { minHeight: '100vh', backgroundColor: '#f8f9fa', fontFamily: 'Arial, sans-serif' },
     nav: { backgroundColor: '#111', color: '#fff', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
@@ -80,8 +57,7 @@ export default function GoldRatesPage() {
     adBox: { backgroundColor: '#fff', border: '1px dashed #ccc', padding: '20px', textAlign: 'center', marginBottom: '30px', borderRadius: '8px' },
     heading: { textAlign: 'center', marginBottom: '10px', fontWeight: '800', fontSize: '2.5rem', color: '#1a1a1a' },
     subText: { textAlign: 'center', color: '#666', marginBottom: '30px' },
-    calcCard: { background: 'linear-gradient(145deg, #1a1a1a, #000)', color: '#fff', padding: '30px', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)', marginBottom: '10px' },
-    timeTag: { textAlign: 'center', fontSize: '0.8rem', color: '#888', marginBottom: '30px' },
+    calcCard: { background: 'linear-gradient(145deg, #1a1a1a, #000)', color: '#fff', padding: '30px', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)', marginBottom: '40px' },
     inputGroup: { marginBottom: '20px' },
     label: { display: 'block', color: '#FFD700', marginBottom: '8px', fontSize: '0.9rem' },
     input: { width: '100%', padding: '12px', borderRadius: '8px', border: 'none', fontSize: '1.1rem' },
@@ -95,12 +71,16 @@ export default function GoldRatesPage() {
 
   return (
     <div style={styles.container}>
+      
+      {/* Navbar */}
       <nav style={styles.nav}>
         <Link href="/" style={styles.link}>← Back to Home</Link>
         <span style={styles.logoText}>SAUDI<span style={{ color: '#FFD700' }}>RATE</span> GOLD</span>
       </nav>
 
       <div style={styles.main}>
+
+        {/* Top Ad */}
         <div style={styles.adBox}>
           <small style={{ color: '#999' }}>ADVERTISEMENT AREA</small>
         </div>
@@ -108,6 +88,7 @@ export default function GoldRatesPage() {
         <h1 style={styles.heading}>Gold Rates Saudi Arabia</h1>
         <p style={styles.subText}>Live Market Updates & Calculator</p>
 
+        {/* Calculator */}
         <div style={styles.calcCard}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             <div style={styles.inputGroup}>
@@ -142,11 +123,7 @@ export default function GoldRatesPage() {
           </div>
         </div>
 
-        {/* آخری اپ ڈیٹ کا وقت */}
-        <div style={styles.timeTag}>
-          {loading ? "Updating prices..." : `Last updated today at ${lastUpdated}`}
-        </div>
-
+        {/* Pricing Table */}
         <div style={styles.tableContainer}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
@@ -161,17 +138,26 @@ export default function GoldRatesPage() {
                 <td style={styles.priceTd}>{loading ? '...' : rates.k24} SAR</td>
               </tr>
               <tr>
+                <td style={styles.td}>Gold 22K</td>
+                <td style={styles.priceTd}>{loading ? '...' : rates.k22} SAR</td>
+              </tr>
+              <tr>
                 <td style={styles.td}>Gold 21K</td>
                 <td style={styles.priceTd}>{loading ? '...' : rates.k21} SAR</td>
               </tr>
-              {/* باقی روز بھی اسی طرح... */}
+              <tr>
+                <td style={styles.td}>Gold 18K</td>
+                <td style={styles.priceTd}>{loading ? '...' : rates.k18} SAR</td>
+              </tr>
             </tbody>
           </table>
         </div>
 
+        {/* Bottom Ad */}
         <div style={{ ...styles.adBox, marginTop: '40px', minHeight: '150px' }}>
           <small style={{ color: '#999' }}>BOTTOM AD SPACE</small>
         </div>
+
       </div>
     </div>
   );
