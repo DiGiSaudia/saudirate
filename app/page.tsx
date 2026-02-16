@@ -3,88 +3,112 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function HomePage() {
-  const [dateTime, setDateTime] = useState('');
+  const [amount, setAmount] = useState(1);
+  const [loading, setLoading] = useState(true);
+  
+  // Fake Rates (Ye rates API se connect kiye ja sakte hain)
+  const [exchangeRates, setExchangeRates] = useState({
+    alRajhi: 74.50,
+    stcPay: 74.85,
+    urPay: 74.90,
+    enjaz: 74.40,
+    fawri: 74.60,
+    mobilyPay: 74.75
+  });
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      // سعودی عرب کے ٹائم زون کے مطابق فارمیٹنگ
-      const formatted = now.toLocaleDateString('en-GB', {
-        day: 'numeric', 
-        month: 'short', 
-        year: 'numeric',
-        timeZone: 'Asia/Riyadh'
-      }) + '  |  ' + now.toLocaleTimeString('en-GB', {
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit',
-        timeZone: 'Asia/Riyadh'
-      });
-      setDateTime(formatted + " (KSA)");
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+  const [selectedBankRate, setSelectedBankRate] = useState(74.85);
 
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'sans-serif' }}>
+    <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh', fontFamily: 'Arial, sans-serif' }}>
       
-      {/* TOP HEADER BAR - FIXED TO SAUDI TIME */}
-      <div style={{ 
-        backgroundColor: '#FFD700', 
-        color: '#000', 
-        padding: '8px 20px', 
-        fontSize: '0.85rem', 
-        fontWeight: 'bold', 
-        textAlign: 'center',
-        borderBottom: '1px solid #e5c100'
-      }}>
-        {dateTime ? `🕒 Saudi Arabia Time: ${dateTime}` : 'Loading...'}
-      </div>
+      {/* Navigation Bar */}
+      <nav style={{ backgroundColor: '#111', color: '#fff', padding: '15px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '1.4rem' }}>SAUDI<span style={{ color: '#FFD700' }}>RATE</span></div>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <Link href="/gold-rates" style={{ color: '#FFD700', textDecoration: 'none', fontWeight: 'bold' }}>Gold Rates</Link>
+          <Link href="/" style={{ color: '#fff', textDecoration: 'none' }}>Home</Link>
+        </div>
+      </nav>
 
-      {/* باقی سارا ہیرو سیکشن اور باکسز وہی رہیں گے جو پہلے تھے */}
-      <section style={{ background: '#000', color: '#fff', padding: '60px 20px 100px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '3.5rem', fontWeight: 'bold', margin: '0 0 10px' }}>
-          Saudi<span style={{ color: '#FFD700' }}>Rate</span>
-        </h1>
-        <p style={{ color: '#ccc', fontSize: '1.2rem', marginBottom: '50px' }}>
-          Real-Time Gold Prices & Currency Exchange
-        </p>
+      <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '20px' }}>
 
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
-          {/* Box 1: Gold */}
-          <div style={{ backgroundColor: '#fff', color: '#000', padding: '40px 20px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🟡</div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 'bold' }}>Gold Rates</h2>
-            <p style={{ color: '#666', margin: '15px 0 25px' }}>Live 24K, 22K, and 21K gold prices.</p>
-            <Link href="/gold-rates" style={{ display: 'block', backgroundColor: '#FFD700', color: '#000', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>View Gold Prices</Link>
+        {/* --- MAIN CURRENCY CONVERTER --- */}
+        <div style={{ background: 'linear-gradient(135deg, #004d40 0%, #00241f 100%)', borderRadius: '24px', padding: '40px', color: '#fff', textAlign: 'center', marginTop: '30px', boxShadow: '0 15px 35px rgba(0,0,0,0.2)' }}>
+          <h1 style={{ marginBottom: '10px' }}>SAR to PKR/INR/PHP Converter</h1>
+          <p style={{ opacity: 0.8, marginBottom: '30px' }}>Get the best exchange rate before sending money</p>
+
+          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ textAlign: 'left' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px', color: '#80cbc4' }}>SAR Amount</label>
+              <input 
+                type="number" 
+                value={amount} 
+                onChange={(e: any) => setAmount(Number(e.target.value))}
+                style={{ padding: '15px', borderRadius: '12px', border: 'none', fontSize: '1.3rem', width: '200px', fontWeight: 'bold' }}
+              />
+            </div>
+            <div style={{ textAlign: 'left' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px', color: '#80cbc4' }}>Select Provider</label>
+              <select 
+                onChange={(e: any) => setSelectedBankRate(Number(e.target.value))}
+                style={{ padding: '15px', borderRadius: '12px', border: 'none', fontSize: '1.1rem', width: '220px', cursor: 'pointer' }}
+              >
+                <option value={exchangeRates.stcPay}>STC Pay (Best Rate)</option>
+                <option value={exchangeRates.urPay}>UrPay</option>
+                <option value={exchangeRates.alRajhi}>Al Rajhi Bank</option>
+                <option value={exchangeRates.mobilyPay}>Mobily Pay</option>
+                <option value={exchangeRates.enjaz}>Enjaz Transfer</option>
+              </select>
+            </div>
           </div>
 
-          {/* Box 2: Currency */}
-          <div style={{ backgroundColor: '#fff', color: '#000', padding: '40px 20px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '15px' }}>💱</div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 'bold' }}>Currency Rates</h2>
-            <p style={{ color: '#666', margin: '15px 0 25px' }}>SAR to PKR, INR, BDT exchange rates.</p>
-            <Link href="/currency" style={{ display: 'block', backgroundColor: '#111', color: '#fff', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>Check Rates</Link>
-          </div>
-
-          {/* Box 3: Calculator */}
-          <div style={{ backgroundColor: '#fff', color: '#000', padding: '40px 20px', borderRadius: '15px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🧮</div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 'bold' }}>Currency Calculator</h2>
-            <p style={{ color: '#666', margin: '15px 0 25px' }}>Instant remittance amounts calculation.</p>
-            <Link href="/calculator" style={{ display: 'block', backgroundColor: '#28a745', color: '#fff', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>Use Calculator</Link>
+          <div style={{ marginTop: '30px' }}>
+            <div style={{ fontSize: '1.2rem', color: '#80cbc4' }}>You will receive approximately:</div>
+            <div style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#FFD700' }}>
+              {(amount * selectedBankRate).toFixed(2)} <span style={{ fontSize: '1.2rem' }}>PKR</span>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* SEO ARTICLE AREA */}
-      <div style={{ maxWidth: '1100px', margin: '40px auto', padding: '0 20px' }}>
-        <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '15px', border: '1px solid #eee', lineHeight: '1.8' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '20px' }}>Saudi Arabia Financial Insights</h2>
-          <p>Get the most accurate gold and currency data updated according to Saudi Market time.</p>
+        {/* --- ALL PROVIDERS TABLE --- */}
+        <h2 style={{ marginTop: '50px', marginBottom: '20px', textAlign: 'center' }}>Today's Live Exchange Rates</h2>
+        <div style={{ backgroundColor: '#fff', borderRadius: '20px', overflow: 'hidden', border: '1px solid #eee', boxShadow: '0 5px 15px rgba(0,0,0,0.05)' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead style={{ backgroundColor: '#f1f1f1' }}>
+              <tr>
+                <th style={{ padding: '20px', textAlign: 'left' }}>Money Provider</th>
+                <th style={{ padding: '20px', textAlign: 'right' }}>Rate (1 SAR)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { name: 'STC Pay', rate: exchangeRates.stcPay, color: '#4f2d7f' },
+                { name: 'UrPay', rate: exchangeRates.urPay, color: '#00d084' },
+                { name: 'Mobily Pay', rate: exchangeRates.mobilyPay, color: '#0061ff' },
+                { name: 'Al Rajhi Bank', rate: exchangeRates.alRajhi, color: '#0054a6' },
+                { name: 'Enjaz (Bank AlBilad)', rate: exchangeRates.enjaz, color: '#9d2235' },
+                { name: 'Fawri', rate: exchangeRates.fawri, color: '#00a19c' }
+              ].map((bank, index) => (
+                <tr key={index} style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: bank.color }}></div>
+                    <span style={{ fontWeight: 'bold' }}>{bank.name}</span>
+                  </td>
+                  <td style={{ padding: '20px', textAlign: 'right', fontWeight: 'bold', color: '#2e7d32', fontSize: '1.2rem' }}>
+                    {bank.rate}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </div>
 
-    </main>
+        {/* Advertisement Space */}
+        <div style={{ marginTop: '40px', backgroundColor: '#fff', border: '1px dashed #ccc', padding: '30px', textAlign: 'center', borderRadius: '15px' }}>
+          <small style={{ color: '#999' }}>GOOGLE ADSENSE PLACEMENT</small>
+        </div>
+
+      </div>
+    </div>
   );
 }
