@@ -1,89 +1,138 @@
 "use client";
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 
-export default function CalculatorPage() {
+export default function ProfessionalCalculator() {
   const [amount, setAmount] = useState<number>(1);
-  const [targetCurrency, setTargetCurrency] = useState<string>('PKR');
+  const [fromCurrency, setFromCurrency] = useState<string>('SAR');
+  const [toCurrency, setToCurrency] = useState<string>('PKR');
+  const [exchangeRate, setExchangeRate] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Yeh rates hum baad mein API se bhi connect kar sakte hain
-  const rates: { [key: string]: { rate: number, name: string, flag: string } } = {
-    PKR: { rate: 74.25, name: 'Pakistani Rupee', flag: '🇵🇰' },
-    INR: { rate: 22.15, name: 'Indian Rupee', flag: '🇮🇳' },
-    BDT: { rate: 31.40, name: 'Bangladeshi Taka', flag: '🇧🇩' },
-    PHP: { rate: 14.80, name: 'Philippine Peso', flag: '🇵🇭' }
+  // آپ کی فراہم کردہ لائیو API Key
+  const API_KEY = '0dfe1f9efbc26627f2809000'; 
+
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        setLoading(true);
+        // API سے لائیو ریٹس حاصل کرنا
+        const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${fromCurrency}/${toCurrency}`);
+        const data = await response.json();
+        if (data.result === "success") {
+          setExchangeRate(data.conversion_rate);
+        }
+      } catch (error) {
+        console.error("Error fetching live rates:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRates();
+  }, [fromCurrency, toCurrency]);
+
+  const result = (amount * exchangeRate).toFixed(2);
+
+  // کرنسیاں آپس میں بدلنے کا فنکشن (Swap)
+  const handleSwap = () => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
   };
 
-  const result = (amount * rates[targetCurrency].rate).toFixed(2);
-
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#f4f7f6', fontFamily: 'sans-serif' }}>
-      
-      {/* Top Bar with Saudi Time (As per your home page) */}
-      <div style={{ backgroundColor: '#FFD700', color: '#000', padding: '8px 20px', fontSize: '0.85rem', fontWeight: 'bold', textAlign: 'center' }}>
-         Currency Calculator - SaudiRate.com
-      </div>
-
-      <div style={{ maxWidth: '600px', margin: '40px auto', padding: '0 20px' }}>
+    <main style={{ minHeight: '100vh', backgroundColor: '#f8f9fa', padding: '20px', fontFamily: 'sans-serif' }}>
+      <div style={{ maxWidth: '550px', margin: '40px auto' }}>
         
-        {/* TOP AD UNIT */}
-        <div style={{ backgroundColor: '#fff', padding: '15px', textAlign: 'center', border: '1px dashed #ccc', marginBottom: '30px', borderRadius: '8px' }}>
-          <p style={{ fontSize: '0.7rem', color: '#bbb', margin: '0 0 10px' }}>ADVERTISEMENT</p>
-          <div style={{ minHeight: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ddd', backgroundColor: '#fafafa' }}>
-             Top Banner Ad
-          </div>
+        {/* Ad Space for Calculator Top */}
+        <div style={{ backgroundColor: '#fff', padding: '10px', textAlign: 'center', marginBottom: '20px', border: '1px dashed #ccc', borderRadius: '8px' }}>
+          <small style={{ color: '#999' }}>ADVERTISEMENT</small>
         </div>
 
-        {/* MAIN CALCULATOR CARD */}
-        <div style={{ backgroundColor: '#fff', padding: '35px', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid #eee' }}>
-          <h1 style={{ textAlign: 'center', fontSize: '1.8rem', fontWeight: 'bold', marginBottom: '30px', color: '#111' }}>
-            Currency <span style={{ color: '#28a745' }}>Converter</span>
+        <div style={{ backgroundColor: '#fff', padding: '35px', borderRadius: '25px', boxShadow: '0 15px 40px rgba(0,0,0,0.1)', border: '1px solid #eee' }}>
+          <h1 style={{ textAlign: 'center', fontSize: '1.8rem', fontWeight: 'bold', marginBottom: '30px', color: '#1a1a1a' }}>
+            Live <span style={{ color: '#28a745' }}>Currency</span> Converter
           </h1>
 
+          {/* Amount Input */}
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px', color: '#555' }}>Amount (Saudi Riyal - SAR)</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#555' }}>Enter Amount</label>
             <input 
               type="number" 
               value={amount} 
               onChange={(e) => setAmount(Number(e.target.value))}
-              style={{ width: '100%', padding: '15px', borderRadius: '10px', border: '2px solid #f0f0f0', fontSize: '1.2rem', outline: 'none' }}
+              style={{ width: '100%', padding: '15px', borderRadius: '12px', border: '2px solid #f0f0f0', fontSize: '1.2rem', outline: 'none' }}
             />
           </div>
 
-          <div style={{ marginBottom: '30px' }}>
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px', color: '#555' }}>Convert To</label>
-            <select 
-              value={targetCurrency} 
-              onChange={(e) => setTargetCurrency(e.target.value)}
-              style={{ width: '100%', padding: '15px', borderRadius: '10px', border: '2px solid #f0f0f0', fontSize: '1.1rem', backgroundColor: '#fff', cursor: 'pointer' }}
+          {/* From and To Selection with Swap Button */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '25px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ fontSize: '0.8rem', color: '#888', display: 'block', marginBottom: '4px' }}>From</label>
+              <select 
+                value={fromCurrency} 
+                onChange={(e) => setFromCurrency(e.target.value)}
+                style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #ddd', backgroundColor: '#fdfdfd', cursor: 'pointer' }}
+              >
+                <option value="SAR">🇸🇦 SAR</option>
+                <option value="PKR">🇵🇰 PKR</option>
+                <option value="INR">🇮🇳 INR</option>
+                <option value="BDT">🇧🇩 BDT</option>
+                <option value="USD">🇺🇸 USD</option>
+                <option value="EUR">🇪🇺 EUR</option>
+                <option value="GBP">🇬🇧 GBP</option>
+              </select>
+            </div>
+
+            <button 
+              onClick={handleSwap} 
+              title="Swap Currencies"
+              style={{ backgroundColor: '#111', color: '#fff', border: 'none', width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', marginTop: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}
             >
-              <option value="PKR">🇵🇰 PKR - Pakistani Rupee</option>
-              <option value="INR">🇮🇳 INR - Indian Rupee</option>
-              <option value="BDT">🇧🇩 BDT - Bangladeshi Taka</option>
-              <option value="PHP">🇵🇭 PHP - Philippine Peso</option>
-            </select>
+              ⇄
+            </button>
+
+            <div style={{ flex: 1 }}>
+              <label style={{ fontSize: '0.8rem', color: '#888', display: 'block', marginBottom: '4px' }}>To</label>
+              <select 
+                value={toCurrency} 
+                onChange={(e) => setToCurrency(e.target.value)}
+                style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #ddd', backgroundColor: '#fdfdfd', cursor: 'pointer' }}
+              >
+                <option value="PKR">🇵🇰 PKR</option>
+                <option value="SAR">🇸🇦 SAR</option>
+                <option value="INR">🇮🇳 INR</option>
+                <option value="BDT">🇧🇩 BDT</option>
+                <option value="USD">🇺🇸 USD</option>
+                <option value="PHP">🇵🇭 PHP</option>
+                <option value="EGP">🇪🇬 EGP</option>
+              </select>
+            </div>
           </div>
 
-          {/* RESULT AREA */}
-          <div style={{ backgroundColor: '#111', color: '#fff', padding: '30px', borderRadius: '15px', textAlign: 'center' }}>
-            <div style={{ fontSize: '0.9rem', color: '#FFD700', marginBottom: '10px', fontWeight: 'bold' }}>
-              {amount} SAR =
-            </div>
-            <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#fff' }}>
-              {result} <span style={{ fontSize: '1.2rem', color: '#FFD700' }}>{targetCurrency}</span>
-            </div>
-            <div style={{ fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
-              1 SAR = {rates[targetCurrency].rate} {targetCurrency}
-            </div>
+          {/* Result Display Box */}
+          <div style={{ backgroundColor: '#111', color: '#fff', padding: '30px', borderRadius: '20px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+            {loading ? (
+              <p style={{ color: '#FFD700', fontWeight: 'bold' }}>Updating Live Rates...</p>
+            ) : (
+              <>
+                <div style={{ fontSize: '0.9rem', color: '#aaa', marginBottom: '8px' }}>{amount} {fromCurrency} equals</div>
+                <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#FFD700' }}>
+                  {result} <span style={{ fontSize: '1.2rem' }}>{toCurrency}</span>
+                </div>
+                <div style={{ fontSize: '0.75rem', color: '#666', marginTop: '15px' }}>
+                  Market Rate: 1 {fromCurrency} = {exchangeRate} {toCurrency}
+                </div>
+              </>
+            )}
           </div>
         </div>
 
-        {/* LARGE RESPONSIVE AD UNIT */}
-        <div style={{ marginTop: '40px', backgroundColor: '#fff', padding: '20px', borderRadius: '12px', border: '1px solid #eee', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.7rem', color: '#bbb', marginBottom: '15px' }}>SPONSORED AD</p>
-          <div style={{ minHeight: '200px', backgroundColor: '#f9f9f9', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ccc' }}>
-            Large Responsive Ad Unit
-          </div>
+        {/* Ad Space for Calculator Bottom */}
+        <div style={{ marginTop: '30px', backgroundColor: '#fff', padding: '20px', borderRadius: '15px', border: '1px solid #eee', textAlign: 'center' }}>
+           <p style={{ fontSize: '0.7rem', color: '#bbb', marginBottom: '10px' }}>SPONSORED BY GOOGLE ADS</p>
+           <div style={{ minHeight: '150px', backgroundColor: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ddd', borderRadius: '8px' }}>
+              Horizontal Ad Unit Area
+           </div>
         </div>
 
       </div>
