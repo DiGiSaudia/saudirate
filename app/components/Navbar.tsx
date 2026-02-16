@@ -16,7 +16,7 @@ export default function Navbar() {
   return (
     <nav style={{ 
       backgroundColor: '#1a1a1a', 
-      padding: '15px 20px', 
+      padding: '10px 20px', 
       color: 'white',
       position: 'sticky',
       top: 0,
@@ -30,14 +30,18 @@ export default function Navbar() {
         justifyContent: 'space-between', 
         alignItems: 'center' 
       }}>
-        {/* Logo - Updated without .com */}
-        <Link href="/" style={{ 
-          fontSize: '1.5rem', 
-          fontWeight: 'bold', 
-          color: '#ffcc00', 
-          textDecoration: 'none' 
-        }}>
-          Saudi<span style={{color: 'white'}}> Rate</span>
+        
+        {/* Logo Section */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img 
+            src="/logo.png" 
+            alt="Saudi Rate Logo" 
+            style={{ 
+              height: '45px', 
+              width: 'auto', 
+              objectFit: 'contain' 
+            }} 
+          />
         </Link>
 
         {/* Desktop Links */}
