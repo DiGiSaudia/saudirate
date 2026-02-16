@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function ContactPage() {
   return (
-    <div style={{ maxWidth: '800px', margin: '20px auto', padding: '0 15px', fontFamily: 'Arial, sans-serif', boxSizing: 'border-box' }}>
+    <div style={{ maxWidth: '800px', width: '95%', margin: '20px auto', padding: '0 10px', fontFamily: 'Arial, sans-serif', boxSizing: 'border-box' }}>
       
       {/* Back to Home Button */}
       <div style={{ marginBottom: '20px' }}>
@@ -21,7 +21,7 @@ export default function ContactPage() {
 
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))', // Mobile pe auto-adjust hoga
         gap: '20px',
         backgroundColor: '#fff',
         padding: '20px',
@@ -48,7 +48,7 @@ export default function ContactPage() {
         </form>
 
         {/* Contact Details */}
-        <div style={{ backgroundColor: '#f0f7ff', padding: '25px', borderRadius: '10px', boxSizing: 'border-box' }}>
+        <div style={{ backgroundColor: '#f0f7ff', padding: '25px', borderRadius: '10px', boxSizing: 'border-box', width: '100%' }}>
           <h3 style={{ color: '#1976d2', marginTop: 0 }}>Contact Details</h3>
           <p style={{ color: '#444' }}><strong>Email:</strong> info@saudirate.com</p>
           <p style={{ color: '#444' }}><strong>Location:</strong> Riyadh, Saudi Arabia</p>
@@ -63,7 +63,9 @@ export default function ContactPage() {
             textDecoration: 'none',
             borderRadius: '5px',
             fontWeight: 'bold',
-            textAlign: 'center'
+            textAlign: 'center',
+            width: '100%', // Mobile button responsive
+            boxSizing: 'border-box'
           }}>Chat on WhatsApp</a>
         </div>
       </div>
@@ -71,6 +73,6 @@ export default function ContactPage() {
   );
 }
 
-const labelStyle = { display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '14px' };
+const labelStyle = { display: 'block', marginBottom: '5px', fontWeight: 'bold' };
 const inputStyle = { width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', boxSizing: 'border-box' };
-const buttonStyle = { padding: '15px', backgroundColor: '#1976d2', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
+const buttonStyle = { padding: '15px', backgroundColor: '#1976d2', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', width: '100%' };
