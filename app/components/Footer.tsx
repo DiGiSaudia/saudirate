@@ -42,7 +42,7 @@ const Footer = () => {
       {/* Disclaimer Text & Copyright */}
       <div style={{ borderTop: '1px solid #333', marginTop: '40px', paddingTop: '20px', textAlign: 'center' }}>
         <p style={{ fontSize: '11px', color: '#777', maxWidth: '800px', margin: '0 auto 20px', lineHeight: '1.5' }}>
-          <strong>Disclaimer:</strong> All rates provided on SaudiRate.com are for information purposes only. While we aim for accuracy, market rates change constantly. Please verify all rates with your bank or financial institution before making any transactions.
+          <strong>Disclaimer:</strong> All rates provided on Saudi Rate are for information purposes only. While we aim for accuracy, market rates change constantly. Please verify all rates with your bank or financial institution before making any transactions.
         </p>
         <p style={{ color: '#666', fontSize: '12px' }}>
           &copy; {new Date().getFullYear()} SaudiRate.com - All Rights Reserved.
