@@ -171,6 +171,54 @@ export default function SaudiPriceHome() {
         </div>
 
       </main>
+      {/* --- SEO INFORMATIVE SECTION --- */}
+<section style={{ marginTop: '80px', borderTop: '1px solid #1E293B', paddingTop: '40px' }}>
+  <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '20px', color: '#10B981' }}>
+    Why Compare Saudi Riyal Exchange Rates on Our Portal?
+  </h2>
+  
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', color: '#94A3B8', lineHeight: '1.8' }}>
+    <div>
+      <h3 style={{ color: '#FACC15', fontSize: '18px', marginBottom: '10px' }}>Real-Time Accuracy</h3>
+      <p>
+        We provide live updates for SAR to PKR, INR, BDT, and 9 other global currencies. 
+        By using official API data, we ensure that you get the most accurate market mid-point 
+        rates before you visit your local exchange house or use apps like UrPay and STC Pay.
+      </p>
+    </div>
+    
+    <div>
+      <h3 style={{ color: '#FACC15', fontSize: '18px', marginBottom: '10px' }}>Save on Hidden Fees</h3>
+      <p>
+        Banks in Saudi Arabia often have different fee structures. Our comparison tool 
+        helps you identify which provider offers "Zero Fee" transfers and who provides 
+        the best profit margin, potentially saving you hundreds of Riyals annually.
+      </p>
+    </div>
+
+    <div>
+      <h3 style={{ color: '#FACC15', fontSize: '18px', marginBottom: '10px' }}>Comprehensive Coverage</h3>
+      <p>
+        Whether you are looking for gold prices in Riyadh or exchange rates for Egypt and 
+        the Philippines, our platform covers it all. We analyze 12+ financial institutions 
+        including Al Rajhi, Enjaz, and Western Union for your convenience.
+      </p>
+    </div>
+  </div>
+
+  {/* FAQ Section for better SEO Ranking */}
+  <div style={{ marginTop: '50px', background: '#0F172A', padding: '30px', borderRadius: '20px' }}>
+    <h3 style={{ marginBottom: '20px', color: 'white' }}>Frequently Asked Questions (FAQs)</h3>
+    <div style={{ marginBottom: '15px' }}>
+      <strong style={{ color: '#10B981' }}>Q: Which app gives the best rate in Saudi Arabia?</strong>
+      <p style={{ fontSize: '14px' }}>A: Rates vary daily, but digital wallets like UrPay, STC Pay, and Mobily Pay often offer competitive rates compared to traditional banks.</p>
+    </div>
+    <div>
+      <strong style={{ color: '#10B981' }}>Q: Is the gold rate the same across KSA?</strong>
+      <p style={{ fontSize: '14px' }}>A: Yes, the 24K gold base price is generally consistent, though local jewelry shops may have slight variations in making charges.</p>
+    </div>
+  </div>
+</section>
     </div>
   );
 }
