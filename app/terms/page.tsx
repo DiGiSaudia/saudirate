@@ -1,32 +1,19 @@
-'use client';
-import React from 'react';
-
-const TermsPage = () => {
+export default function TermsAndConditions() {
   return (
-    <div style={{ padding: '60px 20px', backgroundColor: '#fdfdfd', minHeight: '80vh', fontFamily: 'system-ui, sans-serif' }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto', backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '20px', color: '#1a1a1a' }}>Terms and Conditions</h1>
-
-        <p style={{ lineHeight: '1.8', color: '#555', marginBottom: '20px' }}>
-          Welcome to SaudiRate.com! These terms and conditions outline the rules and regulations for the use of SaudiRate.com's Website.
-        </p>
-
-        <h3 style={{ fontSize: '1.3rem', marginTop: '25px', marginBottom: '10px', color: '#333' }}>Disclaimer</h3>
-        <p style={{ lineHeight: '1.8', color: '#555', marginBottom: '20px' }}>
-          The materials on SaudiRate.com are provided on an 'as is' basis. SaudiRate.com makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
-        </p>
+    <div style={{ backgroundColor: '#020617', color: '#F8FAFC', minHeight: '100vh', padding: '60px 20px' }}>
+      <main style={{ maxWidth: '850px', margin: '0 auto', background: '#0F172A', padding: '45px', borderRadius: '35px', border: '1px solid #1E293B' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '900', color: 'white', marginBottom: '25px' }}>Terms and Conditions</h1>
         
-        <p style={{ lineHeight: '1.8', color: '#555', marginBottom: '20px' }}>
-          Further, SaudiRate.com does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.
-        </p>
+        <section style={{ color: '#CBD5E1', lineHeight: '1.8' }}>
+          <p style={{ marginBottom: '20px' }}>Welcome to SaudiRate.com! These terms and conditions outline the rules and regulations for the use of SaudiRate.com's Website.</p>
 
-        <h3 style={{ fontSize: '1.3rem', marginTop: '25px', marginBottom: '10px', color: '#333' }}>Accuracy of Materials</h3>
-        <p style={{ lineHeight: '1.8', color: '#555', marginBottom: '20px' }}>
-          The materials appearing on SaudiRate.com's website could include technical, typographical, or photographic errors. SaudiRate.com does not warrant that any of the materials on its website are accurate, complete or current.
-        </p>
-      </div>
+          <h3 style={{ color: '#10B981', marginTop: '25px' }}>Disclaimer</h3>
+          <p style={{ fontSize: '15px', color: '#94A3B8' }}>The materials on SaudiRate.com are provided on an 'as is' basis. SaudiRate.com makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+
+          <h3 style={{ color: '#10B981', marginTop: '25px' }}>Accuracy of Materials</h3>
+          <p style={{ fontSize: '15px', color: '#94A3B8' }}>The materials appearing on SaudiRate.com's website could include technical, typographical, or photographic errors. SaudiRate.com does not warrant that any of the materials on its website are accurate, complete or current.</p>
+        </section>
+      </main>
     </div>
   );
-};
-
-export default TermsPage;
+}
