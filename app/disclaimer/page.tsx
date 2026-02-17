@@ -1,38 +1,22 @@
-// @ts-nocheck
-"use client";
-import React from 'react';
-import Link from 'next/link';
-
-export default function DisclaimerPage() {
+export default function Disclaimer() {
   return (
-    <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh', fontFamily: 'Arial, sans-serif' }}>
-      <nav style={{ backgroundColor: '#000', padding: '15px', display: 'flex', justifyContent: 'space-between' }}>
-        <Link href="/" style={{ color: '#FFD700', textDecoration: 'none', fontWeight: 'bold' }}>← Back to Home</Link>
-      </nav>
-
-      <div style={{ maxWidth: '700px', width: '90%', margin: '40px auto', backgroundColor: '#fff', padding: '30px', borderRadius: '15px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-        <h1 style={{ color: '#333', borderBottom: '2px solid #FFD700', paddingBottom: '10px' }}>Disclaimer</h1>
+    <div style={{ backgroundColor: '#020617', color: '#F8FAFC', minHeight: '100vh', padding: '60px 20px' }}>
+      <main style={{ maxWidth: '800px', margin: '0 auto', background: '#0F172A', padding: '40px', borderRadius: '30px', border: '1px solid #1E293B' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#FACC15', marginBottom: '20px' }}>Disclaimer</h1>
         
-        <p style={{ lineHeight: '1.6', color: '#555' }}>
-          The information provided on <strong>SaudiRate.com</strong> is for general informational purposes only. All currency and gold rates are updated automatically from third-party sources.
-        </p>
-
-        <h3 style={{ color: '#000', marginTop: '20px' }}>No Financial Advice</h3>
-        <p style={{ lineHeight: '1.6', color: '#555' }}>
-          The rates shown here do not constitute financial advice. We strongly recommend that you verify the current rates with your bank or local exchange house before making any financial transaction.
-        </p>
-
-        <h3 style={{ color: '#000', marginTop: '20px' }}>Accuracy of Data</h3>
-        <p style={{ lineHeight: '1.6', color: '#555' }}>
-          While we strive to provide the most accurate and up-to-date information, market conditions can change rapidly. SaudiRate.com is not responsible for any losses or damages resulting from the use of this information.
-        </p>
-
-        <div style={{ marginTop: '30px', padding: '15px', backgroundColor: '#fff3cd', borderRadius: '8px', borderLeft: '5px solid #ffecb5' }}>
-          <small style={{ color: '#856404' }}>
-            Note: Actual bank rates, transfer fees, and taxes may vary depending on the service provider.
-          </small>
+        <div style={{ background: 'rgba(250, 204, 21, 0.05)', borderLeft: '4px solid #FACC15', padding: '20px', marginBottom: '30px' }}>
+          <p style={{ color: '#FACC15', fontWeight: 'bold' }}>Important Notice:</p>
+          <p style={{ color: '#CBD5E1', fontSize: '15px' }}>The rates provided are for informational purposes only. Always verify with your bank before making a transaction.</p>
         </div>
-      </div>
+
+        <section style={{ lineHeight: '1.8', color: '#CBD5E1' }}>
+          <h3 style={{ color: 'white' }}>No Financial Advice</h3>
+          <p>SaudiRate.com is not a financial institution. We provide market trends and live rates, but this should not be considered as professional financial advice.</p>
+          
+          <h3 style={{ color: 'white', marginTop: '20px' }}>Accuracy of Data</h3>
+          <p>While we strive to provide the most accurate data, market conditions change rapidly. We are not responsible for any losses resulting from the use of this information.</p>
+        </section>
+      </main>
     </div>
   );
 }

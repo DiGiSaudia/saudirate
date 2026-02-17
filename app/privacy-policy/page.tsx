@@ -1,29 +1,21 @@
-'use client';
-import React from 'react';
-
-const PrivacyPage = () => {
+export default function PrivacyPolicy() {
   return (
-    <div style={{ padding: '60px 20px', backgroundColor: '#fdfdfd', minHeight: '80vh', fontFamily: 'system-ui, sans-serif' }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto', backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '20px', color: '#1a1a1a' }}>Privacy Policy</h1>
-        <p style={{ color: '#888', marginBottom: '30px', fontSize: '0.9rem' }}>Last Updated: February 2026</p>
+    <div style={{ backgroundColor: '#020617', color: '#F8FAFC', minHeight: '100vh', padding: '60px 20px' }}>
+      <main style={{ maxWidth: '800px', margin: '0 auto', background: '#0F172A', padding: '40px', borderRadius: '30px', border: '1px solid #1E293B' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#10B981', marginBottom: '20px' }}>Privacy Policy</h1>
+        <p style={{ color: '#94A3B8', fontSize: '14px', marginBottom: '30px' }}>Last Updated: February 2026</p>
 
-        <p style={{ lineHeight: '1.8', color: '#555', marginBottom: '20px' }}>
-          At SaudiRate.com, accessible from https://saudirate.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SaudiRate.com and how we use it.
-        </p>
+        <section style={{ lineHeight: '1.8', color: '#CBD5E1' }}>
+          <h2 style={{ color: 'white', fontSize: '20px', marginTop: '20px' }}>1. Information We Collect</h2>
+          <p>At SaudiRate.com, we prioritize your privacy. We collect basic log files like IP addresses and browser types to improve your experience. No personal financial data is stored on our servers.</p>
 
-        <h3 style={{ fontSize: '1.3rem', marginTop: '25px', marginBottom: '10px', color: '#333' }}>Log Files</h3>
-        <p style={{ lineHeight: '1.8', color: '#555', marginBottom: '20px' }}>
-          SaudiRate.com follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.
-        </p>
+          <h2 style={{ color: 'white', fontSize: '20px', marginTop: '20px' }}>2. Google DoubleClick DART Cookie</h2>
+          <p>Google is a third-party vendor on our site. It uses cookies to serve ads to our site visitors based upon their visit to our website and other sites on the internet.</p>
 
-        <h3 style={{ fontSize: '1.3rem', marginTop: '25px', marginBottom: '10px', color: '#333' }}>Google DoubleClick DART Cookie</h3>
-        <p style={{ lineHeight: '1.8', color: '#555', marginBottom: '20px' }}>
-          Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet.
-        </p>
-      </div>
+          <h2 style={{ color: 'white', fontSize: '20px', marginTop: '20px' }}>3. Third Party Policies</h2>
+          <p>Our Privacy Policy does not apply to other advertisers or websites. We advise you to consult the respective Privacy Policies of these third-party ad servers for more detailed information.</p>
+        </section>
+      </main>
     </div>
   );
-};
-
-export default PrivacyPage;
+}
