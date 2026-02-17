@@ -86,6 +86,54 @@ export default function GoldRatesSaudi() {
         </div>
 
       </main>
+      {/* --- SEO GOLD INFORMATIVE SECTION --- */}
+        <section style={{ marginTop: '80px', borderTop: '1px solid #1E293B', paddingTop: '40px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '20px', color: '#FACC15' }}>
+            Understanding Gold Prices in Saudi Arabia
+          </h2>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', color: '#94A3B8', lineHeight: '1.8' }}>
+            <div>
+              <h3 style={{ color: '#10B981', fontSize: '18px', marginBottom: '10px' }}>Daily Market Updates</h3>
+              <p>
+                The gold market in Saudi Arabia is highly dynamic. Our portal provides 
+                the most accurate 24K, 22K, 21K, and 18K gold rates per gram based on 
+                global bullion market trends and local Riyadh/Jeddah market adjustments.
+              </p>
+            </div>
+            
+            <div>
+              <h3 style={{ color: '#10B981', fontSize: '18px', marginBottom: '10px' }}>Buying Guide: Units</h3>
+              <p>
+                Whether you are buying in Grams, Tolas, or Ounces, we have you covered. 
+                Our live calculator helps you convert mass units instantly, making it 
+                easier to budget for jewelry or investment bullion in KSA.
+              </p>
+            </div>
+
+            <div>
+              <h3 style={{ color: '#10B981', fontSize: '18px', marginBottom: '10px' }}>Investment Tips</h3>
+              <p>
+                24K gold is considered the best for investment (bullion), while 21K and 
+                22K are popular for jewelry. Always check the "Making Charges" (Masnaia) 
+                locally before finalizing your purchase in gold souks.
+              </p>
+            </div>
+          </div>
+
+          {/* Gold Specific FAQ */}
+          <div style={{ marginTop: '50px', background: '#0F172A', padding: '30px', borderRadius: '20px', border: '1px solid #1E293B' }}>
+            <h3 style={{ marginBottom: '20px', color: 'white' }}>Gold Rate FAQs</h3>
+            <div style={{ marginBottom: '15px' }}>
+              <strong style={{ color: '#FACC15' }}>Q: What is the purest form of gold in KSA?</strong>
+              <p style={{ fontSize: '14px', color: '#94A3B8' }}>A: 24 Karat (24K) is 99.9% pure gold and is the standard for investment bars and coins.</p>
+            </div>
+            <div>
+              <strong style={{ color: '#FACC15' }}>Q: Why do gold rates change daily?</strong>
+              <p style={{ fontSize: '14px', color: '#94A3B8' }}>A: Gold rates are linked to the international market, US Dollar fluctuations, and global economic stability.</p>
+            </div>
+          </div>
+        </section>
     </div>
   );
 }

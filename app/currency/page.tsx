@@ -95,6 +95,28 @@ export default function CurrencyHub() {
         </div>
 
       </main>
+      {/* --- SEO CURRENCY INFORMATIVE SECTION --- */}
+        <section style={{ marginTop: '80px', borderTop: '1px solid #1E293B', paddingTop: '40px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '20px', color: '#10B981' }}>
+            International Money Transfer from Saudi Arabia
+          </h2>
+          <p style={{ color: '#94A3B8', marginBottom: '30px' }}>
+            Sending money home shouldn't be expensive. Compare the latest Saudi Riyal (SAR) exchange 
+            rates for 12 major corridors including Pakistan, India, Egypt, and the Philippines.
+          </p>
+          
+          {/* Quick Tips */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+            <div style={{ background: '#020617', padding: '20px', borderRadius: '15px', border: '1px solid #1E293B' }}>
+              <h4 style={{ color: '#38BDF8' }}>Exchange Rate vs. Fee</h4>
+              <p style={{ fontSize: '13px', color: '#64748B' }}>Sometimes a "Low Fee" means a "Lower Rate". Always look at the total amount the recipient gets.</p>
+            </div>
+            <div style={{ background: '#020617', padding: '20px', borderRadius: '15px', border: '1px solid #1E293B' }}>
+              <h4 style={{ color: '#38BDF8' }}>Digital Advantage</h4>
+              <p style={{ fontSize: '13px', color: '#64748B' }}>Wallets like STC Pay and UrPay usually provide better rates than traditional physical exchange houses.</p>
+            </div>
+          </div>
+        </section>
     </div>
   );
 }
