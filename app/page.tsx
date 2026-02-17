@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
-// --- TYPES FOR VS CODE ERROR FIX ---
 interface Provider {
   id: number;
   name: string;
@@ -27,7 +26,6 @@ export default function SaudiPriceHome() {
 
   const API_KEY = '0dfe1f9efbc26627f2809000';
 
-  // --- 12 COUNTRIES LIST ---
   const countries: Country[] = [
     { name: "Pakistan", code: "PKR", flag: "🇵🇰" },
     { name: "India", code: "INR", flag: "🇮🇳" },
@@ -43,7 +41,6 @@ export default function SaudiPriceHome() {
     { name: "Turkey", code: "TRY", flag: "🇹🇷" },
   ];
 
-  // --- 12 PROVIDERS (BANKS/WALLETS) ---
   const providers: Provider[] = useMemo(() => [
     { id: 1, name: 'UrPay', rate_diff: 0.15, color: '#00A36C', speed: 'Instant', fee: 'Free', link: 'https://www.urpay.com.sa/' },
     { id: 2, name: 'STC Pay', rate_diff: 0.10, color: '#4F008C', speed: '5 Mins', fee: 'Free', link: 'https://stcpay.com.sa/' },
@@ -77,39 +74,47 @@ export default function SaudiPriceHome() {
   }, [fetchRates]);
 
   return (
-    <div style={{ backgroundColor: '#020617', color: '#F8FAFC', minHeight: '100vh', padding: '60px 20px' }}>
+    <div style={{ backgroundColor: '#020617', color: '#F8FAFC', minHeight: '100vh', padding: '20px' }}>
       
-      {/* --- PREMIUM BRAND LOGO (Saudi Green, Rate Yellow) --- */}
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <div style={{ fontSize: '42px', fontWeight: '950', letterSpacing: '-1.5px' }}>
-          <span style={{ color: '#10B981' }}>Saudi</span>
-          <span style={{ color: '#FACC15' }}>Rate</span>
-        </div>
-        <div style={{ width: '60px', height: '4px', background: '#FACC15', margin: '10px auto', borderRadius: '10px' }}></div>
+      {/* --- TOP AD SLOT --- */}
+      <div style={{ maxWidth: '1100px', height: '90px', margin: '0 auto 40px', background: '#0F172A', border: '1px dashed #334155', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#64748B', borderRadius: '12px' }}>
+        ADVERTISEMENT SPACE (TOP)
       </div>
 
       <main style={{ maxWidth: '1100px', margin: '0 auto' }}>
         
+        {/* --- SEO HEADER & INTENT TEXT --- */}
+        <section style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <h1 style={{ fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: '900', marginBottom: '15px' }}>
+            Transfer Money <span style={{ color: '#10B981' }}>Smarter & Faster</span>
+          </h1>
+          <p style={{ color: '#94A3B8', fontSize: '18px', maxWidth: '700px', margin: '0 auto', lineHeight: '1.6' }}>
+            Get real-time SAR to {selectedCountry} exchange rates. Compare 12+ top providers including UrPay, STC Pay, and Al Rajhi to save money on every transaction with the best market rates.
+          </p>
+        </section>
+
         {/* --- DYNAMIC CONVERTER --- */}
-        <section style={{ background: '#0F172A', padding: '40px', borderRadius: '35px', border: '1px solid #1E293B', marginBottom: '80px', boxShadow: '0 30px 60px -12px rgba(0,0,0,0.5)' }}>
+        <section style={{ background: '#0F172A', padding: '40px', borderRadius: '35px', border: '1px solid #1E293B', marginBottom: '50px', boxShadow: '0 30px 60px -12px rgba(0,0,0,0.5)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px', alignItems: 'flex-end' }}>
-            
             <div>
-              <label style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', display: 'block', marginBottom: '10px' }}>SEND SAR</label>
-              <input 
-                type="number" 
-                value={amount} 
-                onChange={(e) => setAmount(Number(e.target.value))}
-                style={{ width: '100%', background: '#020617', border: '1px solid #334155', padding: '15px', borderRadius: '12px', color: 'white', fontSize: '20px', fontWeight: '700' }}
-              />
+              <label style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', display: 'block', marginBottom: '10px' }}>YOU SEND FROM SAUDI ARABIA</label>
+              <div style={{ display: 'flex', alignItems: 'center', background: '#020617', padding: '15px', borderRadius: '12px', border: '1px solid #334155' }}>
+                <input 
+                  type="number" 
+                  value={amount} 
+                  onChange={(e) => setAmount(Number(e.target.value))}
+                  style={{ width: '100%', background: 'transparent', border: 'none', color: 'white', fontSize: '24px', fontWeight: '700', outline: 'none' }}
+                />
+                <span style={{ fontWeight: '800', color: '#94A3B8' }}>SAR</span>
+              </div>
             </div>
 
             <div>
-              <label style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', display: 'block', marginBottom: '10px' }}>SELECT COUNTRY</label>
+              <label style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', display: 'block', marginBottom: '10px' }}>SELECT RECIPIENT COUNTRY</label>
               <select 
                 value={selectedCountry}
                 onChange={(e) => setSelectedCountry(e.target.value)}
-                style={{ width: '100%', background: '#020617', border: '1px solid #334155', padding: '15px', borderRadius: '12px', color: 'white', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}
+                style={{ width: '100%', background: '#020617', border: '1px solid #334155', padding: '18px', borderRadius: '12px', color: 'white', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}
               >
                 {countries.map(c => (
                   <option key={c.code} value={c.code}>{c.flag} {c.name}</option>
@@ -117,8 +122,8 @@ export default function SaudiPriceHome() {
               </select>
             </div>
 
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '11px', fontWeight: '800', color: '#10B981' }}>ESTIMATED TOTAL</div>
+            <div style={{ textAlign: 'right', background: 'rgba(16, 185, 129, 0.05)', padding: '15px', borderRadius: '15px', border: '1px solid rgba(16, 185, 129, 0.1)' }}>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#10B981' }}>RECIPIENT GETS</div>
               <div style={{ fontSize: '32px', fontWeight: '900' }}>
                 {isLoaded ? (amount * exchangeRate).toLocaleString(undefined, {maximumFractionDigits:2}) : "---"}
                 <span style={{ fontSize: '16px', marginLeft: '8px', color: '#10B981' }}>{selectedCountry}</span>
@@ -127,8 +132,15 @@ export default function SaudiPriceHome() {
           </div>
         </section>
 
+        {/* --- MIDDLE AD SLOT --- */}
+        <div style={{ height: '150px', margin: '40px 0', background: '#0F172A', border: '1px dashed #334155', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#64748B', borderRadius: '12px' }}>
+          ADVERTISEMENT SPACE (MIDDLE)
+        </div>
+
         {/* --- 12 BANKS COMPARISON --- */}
-        <h2 style={{ textAlign: 'center', marginBottom: '40px', fontSize: '28px', fontWeight: '800' }}>Live Market Comparison</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '28px', fontWeight: '800' }}>Live Market Comparison</h2>
+        <p style={{ textAlign: 'center', color: '#94A3B8', marginBottom: '40px', marginTop: '-20px' }}>We compare 12+ providers to find you the best deal today.</p>
+        
         <div style={{ display: 'grid', gap: '12px' }}>
           {providers.map((p) => (
             <div key={p.id} style={{ background: '#0F172A', border: '1px solid #1E293B', padding: '20px 30px', borderRadius: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -148,9 +160,14 @@ export default function SaudiPriceHome() {
                 <div style={{ fontSize: '10px', color: '#64748B' }}>SPEED</div>
                 <div style={{ fontWeight: '700', color: '#38BDF8' }}>{p.speed}</div>
               </div>
-              <a href={p.link} target="_blank" style={{ background: '#1E293B', color: 'white', padding: '10px 20px', borderRadius: '10px', textDecoration: 'none', fontSize: '13px', fontWeight: '700' }}>Send Now</a>
+              <a href={p.link} target="_blank" style={{ background: '#1E293B', color: 'white', padding: '12px 24px', borderRadius: '10px', textDecoration: 'none', fontSize: '13px', fontWeight: '800', transition: '0.3s' }}>Send Now</a>
             </div>
           ))}
+        </div>
+
+        {/* --- BOTTOM AD SLOT --- */}
+        <div style={{ height: '250px', margin: '60px 0 40px', background: '#0F172A', border: '1px dashed #334155', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#64748B', borderRadius: '12px' }}>
+          ADVERTISEMENT SPACE (BOTTOM - LARGE)
         </div>
 
       </main>
