@@ -1,198 +1,91 @@
 "use client";
-import React, { useState, useEffect, CSSProperties } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect, useCallback } from 'react';
 
-export default function GoldRatesPage() {
-  const [weight, setWeight] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [rates, setRates] = useState({
-    k24: 285.500,
-    k22: 261.750,
-    k21: 249.800,
-    k18: 214.150
-  });
-  const [selectedPurity, setSelectedPurity] = useState(285.500);
+export default function GoldRatesSaudi() {
+  const [basePrice, setBasePrice] = useState<number>(285.50); // Live price from API
+  const [weight, setWeight] = useState<number>(1);
+  const [unit, setUnit] = useState<string>("gram");
 
-  const API_KEY = '0dfe1f9efbc26627f2809000';
-
-  const fetchRates = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/SAR`);
-      const data = await res.json();
-
-      if (data && data.conversion_rates && data.conversion_rates.XAU) {
-        const goldOunce = 1 / data.conversion_rates.XAU;
-        const gram24k = goldOunce / 31.1035;
-
-        const newRates = {
-          k24: Number(gram24k.toFixed(3)),
-          k22: Number((gram24k * 0.916).toFixed(3)),
-          k21: Number((gram24k * 0.875).toFixed(3)),
-          k18: Number((gram24k * 0.750).toFixed(3))
-        };
-
-        setRates(newRates);
-        if (selectedPurity === rates.k24 || selectedPurity === 285.500) {
-            setSelectedPurity(newRates.k24);
-        }
-      }
-    } catch (error) {
-      console.error("Failed to fetch rates", error);
-    } finally {
-      setLoading(false);
-    }
+  // Conversion Logic
+  const units = {
+    gram: 1,
+    tola: 11.6638,
+    ounce: 31.1035
   };
 
-  useEffect(() => {
-    fetchRates();
-  }, []);
-
-  const handleClear = () => {
-    setWeight(1);
-    setSelectedPurity(rates.k24);
-  };
-
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
-
-  const total = (weight * selectedPurity).toFixed(3);
-
-  const theme = {
-    bg: isDarkMode ? '#121212' : '#f8f9fa',
-    text: isDarkMode ? '#ffffff' : '#1a1a1a',
-    cardBg: isDarkMode ? '#1e1e1e' : '#fff',
-    border: isDarkMode ? '#333' : '#eee',
-    refreshBtn: isDarkMode ? '#333' : '#e0e0e0',
-    adBg: isDarkMode ? '#1a1a1a' : '#eaeaea',
-    adText: isDarkMode ? '#555' : '#999'
-  };
-
-  const styles: { [key: string]: CSSProperties } = {
-    container: { minHeight: '100vh', backgroundColor: theme.bg, color: theme.text, fontFamily: 'Arial, sans-serif', transition: '0.3s', paddingBottom: '20px' },
-    nav: { backgroundColor: '#111', color: '#fff', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-    link: { color: '#FFD700', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem' },
-    themeBtn: { background: '#FFD700', border: 'none', padding: '6px 12px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', color: '#000', fontSize: '0.9rem' },
-    main: { maxWidth: '800px', margin: '0 auto', padding: '20px' },
-    
-    // اشتہارات (Ads) کا سٹائل
-    adContainer: { width: '100%', minHeight: '90px', backgroundColor: theme.adBg, border: `1px dashed ${theme.border}`, borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '20px 0', color: theme.adText, fontSize: '0.8rem' },
-    
-    headingContainer: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '5px' },
-    heading: { fontWeight: '800', fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', margin: 0, textAlign: 'center' }, // Responsive Font Size
-    refreshBtn: { background: theme.refreshBtn, border: 'none', borderRadius: '50%', width: '35px', height: '35px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: theme.text, transition: '0.2s', flexShrink: 0 },
-    subText: { textAlign: 'center', color: '#666', marginBottom: '20px', fontSize: '0.9rem' },
-    
-    calcCard: { background: 'linear-gradient(145deg, #1a1a1a, #000)', color: '#fff', padding: '25px', borderRadius: '20px', marginBottom: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' },
-    
-    // موبائل کے لیے ان پٹ فیلڈز کا فلیکس لے آؤٹ
-    inputsRow: { display: 'flex', flexWrap: 'wrap', gap: '20px' },
-    inputWrapper: { flex: '1 1 250px' }, // یہ لائن موبائل ریسپانسو بناتی ہے (کم از کم 250px ورنہ نیچے آ جائے گی)
-    
-    label: { display: 'flex', justifyContent: 'space-between', color: '#FFD700', marginBottom: '8px', fontSize: '0.9rem' },
-    input: { width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid #444', fontSize: '1.1rem', backgroundColor: '#222', color: '#fff' },
-    
-    resultBox: { textAlign: 'center', marginTop: '20px', borderTop: '1px solid #333', paddingTop: '20px' },
-    resultText: { fontSize: 'clamp(2rem, 5vw, 2.8rem)', fontWeight: 'bold', color: '#FFD700' }, // Responsive Font Size
-
-    tableContainer: { backgroundColor: theme.cardBg, borderRadius: '15px', overflow: 'hidden', border: `1px solid ${theme.border}` },
-    th: { padding: '15px', textAlign: 'left', backgroundColor: isDarkMode ? '#252525' : '#f1f1f1', color: theme.text, fontSize: '0.95rem' },
-    td: { padding: '15px', borderBottom: `1px solid ${theme.border}`, fontSize: '0.95rem' }
-  };
+  const purities = [
+    { label: "24K - Pure Gold", factor: 1.0, color: "#FACC15" },
+    { label: "22K - Standard", factor: 0.9167, color: "#EAB308" },
+    { label: "21K - Popular", factor: 0.875, color: "#CA8A04" },
+    { label: "18K - Economy", factor: 0.75, color: "#A16207" }
+  ];
 
   return (
-    <div style={styles.container}>
-      <nav style={styles.nav}>
-        <Link href="/" style={styles.link}>← Home</Link>
-        <button onClick={toggleTheme} style={styles.themeBtn}>
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
-      </nav>
+    <div style={{ backgroundColor: '#020617', color: '#F8FAFC', minHeight: '100vh', padding: '40px 20px' }}>
+      
+      {/* Header Section */}
+      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <h1 style={{ fontSize: 'clamp(24px, 5vw, 40px)', fontWeight: '900' }}>
+          Saudi <span style={{ color: '#FACC15' }}>Gold Rates</span> Live
+        </h1>
+        <p style={{ color: '#94A3B8', marginTop: '10px' }}>Real-time 24K, 22K, 21K & 18K gold prices in Saudi Arabia</p>
+      </div>
 
-      <div style={styles.main}>
+      <main style={{ maxWidth: '1000px', margin: '0 auto' }}>
         
-        {/* --- TOP AD SLOT --- */}
-        <div style={styles.adContainer}>
-          <span>ADVERTISEMENT SPACE (Top)</span>
+        {/* Top Ad Space */}
+        <div style={{ height: '90px', background: '#0F172A', border: '1px dashed #334155', borderRadius: '15px', marginBottom: '40px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#64748B' }}>
+          ADVERTISEMENT SPACE
         </div>
 
-        <div style={styles.headingContainer}>
-          <h1 style={styles.heading}>Saudi Gold Rates</h1>
-          <button 
-            onClick={fetchRates} 
-            style={styles.refreshBtn} 
-            title="Refresh Rates"
-            disabled={loading}
-          >
-            {loading ? '...' : '↻'}
-          </button>
-        </div>
-        
-        <p style={styles.subText}>Live Market Updates & Calculator</p>
-
-        <div style={styles.calcCard}>
-          <div style={styles.inputsRow}>
-            <div style={styles.inputWrapper}>
-              <div style={styles.label}>
-                <span>Weight (Grams)</span>
-                <button onClick={handleClear} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', opacity: 0.8 }}>Clear</button>
-              </div>
-              <input 
-                type="number" 
-                value={weight} 
-                onChange={(e: any) => setWeight(Number(e.target.value))} 
-                style={styles.input} 
-                placeholder="1"
-              />
+        {/* Smart Gold Calculator */}
+        <section style={{ background: '#0F172A', padding: '30px', borderRadius: '30px', border: '1px solid #1E293B', marginBottom: '50px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '20px' }}>
+            <div>
+              <label style={{ fontSize: '11px', color: '#64748B', fontWeight: '800' }}>ENTER WEIGHT</label>
+              <input type="number" value={weight} onChange={(e) => setWeight(Number(e.target.value))} style={{ width: '100%', background: '#020617', border: '1px solid #334155', padding: '15px', borderRadius: '12px', color: 'white', fontSize: '20px', fontWeight: 'bold', marginTop: '8px' }} />
             </div>
-            <div style={styles.inputWrapper}>
-              <label style={styles.label}>Purity</label>
-              <select value={selectedPurity} onChange={(e: any) => setSelectedPurity(Number(e.target.value))} style={styles.input}>
-                <option value={rates.k24}>24K - Pure Gold</option>
-                <option value={rates.k22}>22K - Jewelry</option>
-                <option value={rates.k21}>21K - Trade</option>
-                <option value={rates.k18}>18K - Other</option>
+            <div>
+              <label style={{ fontSize: '11px', color: '#64748B', fontWeight: '800' }}>SELECT UNIT</label>
+              <select value={unit} onChange={(e) => setUnit(e.target.value)} style={{ width: '100%', background: '#020617', border: '1px solid #334155', padding: '15px', borderRadius: '12px', color: 'white', fontSize: '16px', fontWeight: 'bold', marginTop: '8px', cursor: 'pointer' }}>
+                <option value="gram">Gram</option>
+                <option value="tola">Tola</option>
+                <option value="ounce">Ounce (oz)</option>
               </select>
             </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '11px', color: '#FACC15', fontWeight: '800' }}>ESTIMATED 24K PRICE</div>
+              <div style={{ fontSize: '32px', fontWeight: '900', color: '#F8FAFC' }}>
+                {(basePrice * weight * units[unit as keyof typeof units]).toLocaleString(undefined, {maximumFractionDigits: 2})}
+                <span style={{ fontSize: '14px', marginLeft: '5px', color: '#FACC15' }}>SAR</span>
+              </div>
+            </div>
           </div>
-          <div style={styles.resultBox}>
-            <div style={{fontSize: '0.9rem', color: '#aaa', marginBottom: '5px'}}>Estimated Price</div>
-            <div style={styles.resultText}>{total} <span style={{fontSize: '1rem'}}>SAR</span></div>
-          </div>
+        </section>
+
+        {/* Purity Rate Cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', marginBottom: '50px' }}>
+          {purities.map((p) => (
+            <div key={p.label} style={{ background: '#0F172A', padding: '25px', borderRadius: '25px', borderLeft: `6px solid ${p.color}`, borderTop: '1px solid #1E293B', borderRight: '1px solid #1E293B', borderBottom: '1px solid #1E293B' }}>
+              <div style={{ color: '#94A3B8', fontSize: '12px', fontWeight: '800' }}>{p.label}</div>
+              <div style={{ fontSize: '24px', fontWeight: '900', margin: '10px 0' }}>
+                {(basePrice * p.factor).toFixed(2)} 
+                <span style={{ fontSize: '12px', color: '#64748B', marginLeft: '5px' }}>SAR/g</span>
+              </div>
+              <div style={{ height: '1px', background: '#1E293B', margin: '10px 0' }}></div>
+              <div style={{ fontSize: '13px', color: '#94A3B8' }}>
+                Per Tola: <span style={{ color: 'white', fontWeight: 'bold' }}>{(basePrice * p.factor * 11.6638).toFixed(0)} SAR</span>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* --- MIDDLE AD SLOT (High Revenue) --- */}
-        <div style={styles.adContainer}>
-          <span>ADVERTISEMENT SPACE (Middle)</span>
+        {/* Bottom Ad Space */}
+        <div style={{ height: '250px', background: '#0F172A', border: '1px dashed #334155', borderRadius: '15px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#64748B' }}>
+          LARGE AD UNIT
         </div>
 
-        <div style={styles.tableContainer}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr>
-                <th style={styles.th}>Type</th>
-                <th style={{ ...styles.th, textAlign: 'right' }}>Price (1g)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(rates).map(([key, val]) => (
-                <tr key={key}>
-                  <td style={styles.td}>Gold {key.replace('k', '')}K</td>
-                  <td style={{ ...styles.td, textAlign: 'right', fontWeight: 'bold', color: '#b8860b' }}>
-                    {loading ? 'Loading...' : val.toFixed(3)} <small style={{fontSize:'0.7em', color: theme.text}}>SAR</small>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* --- BOTTOM AD SLOT --- */}
-        <div style={{ ...styles.adContainer, minHeight: '150px' }}>
-          <span>ADVERTISEMENT SPACE (Bottom)</span>
-        </div>
-
-      </div>
+      </main>
     </div>
   );
 }
