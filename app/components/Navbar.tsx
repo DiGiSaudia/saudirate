@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+/**
+ * @title SaudiRate Premium Navbar
+ * @description Dual-color text logo with zero-error TypeScript logic.
+ */
+
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -15,13 +20,13 @@ export default function Navbar() {
 
   return (
     <nav style={{ 
-      backgroundColor: '#1a1a1a', 
-      padding: '10px 20px', 
+      backgroundColor: '#020617', 
+      padding: '15px 20px', 
       color: 'white',
       position: 'sticky',
       top: 0,
       zIndex: 1000,
-      boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
+      borderBottom: '1px solid #1E293B'
     }}>
       <div style={{ 
         maxWidth: '1200px', 
@@ -31,27 +36,24 @@ export default function Navbar() {
         alignItems: 'center' 
       }}>
         
-        {/* Logo Section */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <img 
-            src="/logo.png" 
-            alt="Saudi Rate Logo" 
-            style={{ 
-              height: '45px', 
-              width: 'auto', 
-              objectFit: 'contain' 
-            }} 
-          />
+        {/* --- DUAL COLOR LOGO (Saudi in Green, Rate in Yellow) --- */}
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ fontSize: '26px', fontWeight: '900', letterSpacing: '-1px', lineHeight: '1' }}>
+            <span style={{ color: '#10B981' }}>Saudi</span>
+            <span style={{ color: '#FACC15' }}>Rate</span>
+          </div>
+          <div style={{ width: '40px', height: '3px', background: '#FACC15', borderRadius: '10px', marginTop: '4px' }}></div>
         </Link>
 
         {/* Desktop Links */}
-        <div style={{ display: 'flex', gap: '20px' }} className="desktop-menu">
+        <div style={{ display: 'flex', gap: '25px' }} className="desktop-menu">
           {navLinks.map((link, idx) => (
             <Link key={idx} href={link.path} style={{ 
-              color: 'white', 
+              color: '#94A3B8', 
               textDecoration: 'none', 
-              fontSize: '1rem',
-              fontWeight: '500'
+              fontSize: '15px',
+              fontWeight: '600',
+              transition: '0.3s'
             }}>
               {link.name}
             </Link>
@@ -59,29 +61,33 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <div style={{ cursor: 'pointer', fontSize: '1.5rem' }} 
-              className="mobile-btn" 
-              onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? '✖' : '☰'}
+        <div 
+          style={{ cursor: 'pointer', fontSize: '24px', color: '#10B981' }} 
+          className="mobile-btn" 
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? '✕' : '☰'}
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div style={{ 
-          backgroundColor: '#1a1a1a', 
+          backgroundColor: '#0F172A', 
           padding: '20px', 
           display: 'flex', 
           flexDirection: 'column', 
-          gap: '15px',
-          borderTop: '1px solid #333'
+          gap: '20px',
+          borderTop: '1px solid #1E293B',
+          marginTop: '15px'
         }}>
           {navLinks.map((link, idx) => (
-            <Link key={idx} href={link.path} onClick={() => setIsOpen(false)} style={{ 
-              color: 'white', 
-              textDecoration: 'none', 
-              fontSize: '1.1rem' 
-            }}>
+            <Link 
+              key={idx} 
+              href={link.path} 
+              onClick={() => setIsOpen(false)} 
+              style={{ color: 'white', textDecoration: 'none', fontSize: '18px', fontWeight: '600' }}
+            >
               {link.name}
             </Link>
           ))}
