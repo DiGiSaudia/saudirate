@@ -1,7 +1,15 @@
+:root {
+  /* بس یہاں ایک بار رنگ بدلیں، پوری ویب سائٹ خود بدل جائے گی */
+  --site-bg: #FDFCF0;        /* Ivory Background */
+  --nav-footer-bg: #0F172A;  /* Dark Blue */
+  --primary-green: #10B981;  /* Saudi Green */
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  background-color: var(--site-bg) !important;
+}
+
+/* اگر آپ Navbar اور Footer کا رنگ بھی ایک ساتھ بدلنا چاہتے ہیں */
+nav, footer {
+  background-color: var(--nav-footer-bg) !important;
 }
