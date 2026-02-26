@@ -1,0 +1,24 @@
+import React from 'react';
+
+const MarketUpdate = ({ currentPrice }: { currentPrice: number }) => {
+  const previousPrice = 280.50; // یہ عارضی ہے، اسے آپ اپنی API ہسٹری سے بھی جوڑ سکتے ہیں
+  const diff = (currentPrice - previousPrice).toFixed(2);
+  const status = currentPrice > previousPrice ? "increased" : "decreased";
+  const date = new Date().toLocaleDateString('en-GB');
+
+  return (
+    <div className="bg-[#fdfbf7] p-6 rounded-lg border border-gray-200 my-8 shadow-sm">
+      <h2 className="text-2xl font-bold text-[#1a1a1a] mb-3">
+        Saudi Gold Market Update: {date}
+      </h2>
+      <p className="text-gray-700 leading-relaxed italic">
+        "Today in Saudi Arabia, gold rates have <span className="font-bold text-yellow-700">{status}</span> by 
+        <span className="font-bold"> {Math.abs(Number(diff))} SAR</span>. 
+        The current market price for 24K pure gold is <span className="font-bold">{currentPrice} SAR</span> per gram. 
+        Stay updated with <span className="text-yellow-600 font-semibold">saudirate.com</span> for real-time changes."
+      </p>
+    </div>
+  );
+};
+
+export default MarketUpdate;
