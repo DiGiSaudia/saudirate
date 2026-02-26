@@ -1,67 +1,7 @@
-/* app/globals.css */
-
-:root {
-  /* --- ایک کلک کلر سیٹ اپ --- */
-  
-  /* 1. بیک گراؤنڈ (Ivory) */
-  --bg-color: #FDFCF0; 
-  
-  /* 2. پرائمری برانڈ کلر (Saudi Green) */
-  --primary-green: #10B981; 
-  
-  /* 3. سیکنڈری برانڈ کلر (Premium Dark Blue) */
-  --dark-blue: #0F172A; 
-  
-  /* 4. ایکسنٹ کلر (Gold/Yellow) */
-  --accent-gold: #FACC15; 
-  
-  /* 5. ٹیکسٹ کلر */
-  --text-main: #1E293B;
-  --text-light: #64748B;
-
-  /* 6. فونٹ (پوری ویب سائٹ کا فونٹ یہاں سے بدلیں) */
-  --main-font: 'Inter', system-ui, -apple-system, sans-serif;
-}
-
-/* --- گلوبل اپلائی (یہ خود بخود پوری سائٹ بدل دے گا) --- */
-
 body {
-  background-color: var(--bg-color) !important;
-  color: var(--text-main);
-  font-family: var(--main-font);
   margin: 0;
-  transition: all 0.3s ease; /* رنگ بدلتے وقت اسموتھ ایفیکٹ کے لیے */
-}
-
-/* نیو بار اور فوٹر کے لیے */
-nav, footer {
-  background-color: var(--dark-blue) !important;
-  border-bottom: 3px solid var(--primary-green);
-}
-
-/* تمام بٹنز کے لیے */
-button, .btn, a.button {
-  background-color: var(--primary-green) !important;
-  color: white !important;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
-button:hover {
-  background-color: var(--dark-blue) !important;
-  border: 1px solid var(--primary-green);
-}
-
-/* کارڈز کے لیے جو آپ کی ویب سائٹ پر ہیں */
-.card, [class*="card"] {
-  background-color: #FFFFFF !important;
-  border: 1px solid #E2E8F0 !important;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-}
-
-/* لنکس کا رنگ */
-a {
-  color: var(--primary-green);
-  text-decoration: none;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #333;
 }
